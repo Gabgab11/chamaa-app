@@ -17,7 +17,7 @@
    PICTURE: the phone itself, clickable: welcome -> sign up or log in -> SMS code -> home.
    COLOUR and TYPE: approved tokens only (ink, lavender, lime, violet, coral); Inter, display cut for amounts.
    LAYOUT: full-screen on a phone; framed phone + build notes beside it on wider screens. */
-:root{color-scheme:light;
+:root{--pig:#16142E;color-scheme:light;
   --ink:#16142E;--lime:#C8F04D;--coral:#FF8B6B;--late:#B23A12;--r-card:18px;--r-btn:14px;--frame:#0E0D1C;
   --bg:#EEECFB;--surface:#FFFFFF;--surface2:#F4F3FD;--text:#16142E;--muted:#55526F;--ph:#6E6B8F;--accent:#5B4BE8;
   --hero:#16142E;--hero-text:#FFFFFF;--hero-muted:#C9C6E8;--pri:#16142E;--pri-text:#FFFFFF;--sec:#FFFFFF;--sec-text:#16142E;
@@ -25,11 +25,11 @@
 :root[data-theme=dark]{color-scheme:dark;
   --bg:#100F22;--surface:#1E1C3A;--surface2:#2A2850;--text:#F6F5FF;--muted:#CFCCEE;--ph:#A9A6CF;--accent:#B3ABFF;
   --hero:#2C2958;--hero-text:#FFFFFF;--hero-muted:#D6D3F5;--pri:#F6F5FF;--pri-text:#16142E;--sec:#1E1C3A;--sec-text:#F6F5FF;
-  --navoff:#B0ADD6;--line:#3A3766;--icon:#B3ABFF;--scrim:rgba(0,0,0,.6);--late:#FFB59E}
+  --navoff:#B0ADD6;--line:#3A3766;--icon:#B3ABFF;--scrim:rgba(0,0,0,.6);--late:#FFB59E;--pig:#F6F5FF}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;
   --bg:#100F22;--surface:#1E1C3A;--surface2:#2A2850;--text:#F6F5FF;--muted:#CFCCEE;--ph:#A9A6CF;--accent:#B3ABFF;
   --hero:#2C2958;--hero-text:#FFFFFF;--hero-muted:#D6D3F5;--pri:#F6F5FF;--pri-text:#16142E;--sec:#1E1C3A;--sec-text:#F6F5FF;
-  --navoff:#B0ADD6;--line:#3A3766;--icon:#B3ABFF;--scrim:rgba(0,0,0,.6);--late:#FFB59E}}
+  --navoff:#B0ADD6;--line:#3A3766;--icon:#B3ABFF;--scrim:rgba(0,0,0,.6);--late:#FFB59E;--pig:#F6F5FF}}
 *{box-sizing:border-box;min-width:0}
 body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 Inter,system-ui,sans-serif;overflow-x:clip}
 .disp{font-variation-settings:"opsz" 32;font-weight:800;letter-spacing:-.03em}
@@ -359,13 +359,37 @@ body{background:var(--bg)}
 #v-kyc{padding-bottom:40px}
 .kh{font-size:20px;margin:14px 0 12px}
 #sheet-bg,#dt-bg{z-index:32}
+
+/* ===== Plain app: no frame, no notes ===== */
+.stage{display:block;padding:0;min-height:100dvh}
+.phone{width:100%;max-width:480px;height:100vh;height:100dvh;margin:0 auto;border-radius:0;padding:0;background:none}
+.screen{border-radius:0}
+.view{inset:0;padding-top:calc(env(safe-area-inset-top) + 18px)}
+.nav{left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));bottom:calc(env(safe-area-inset-bottom) + 10px)}
+@media(min-width:520px){.screen{box-shadow:0 0 0 1px var(--gb),0 20px 60px rgba(22,20,46,.12)}}
+
+/* ===== Splash: coin circles the name, drops into the piggy bank ===== */
+#splash{position:absolute;inset:0;z-index:60;background:var(--bg);display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer}
+#splash::before,#splash::after{content:"";position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none}
+#splash::before{width:300px;height:300px;background:var(--blob1);top:-60px;left:-90px}
+#splash::after{width:260px;height:260px;background:var(--blob2);bottom:-60px;right:-100px}
+.sp-stack{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;z-index:1}
+#sp-pig{width:132px;height:132px;opacity:0;transform:scale(.4)}
+#sp-word{font:800 48px/1 Inter,system-ui,sans-serif;font-variation-settings:"opsz" 32;letter-spacing:-.04em;color:var(--text);opacity:0;position:relative;z-index:2}
+#sp-coin{position:absolute;left:0;top:0;width:26px;height:26px;margin:-13px 0 0 -13px;z-index:3;opacity:0;will-change:transform}
+#sp-coin.back{z-index:1}
+#sp-tag{font-size:14px;color:var(--muted);opacity:0;margin-top:4px}
+#splash.out{animation:spOut .45s ease forwards}
+@keyframes spOut{to{opacity:0;transform:scale(1.06)}}
 </style>
 </head>
 <body>
 <div class="stage">
   <div class="phone"><div class="screen">
     <div class="glow" aria-hidden="true"></div>
-    <div class="status"><span>9:41</span><div class="notch"></div><span>100%</span></div>
+    <div id="splash" role="img" aria-label="Chamaa"><div class="sp-stack"><svg id="sp-pig" viewBox="0 0 256 256" aria-hidden="true"><ellipse fill="var(--pig)" cx="124" cy="136" rx="92" ry="74"/><path fill="var(--pig)" d="M164 74 L190 44 L196 92 Z"/><rect fill="var(--pig)" x="200" y="114" width="34" height="42" rx="12"/><rect fill="var(--pig)" x="66" y="186" width="28" height="44" rx="8"/><rect fill="var(--pig)" x="148" y="186" width="28" height="44" rx="8"/><rect fill="var(--bg)" x="100" y="70" width="44" height="10" rx="5"/><path id="sp-spiral" d="M124 140 A7 7 0 0 1 138 140 A14 14 0 0 1 110 140 A21 21 0 0 1 152 140 A28 28 0 0 1 96 140 A35 35 0 0 1 166 140" fill="none" stroke="#C8F04D" stroke-width="9" stroke-linecap="round"/></svg><div id="sp-word">chamaa</div><div id="sp-tag" data-t="tagPlain"></div></div><div id="sp-coin"><svg viewBox="0 0 26 26" width="26" height="26"><circle cx="13" cy="13" r="12" fill="#C8F04D" stroke="#16142E" stroke-width="2"/><circle cx="13" cy="13" r="7.5" fill="none" stroke="#16142E" stroke-width="1.4" opacity=".55"/><path d="M15.6 10.4a3.6 3.6 0 1 0 0 5.2" fill="none" stroke="#16142E" stroke-width="2" stroke-linecap="round"/></svg></div></div>
+    
+    
 
     <section class="view on" id="v-welcome" aria-label="Welcome">
       <div class="hdrow" style="justify-content:flex-end"><button class="bell" type="button" data-mode="1"></button></div>
@@ -597,19 +621,6 @@ body{background:var(--bg)}
     </div></div>
     <div class="toast" id="toast" role="status"></div>
   </div></div>
-
-  <aside class="notes">
-    <h1 class="disp">Chamaa · first build</h1>
-    <p>A working preview of sprint 1, built from the approved UI/UX. Tap through it in the phone.</p>
-    <ol>
-      <li>Create account, "check your email" pop-up, log in</li>
-      <li>Dashboard: balance counts up, currency from your location</li>
-      <li>Pay: M-Pesa, card or bank transfer, then receipt</li>
-      <li>Goals: set goals for different things</li>
-      <li>Invite friends, generate a statement, live notifications</li>
-    </ol>
-    <p>Screens only: no emails are sent and no accounts are saved yet. Works worldwide, in English and Kiswahili, light and dark.</p>
-  </aside>
 </div>
 
 <script>
@@ -620,7 +631,7 @@ const C=[["KE","Kenya","254","KES"],["UG","Uganda","256","UGX"],["TZ","Tanzania"
 const FX={USD:1,KES:129,UGX:3700,TZS:2600,RWF:1400,ETB:125,NGN:1550,GHS:12.5,ZAR:18,ZMW:27,XAF:600,XOF:600,EGP:49,MAD:10,AED:3.67,SAR:3.75,QAR:3.64,INR:85,PKR:280,PHP:57,GBP:.78,EUR:.92,SEK:10.6,CAD:1.38,JMD:157,BRL:5.6,MXN:18.5,AUD:1.53,NZD:1.68};
 const TZC={"Africa/Nairobi":"KE","Africa/Kampala":"UG","Africa/Dar_es_Salaam":"TZ","Africa/Kigali":"RW","Africa/Addis_Ababa":"ET","Africa/Lagos":"NG","Africa/Accra":"GH","Africa/Johannesburg":"ZA","Africa/Lusaka":"ZM","Africa/Harare":"ZW","Africa/Douala":"CM","Africa/Dakar":"SN","Africa/Cairo":"EG","Africa/Casablanca":"MA","Asia/Dubai":"AE","Asia/Riyadh":"SA","Asia/Qatar":"QA","Asia/Kolkata":"IN","Asia/Calcutta":"IN","Asia/Karachi":"PK","Asia/Manila":"PH","Europe/London":"GB","Europe/Dublin":"IE","Europe/Berlin":"DE","Europe/Paris":"FR","Europe/Amsterdam":"NL","Europe/Rome":"IT","Europe/Madrid":"ES","Europe/Stockholm":"SE","America/Toronto":"CA","America/Vancouver":"CA","America/Jamaica":"JM","America/Sao_Paulo":"BR","America/Mexico_City":"MX","Australia/Sydney":"AU","Australia/Melbourne":"AU","Pacific/Auckland":"NZ"};
 const T={
- en:{tag:"Save together.<br>Grow together.",sub:"Run your chama in one place.<br>No more lost WhatsApp records.",create:"Create account",login:"Log in",inv:"I have an invite code",
+ en:{tag:"Save together.<br>Grow together.",tagPlain:"Save together. Grow together.",sub:"Run your chama in one place.<br>No more lost WhatsApp records.",create:"Create account",login:"Log in",inv:"I have an invite code",
   suT:"Create your account",suS:"Join your chama in a minute.",first:"First name",last:"Last name",email:"Email",phone:"Phone number",city:"City",newpw:"Create a password",pw:"Password",
   pwHint:"At least 8 characters, with a number.",optional:"(optional)",invCode:"Invite code",terms:"I agree to the Terms and Privacy Policy",have:"Already have an account?",new:"New to Chamaa?",
   liT:"Welcome back",liS:"Log in with your email and password.",forgot:"Forgot password?",
@@ -648,7 +659,7 @@ const T={
   kycT:"Verify your identity",kycSafe:"Your details are encrypted and only used to confirm who you are.",kSubT:"Thanks! We're checking your details",kSubS:"This usually takes a few minutes. We'll let you know in your notifications.",backMe:"Back to Me",kDemo:"Preview: you'll be verified automatically in a few seconds.",notNow:"Not now",stepOf:"Step {a} of {b} · {t}",kSteps:["Your ID","Photos of your ID","Take a selfie","Where you live","Check and submit"],idCountry:"Country that issued your ID",idType:"Type of ID",idTypes:["Passport","National ID","Driver's licence","Residence permit"],idNo:"ID number",dob:"Date of birth",front:"Front of your ID",backS:"Back of your ID",passPage:"Photo page of your passport",upHint:"All corners showing, no glare",tapUp:"Tap to take or upload a photo",selfieT:"Your selfie",selfieHint:"Face the camera in good light. No hat or sunglasses.",resCountry:"Country you live in",addr:"Street address",proof:"Proof of address",proofHint:"Utility bill or bank statement from the last 3 months",confirm:"I confirm these details are true and belong to me",nextK:"Continue",submitK:"Submit for verification",eK0:"Choose the ID type and enter the ID number and date of birth.",eK1:"Add clear photos of your ID.",eK2:"Add your selfie.",eK3:"Enter your city and street address, and add a proof of address.",eK4:"Please tick the box to confirm.",kycNone:"Verify your identity",kycNoneS:"Needed before you pay in, receive payouts or add a bank account. About 3 minutes.",startK:"Start",kycPend:"Checking your details",kycPendS:"Usually a few minutes. You can keep using the app.",kycOk:"Identity verified",kycOkS:"Verified countries:",addCountry:"Verify another country",gateT:"Verify your identity first",gateS:"To keep everyone's money safe, verify who you are before you pay in, receive payouts or add a bank account. It takes about 3 minutes.",gatePendT:"Almost there",gatePendS:"We're still checking your details. You can do this as soon as you're verified.",verifyNow:"Verify now",okBtn:"OK",bankCountry:"Country of the account",bankNote:"You can add accounts in {list}: the countries on your verified ID and address. To add another country, verify your ID or address there.",bankNoteNone:"Bank accounts can be added once your identity is verified.",kVerifiedN:"Your identity is verified. You can now pay in and add bank accounts.",meT:"Me",showBal:"Show balance",hideBal2:"Hide balance",editProf:"Edit profile",rmPhoto:"Remove photo",addPhoto:"Add photo",chgPhoto:"Change photo",photoErr:"Choose an image under 5 MB.",photoOk:"Profile photo updated.",memberSince:"Member since Nov 2026",banks:"Bank accounts",addBank:"Add bank account",noBank:"No accounts yet. Add one to receive payouts.",defaultT:"Default",setDef:"Make default",remove:"Remove",bankType:["Bank account","Mobile money"],bankName:"Bank name",mmName:"Provider (e.g. M-Pesa)",holder:"Account holder name",accNo:"Account number",mmNo:"Mobile money number",swift:"Branch or SWIFT code",makeDef:"Use this account for my payouts",saveBank:"Save account",eBank:"Fill in the name, holder and number.",bankAdded:"Account added.",notifSet:"Notifications",sendBy:"Send them by",nItems:[["remind","Contribution reminders","Before and after a due date"],["payout","Payouts","When it is your turn, and when money is sent"],["pay","Payments","When a payment is received"],["goal","Goal progress","Milestones on your goals"],["join","Invites and new members","When someone joins your chama"],["late","Late payments","When a member in your chama is late"]],chans:[["push","Push notifications"],["email","Email"],["sms","SMS"]],appSet:"App settings",appear:"Appearance",appearO:["System","Light","Dark"],language:"Language",currency:"Display currency",hideBal:"Hide balance on home",hideBalS:"Also with the eye on the balance card",help:"Help and support",termsL:"Terms of service",privacy:"Privacy policy",logout:"Log out",saveCh:"Save changes",profSaved:"Profile saved.",saved2:"Saved.",notifT:"Notifications",markAll:"Mark all as read",cancel:"Cancel",doneBtn:"Done",time:"Time",pickDate:"Choose date and time",dtGoal:"Target date",dtFrom:"From",dtTo:"To",justNow:"Just now",minAgo:"{n} min ago",hAgo:"{n} h ago",newTag:"NEW",
   soon:"Coming in the next builds.",sent:"Verification email sent again.",choose:"Choose your country",search:"Search countries",none:"No country matches that.",dark:"Dark mode",light:"Light mode",show:"Show password",hide:"Hide password",
   eFirst:"Enter your first name.",eLast:"Enter your last name.",eEmail:"Enter a valid email address.",ePhone:"Enter a valid phone number.",eCity:"Enter your city.",ePw:"Use at least 8 characters, including a number.",eTerms:"Please agree to the Terms to continue.",eLogin:"Enter your email and password."},
- sw:{tag:"Tuweke pamoja.<br>Tukue pamoja.",sub:"Endesha chama chako mahali pamoja.<br>Hakuna tena rekodi zilizopotea WhatsApp.",create:"Fungua akaunti",login:"Ingia",inv:"Nina msimbo wa mwaliko",
+ sw:{tag:"Tuweke pamoja.<br>Tukue pamoja.",tagPlain:"Tuweke pamoja. Tukue pamoja.",sub:"Endesha chama chako mahali pamoja.<br>Hakuna tena rekodi zilizopotea WhatsApp.",create:"Fungua akaunti",login:"Ingia",inv:"Nina msimbo wa mwaliko",
   suT:"Fungua akaunti yako",suS:"Jiunge na chama chako kwa dakika moja.",first:"Jina la kwanza",last:"Jina la mwisho",email:"Barua pepe",phone:"Nambari ya simu",city:"Mji",newpw:"Unda nenosiri",pw:"Nenosiri",
   pwHint:"Angalau herufi 8, pamoja na nambari.",optional:"(si lazima)",invCode:"Msimbo wa mwaliko",terms:"Nakubali Masharti na Sera ya Faragha",have:"Tayari una akaunti?",new:"Mpya kwa Chamaa?",
   liT:"Karibu tena",liS:"Ingia kwa barua pepe na nenosiri lako.",forgot:"Umesahau nenosiri?",
@@ -962,6 +973,38 @@ document.addEventListener('click',e=>{
   if(e.target.closest('#bk-cc')){openSheet({kyc:'bank'});return}
 },true);
 
+
+/* ---------- splash: coin circles the name, drops into the piggy bank ---------- */
+function runSplash(){const sp=$('splash');if(!sp)return;let done=false;
+  const finish=()=>{if(done)return;done=true;sp.classList.add('out');setTimeout(()=>sp.remove(),460)};
+  sp.addEventListener('click',finish);
+  const word=$('sp-word'),pig=$('sp-pig'),coin=$('sp-coin'),tag=$('sp-tag');
+  if(reduce()||!sp.animate){word.style.opacity=1;pig.style.opacity=1;pig.style.transform='none';tag.style.opacity=1;setTimeout(finish,900);return}
+  const R=sp.getBoundingClientRect(),w=word.getBoundingClientRect(),pr=pig.getBoundingClientRect();
+  const cx=w.left-R.left+w.width/2,cy=w.top-R.top+w.height/2,rx=w.width/2+26,ry=w.height/2+18;
+  const pigScale=1/0.4;/* pig is drawn at scale .4 at rest; compute its final rect */
+  const pw=pr.width*pigScale,ph=pr.height*pigScale,pl=pr.left-R.left+pr.width/2-pw/2,pt=pr.top-R.top+pr.height/2-ph/2;
+  const slotX=pl+122/256*pw,slotY=pt+75/256*ph;
+  word.animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:450,easing:'ease-out',fill:'forwards'});
+  /* orbit: one and a half loops around the name, coin flipping as it goes */
+  const N=48,frames=[];const loops=1.5,a0=Math.PI;
+  for(let i=0;i<=N;i++){const p=i/N,a=a0+p*loops*2*Math.PI,x=cx+rx*Math.cos(a),y=cy+ry*Math.sin(a)*0.9,front=Math.sin(a)>0;
+    frames.push({transform:`translate(${x}px,${y}px) scaleX(${Math.abs(Math.cos(a*2)).toFixed(2)*0.7+0.3}) scale(${front?1:.82})`,opacity:1,offset:p})}
+  coin.style.opacity=1;
+  const orbit=coin.animate(frames,{duration:1500,delay:350,easing:'cubic-bezier(.45,.05,.55,.95)',fill:'forwards'});
+  /* switch layer when the coin passes behind the word */
+  let t0=performance.now()+350;const layer=()=>{if(done)return;const p=Math.min(1,Math.max(0,(performance.now()-t0)/1500));const a=a0+p*loops*2*Math.PI;coin.classList.toggle('back',Math.sin(a)<0&&p<1);if(p<1)requestAnimationFrame(layer)};requestAnimationFrame(layer);
+  orbit.finished.then(()=>{if(done)return;
+    pig.animate([{opacity:0,transform:'scale(.4)'},{opacity:1,transform:'scale(1.08)',offset:.7},{opacity:1,transform:'scale(1)'}],{duration:420,easing:'ease-out',fill:'forwards'});
+    const end=frames[N].transform.match(/translate\(([-\d.]+)px,([-\d.]+)px\)/),ex=+end[1],ey=+end[2];
+    const midX=(ex+slotX)/2,midY=Math.min(ey,slotY)-70;
+    const fly=coin.animate([{transform:`translate(${ex}px,${ey}px) scale(1)`},{transform:`translate(${midX}px,${midY}px) scale(1.15) rotate(-20deg)`,offset:.55},{transform:`translate(${slotX}px,${slotY-16}px) scale(1) rotate(0deg) scaleX(.35)`,offset:.85},{transform:`translate(${slotX}px,${slotY+6}px) scale(.8) scaleX(.2)`,opacity:0}],{duration:820,delay:220,easing:'cubic-bezier(.3,.1,.3,1)',fill:'forwards'});
+    fly.finished.then(()=>{if(done)return;
+      pig.animate([{transform:'scale(1)'},{transform:'scale(1.06,.92) translateY(4px)'},{transform:'scale(.98,1.04) translateY(-6px)'},{transform:'scale(1)'}],{duration:480,easing:'ease-out'});
+      const sp2=document.getElementById('sp-spiral');if(sp2)sp2.animate([{strokeWidth:9},{strokeWidth:13},{strokeWidth:9}],{duration:480});
+      tag.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:400,delay:150,fill:'forwards'});
+      setTimeout(finish,1150)})})}
+
 /* ---------- events ---------- */
 document.querySelectorAll('.pick').forEach(b=>b.addEventListener('click',()=>openSheet(b)));
 document.querySelectorAll('form').forEach(f=>f.addEventListener('input',()=>{const e=f.querySelector('.err');if(e)e.textContent=''}));
@@ -1036,6 +1079,7 @@ photo=store('chamaa-photo')||null;hideBal=store('chamaa-hide')==='1';
 const sm=store('chamaa-mode');if(sm==='dark'||sm==='light')document.documentElement.dataset.theme=sm;
 addNotif(false);addNotif(false);addNotif(false);notes.forEach((n,i)=>n.ts=Date.now()-(i+1)*17*60000);
 render();
+requestAnimationFrame(()=>requestAnimationFrame(runSplash));
 setInterval(()=>{if(cur!=='welcome'&&cur!=='signup'&&cur!=='login')addNotif(true)},25000);
 setInterval(()=>{if(!$('notif-bg').classList.contains('on'))renderNotifs()},60000);
 }
