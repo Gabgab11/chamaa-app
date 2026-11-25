@@ -2,4 +2,5 @@
 
 Save together. Grow together.
 
-- `prototype/` — clickable preview of the Chamaa web app (all screens built so far).
+- `index.html` — website (landing page)
+- `app/` — the Chamaa web app

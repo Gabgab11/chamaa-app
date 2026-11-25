@@ -1079,6 +1079,7 @@ photo=store('chamaa-photo')||null;hideBal=store('chamaa-hide')==='1';
 const sm=store('chamaa-mode');if(sm==='dark'||sm==='light')document.documentElement.dataset.theme=sm;
 addNotif(false);addNotif(false);addNotif(false);notes.forEach((n,i)=>n.ts=Date.now()-(i+1)*17*60000);
 render();
+const h0=(location.hash||'').slice(1);if(h0==='signup'||h0==='login'){if(h0==='signup')$('inv-field').hidden=true;show(h0)}
 requestAnimationFrame(()=>requestAnimationFrame(runSplash));
 setInterval(()=>{if(cur!=='welcome'&&cur!=='signup'&&cur!=='login')addNotif(true)},25000);
 setInterval(()=>{if(!$('notif-bg').classList.contains('on'))renderNotifs()},60000);
