@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#16142E">
+<title>Chamaa</title>
+<meta name="description" content="Chamaa — save together, grow together.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20256%20256%22%3E%3Crect%20width%3D%22256%22%20height%3D%22256%22%20rx%3D%2256%22%20fill%3D%22%23EEECFB%22/%3E%3Cg%20transform%3D%22translate%2824%2020%29%20scale%28.82%29%22%3E%3Cellipse%20fill%3D%22%2316142E%22%20cx%3D%22124%22%20cy%3D%22136%22%20rx%3D%2292%22%20ry%3D%2274%22/%3E%3Cpath%20fill%3D%22%2316142E%22%20d%3D%22M164%2074%20L190%2044%20L196%2092%20Z%22/%3E%3Crect%20fill%3D%22%2316142E%22%20x%3D%22200%22%20y%3D%22114%22%20width%3D%2234%22%20height%3D%2242%22%20rx%3D%2212%22/%3E%3Crect%20fill%3D%22%2316142E%22%20x%3D%2266%22%20y%3D%22186%22%20width%3D%2228%22%20height%3D%2244%22%20rx%3D%228%22/%3E%3Crect%20fill%3D%22%2316142E%22%20x%3D%22148%22%20y%3D%22186%22%20width%3D%2228%22%20height%3D%2244%22%20rx%3D%228%22/%3E%3Crect%20fill%3D%22%23EEECFB%22%20x%3D%22100%22%20y%3D%2270%22%20width%3D%2244%22%20height%3D%2210%22%20rx%3D%225%22/%3E%3Cpath%20d%3D%22M124%20140%20A7%207%200%200%201%20138%20140%20A14%2014%200%200%201%20110%20140%20A21%2021%200%200%201%20152%20140%20A28%2028%200%200%201%2096%20140%20A35%2035%200%200%201%20166%20140%22%20fill%3D%22none%22%20stroke%3D%22%23C8F04D%22%20stroke-width%3D%229%22%20stroke-linecap%3D%22round%22/%3E%3C/g%3E%3C/svg%3E">
+<meta name="apple-mobile-web-app-title" content="Chamaa">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap" rel="stylesheet">
+<style>
+/* VOICE: the real Chamaa app, calm and trustworthy, money as the hero.
+   IDEA: a working phone build of the approved UI/UX, first sprint, now worldwide.
+   PICTURE: the phone itself, clickable: welcome -> sign up or log in -> SMS code -> home.
+   COLOUR and TYPE: approved tokens only (ink, lavender, lime, violet, coral); Inter, display cut for amounts.
+   LAYOUT: full-screen on a phone; framed phone + build notes beside it on wider screens. */
+:root{color-scheme:light;
+  --ink:#16142E;--lime:#C8F04D;--coral:#FF8B6B;--late:#B23A12;--r-card:18px;--r-btn:14px;--frame:#0E0D1C;
+  --bg:#EEECFB;--surface:#FFFFFF;--surface2:#F4F3FD;--text:#16142E;--muted:#55526F;--ph:#6E6B8F;--accent:#5B4BE8;
+  --hero:#16142E;--hero-text:#FFFFFF;--hero-muted:#C9C6E8;--pri:#16142E;--pri-text:#FFFFFF;--sec:#FFFFFF;--sec-text:#16142E;
+  --navoff:#77748F;--line:#DEDAF5;--icon:#5B4BE8;--scrim:rgba(22,20,46,.45)}
+:root[data-theme=dark]{color-scheme:dark;
+  --bg:#100F22;--surface:#1E1C3A;--surface2:#2A2850;--text:#F6F5FF;--muted:#CFCCEE;--ph:#A9A6CF;--accent:#B3ABFF;
+  --hero:#2C2958;--hero-text:#FFFFFF;--hero-muted:#D6D3F5;--pri:#F6F5FF;--pri-text:#16142E;--sec:#1E1C3A;--sec-text:#F6F5FF;
+  --navoff:#B0ADD6;--line:#3A3766;--icon:#B3ABFF;--scrim:rgba(0,0,0,.6);--late:#FFB59E}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;
+  --bg:#100F22;--surface:#1E1C3A;--surface2:#2A2850;--text:#F6F5FF;--muted:#CFCCEE;--ph:#A9A6CF;--accent:#B3ABFF;
+  --hero:#2C2958;--hero-text:#FFFFFF;--hero-muted:#D6D3F5;--pri:#F6F5FF;--pri-text:#16142E;--sec:#1E1C3A;--sec-text:#F6F5FF;
+  --navoff:#B0ADD6;--line:#3A3766;--icon:#B3ABFF;--scrim:rgba(0,0,0,.6);--late:#FFB59E}}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 Inter,system-ui,sans-serif;overflow-x:clip}
+.disp{font-variation-settings:"opsz" 32;font-weight:800;letter-spacing:-.03em}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+.stage{min-height:100vh;display:flex;gap:48px;align-items:center;justify-content:center;padding:32px 16px}
+.phone{width:390px;height:812px;border-radius:52px;background:var(--frame);padding:10px;flex:none}
+.screen{width:100%;height:100%;border-radius:42px;background:var(--bg);position:relative;overflow:hidden}
+.status{height:44px;display:flex;justify-content:space-between;align-items:center;padding:0 28px;font-size:13px;font-weight:700}
+.notch{width:96px;height:26px;border-radius:14px;background:var(--frame)}
+.notes{max-width:340px}
+.notes h1{font-size:34px;line-height:1.05;margin:0 0 12px;text-wrap:balance}
+.notes p{color:var(--muted);margin:0 0 16px;font-size:15px}
+.notes ol{padding-left:20px;margin:0 0 16px;font-size:15px}.notes li{margin-bottom:6px}
+.sample{font-size:13px;color:var(--muted)}
+@media(max-width:860px){
+  .stage{padding:0;display:block}.notes{display:none}
+  .phone{width:100%;height:100vh;height:100dvh;border-radius:0;padding:0;background:none}
+  .screen{border-radius:0}.status{display:none}
+}
+
+.view{position:absolute;inset:44px 0 0;overflow-y:auto;padding:8px 20px 100px;display:none}
+@media(max-width:860px){.view{inset:0;padding-top:max(16px,env(safe-area-inset-top))}}
+.view.on{display:block;animation:in .25s ease}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+@media(prefers-reduced-motion:reduce){.view.on{animation:none}}
+
+.card{background:var(--surface);border-radius:var(--r-card);padding:16px}
+.hero{background:var(--hero);color:var(--hero-text);border-radius:var(--r-card);padding:16px}
+.btn{display:block;width:100%;min-height:52px;border-radius:var(--r-btn);font-weight:700;font-size:15px;text-align:center}
+.btn-ink{background:var(--pri);color:var(--pri-text)}
+.btn-white{background:var(--sec);color:var(--sec-text)}
+.btn-sm{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:12px;font-size:13px;font-weight:700}
+.link{color:var(--accent);font-weight:600;font-size:14px;min-height:44px;display:block;width:100%;text-align:center}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:5px 10px;border-radius:10px}
+.av{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex:none}
+.bar{height:9px;border-radius:9px;background:rgba(22,20,46,.13)}.bar i{display:block;height:100%;border-radius:9px;background:var(--ink)}
+.muted{color:var(--muted)}
+.cc{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:24px;padding:0 6px;border-radius:7px;background:var(--surface2);color:var(--text);font-size:12px;font-weight:800;letter-spacing:.02em;flex:none}
+.sheet-bg{position:absolute;inset:0;background:var(--scrim);z-index:20;display:none}
+.sheet-bg.on{display:block}
+.sheet{position:absolute;left:0;right:0;bottom:0;max-height:82%;background:var(--bg);border-radius:24px 24px 0 0;padding:10px 16px 16px;display:flex;flex-direction:column;z-index:21}
+.grab{width:40px;height:5px;border-radius:3px;background:var(--line);margin:0 auto 12px}
+.sheet h3{margin:0 0 12px;font-size:18px}
+.clist{overflow-y:auto;margin-top:10px;background:var(--surface);border-radius:var(--r-card)}
+.clist button{width:100%;display:flex;align-items:center;gap:12px;padding:0 14px;min-height:54px;font-size:16px;color:var(--text);text-align:left;border-top:1px solid var(--line)}
+.clist button:first-child{border-top:0}
+.clist button[aria-selected=true]{font-weight:700}
+.clist .n{flex:1}.clist .d{color:var(--muted);font-weight:600}
+.empty{padding:16px;color:var(--muted);font-size:15px}
+.err{color:var(--late);font-size:13px;font-weight:600;min-height:20px;margin:4px 0 0}
+
+/* forms */
+.back{width:44px;height:44px;border-radius:50%;background:var(--surface);color:var(--text);display:flex;align-items:center;justify-content:center}
+.ftitle{font-size:30px;line-height:1.1;margin:22px 0 6px}
+.fsub{margin:0 0 20px;font-size:15px;color:var(--muted)}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:13px;font-weight:600;margin:0 0 6px}
+.field .opt{color:var(--muted);font-weight:400}
+.in{background:var(--surface);border-radius:var(--r-btn);display:flex;align-items:center;gap:10px;padding:0 14px;min-height:52px;border:2px solid transparent}
+.in:focus-within{border-color:var(--accent)}
+.in input::placeholder{color:var(--ph);opacity:1}
+.in b{font-size:16px;white-space:nowrap}
+.in input{border:0;outline:0;font:inherit;font-size:16px;flex:1;background:none;color:var(--text);min-height:48px;width:100%}
+.pick{width:100%;min-height:52px;display:flex;align-items:center;gap:10px;text-align:left;font-size:16px;font-weight:600}
+.pick span.n{flex:1}
+.chev{flex:none}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);margin:6px 0 4px}
+.check{color:var(--muted)}.check input{width:20px;height:20px;accent-color:var(--accent);margin:1px 0 0;flex:none}
+.swap{text-align:center;font-size:14px;color:var(--muted);margin-top:8px}
+.swap button{color:var(--accent);font-weight:700;min-height:44px;padding:0 6px}
+
+/* welcome */
+.w-top{display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:4px}
+.logo-tile{width:170px;height:170px;border-radius:50px;background:#fff;display:flex;align-items:center;justify-content:center}
+.w-top h2{font-size:34px;line-height:1.08;margin:28px 0 10px}
+.w-top p{font-size:15px;color:var(--muted);margin:0 0 30px;line-height:1.45}
+.stack{display:grid;gap:10px}
+.lang{display:flex;justify-content:center;gap:6px;margin-top:14px}
+.lang button,.mode{font-size:13px;font-weight:600;padding:0 14px;min-height:40px;border-radius:10px;background:var(--surface);color:var(--text)}
+.lang button[aria-pressed=true]{background:var(--pri);color:var(--pri-text)}
+.mode{display:inline-flex;align-items:center;gap:6px}
+
+/* otp */
+.otp{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:20px 0 4px}
+.otp input{height:58px;border-radius:var(--r-btn);border:2px solid transparent;background:var(--surface);text-align:center;font:800 24px Inter,sans-serif;color:var(--text);width:100%}
+.otp input:focus{border-color:var(--accent);outline:0}
+
+/* home */
+.hd{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.bell{width:44px;height:44px;border-radius:50%;background:var(--surface);color:var(--text);display:flex;align-items:center;justify-content:center;position:relative}
+.bell span{position:absolute;top:10px;right:12px;width:8px;height:8px;border-radius:50%;background:var(--coral)}
+.amt{font-size:clamp(28px,9vw,36px);margin:4px 0 12px;font-variation-settings:"opsz" 32;font-weight:800;letter-spacing:-.03em;white-space:nowrap}
+.qa{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0 18px}
+.qa svg{color:var(--icon)}
+.qa button{background:var(--surface);color:var(--text);border-radius:16px;padding:12px 0;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;font-weight:600;min-height:64px}
+.sec{display:flex;justify-content:space-between;align-items:center;font-size:15px;font-weight:700;margin-bottom:8px}
+.sec a{color:var(--accent);font-size:13px;text-decoration:none}
+.row{display:flex;align-items:center;gap:12px}
+.goal{background:var(--lime);color:var(--ink);border-radius:var(--r-card);padding:16px;margin-top:10px}
+
+.nav{position:absolute;left:12px;right:12px;bottom:12px;height:64px;background:var(--surface);border-radius:var(--r-card);display:none;align-items:center;justify-content:space-around;box-shadow:0 2px 10px rgba(22,20,46,.07)}
+@media(max-width:860px){.nav{bottom:max(12px,env(safe-area-inset-bottom))}}
+.nav.on{display:flex}
+.nav button{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:600;color:var(--navoff);min-width:52px;min-height:48px;justify-content:center}
+.nav button[aria-current=page]{color:var(--text)}
+.nav .plus{width:52px;height:52px;border-radius:50%;background:var(--lime);margin-top:-20px;min-width:0}
+.hdrow{display:flex;justify-content:space-between;align-items:center;min-height:44px}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.eye{width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:var(--muted);flex:none;margin-right:-8px}
+.hint{font-size:13px;color:var(--muted);margin:-6px 0 12px}
+.forgot{color:var(--accent);font-weight:600;font-size:14px;min-height:44px}
+.pick.mini{width:auto;gap:6px;padding:0 8px;font-size:15px;border-right:1px solid var(--line);border-radius:0;min-height:40px}
+.modal{position:absolute;left:16px;right:16px;top:50%;transform:translateY(-50%);background:var(--surface);border-radius:24px;padding:28px 20px 12px;text-align:center}
+.modal h3{font-size:24px;margin:16px 0 8px}
+.modal p{margin:0 0 14px;font-size:15px}
+.mail{width:92px;height:92px;border-radius:50%;background:var(--lime);display:inline-flex;align-items:center;justify-content:center;position:relative}
+.tick{position:absolute;right:2px;bottom:4px;width:28px;height:28px;border-radius:50%;background:#2E7D32;border:3px solid var(--surface);display:flex;align-items:center;justify-content:center}
+.sheet-bg.on .modal{animation:pop .3s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes pop{from{opacity:0;transform:translateY(-46%) scale(.94)}}
+@media(prefers-reduced-motion:reduce){.sheet-bg.on .modal{animation:none}}
+.toast{position:absolute;left:20px;right:20px;bottom:90px;background:var(--pri);color:var(--pri-text);z-index:30;border-radius:14px;padding:12px 14px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+
+/* ===== Glassmorphism layer ===== */
+:root{--glass:rgba(255,255,255,.62);--glass-hi:rgba(255,255,255,.80);--gb:rgba(255,255,255,.85);--gshadow:0 8px 30px rgba(45,36,120,.10);
+  --hero:rgba(22,20,46,.86);--bg:#E8E5FB;--blob1:rgba(124,108,255,.55);--blob2:rgba(200,240,77,.65);--blob3:rgba(255,139,107,.45);--surface2:rgba(255,255,255,.75)}
+:root[data-theme=dark]{--glass:rgba(38,35,78,.50);--glass-hi:rgba(30,28,62,.82);--gb:rgba(255,255,255,.14);--gshadow:0 10px 34px rgba(0,0,0,.40);
+  --hero:rgba(70,62,150,.45);--bg:#0C0B1C;--blob1:rgba(109,93,245,.55);--blob2:rgba(200,240,77,.22);--blob3:rgba(255,139,107,.30);--surface2:rgba(255,255,255,.10)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--glass:rgba(38,35,78,.50);--glass-hi:rgba(30,28,62,.82);--gb:rgba(255,255,255,.14);--gshadow:0 10px 34px rgba(0,0,0,.40);
+  --hero:rgba(70,62,150,.45);--bg:#0C0B1C;--blob1:rgba(109,93,245,.55);--blob2:rgba(200,240,77,.22);--blob3:rgba(255,139,107,.30);--surface2:rgba(255,255,255,.10)}}
+.screen{isolation:isolate}
+.screen::before,.screen::after,.glow{content:"";position:absolute;border-radius:50%;filter:blur(60px);z-index:-1;pointer-events:none}
+.screen::before{width:300px;height:300px;background:var(--blob1);top:-60px;left:-90px;animation:drift 18s ease-in-out infinite alternate}
+.screen::after{width:260px;height:260px;background:var(--blob2);top:300px;right:-110px;animation:drift 22s ease-in-out infinite alternate-reverse}
+.glow{width:240px;height:240px;background:var(--blob3);bottom:-60px;left:-40px;animation:drift 26s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(40px,30px) scale(1.12)}}
+body{background:var(--bg)}
+.screen{background:var(--bg)}
+.card,.in,.qa button,.back,.bell,.nav,.btn-white,.lang button,.logo-tile,.clist,.modal,.sheet,.seg,.glassb{
+  background:var(--glass);-webkit-backdrop-filter:blur(20px) saturate(170%);backdrop-filter:blur(20px) saturate(170%);
+  border:1px solid var(--gb);box-shadow:var(--gshadow)}
+.hero{background:var(--hero);-webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);border:1px solid rgba(255,255,255,.16);box-shadow:var(--gshadow)}
+.goal{border:1px solid rgba(255,255,255,.55);box-shadow:0 10px 30px rgba(140,180,20,.25)}
+.modal,.sheet{background:var(--glass-hi)}
+.clist{box-shadow:none}
+.clist button{border-top-color:var(--gb)}
+.in{border-width:1px}
+.in:focus-within{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),var(--gshadow)}
+.lang button[aria-pressed=true]{background:var(--pri);color:var(--pri-text);border-color:transparent}
+.btn-ink{box-shadow:0 10px 24px rgba(22,20,46,.22)}
+.nav .plus{box-shadow:0 8px 22px rgba(160,200,40,.45)}
+.otp input{background:var(--glass);border:1px solid var(--gb)}
+.logo-tile{background:rgba(255,255,255,.88)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  :root{--glass:rgba(255,255,255,.92)}:root[data-theme=dark]{--glass:rgba(34,32,66,.94)}}
+@media(prefers-reduced-transparency:reduce){.card,.in,.qa button,.back,.bell,.nav,.btn-white,.lang button,.clist,.modal,.sheet{background:var(--glass-hi)}}
+@media(prefers-reduced-motion:reduce){.screen::before,.screen::after,.glow{animation:none}}
+
+/* ===== No visible scrollbars, compact auth forms ===== */
+.view,.clist{scrollbar-width:none;-ms-overflow-style:none}
+.view::-webkit-scrollbar,.clist::-webkit-scrollbar{display:none;width:0;height:0}
+#v-signup,#v-login{padding-bottom:20px}
+#v-signup .ftitle,#v-login .ftitle{font-size:28px;margin:12px 0 4px}
+#v-signup .fsub,#v-login .fsub{font-size:14px;margin:0 0 14px;line-height:1.4}
+#v-signup .field{margin-bottom:9px}
+#v-signup .field label{margin-bottom:4px}
+#v-signup .in{min-height:48px}
+#v-signup .in input{min-height:44px}
+#v-signup .pick.mini{min-height:36px}
+#v-signup .hint{margin:-4px 0 8px;font-size:12.5px}
+#v-signup .check{margin:2px 0 0}
+#v-signup .err{min-height:18px;margin:2px 0 4px}
+#v-signup .swap,#v-login .swap{margin-top:2px}
+#v-signup .swap button,#v-login .swap button{min-height:40px}
+
+/* ===== Dashboard build ===== */
+.vt{flex:1;margin:0 10px;font-size:17px;font-weight:700;text-align:center}
+.badge{position:absolute;top:4px;right:2px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--coral);color:var(--ink);font:800 11px/18px Inter,sans-serif;text-align:center}
+.curchip{font-size:12px;font-weight:700;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:0 10px;min-height:30px;display:inline-flex;align-items:center;gap:6px}
+.baleye{width:36px;height:36px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:var(--hero-muted)}
+.baleye:hover{color:#fff}
+.locnote{font-size:12.5px;color:var(--muted);margin:8px 2px 0}
+.qa{margin-top:10px}
+.btn-lime{background:var(--lime);color:var(--ink);font-weight:800;box-shadow:0 10px 24px rgba(160,200,40,.35)}
+.btn-lime[disabled]{opacity:.7}
+.payamt{font-size:42px;margin:4px 0 8px}
+.chip-s{display:inline-block;font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:10px;background:var(--glass);border:1px solid var(--gb)}
+.lbl2{font-size:13px;font-weight:700;margin:0 0 8px}
+.mrow{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;text-align:left;border-top:1px solid var(--line);padding:6px 0}
+.mrow:first-child{border-top:0}
+.mrow .mi{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:none;background:var(--surface2)}
+.mrow .n{flex:1;font-weight:700;font-size:15px}.mrow .n small{display:block;font-weight:500;color:var(--muted);font-size:12.5px}
+.radio{width:22px;height:22px;border-radius:50%;border:2px solid var(--muted);flex:none;position:relative}
+.mrow[aria-checked=true] .radio{border-color:var(--accent)}.mrow[aria-checked=true] .radio::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--accent)}
+.kv{display:flex;justify-content:space-between;align-items:center;font-size:14px;min-height:34px;gap:10px}
+.linkish{color:var(--accent);font-weight:700;font-size:14px;min-height:36px}
+.okc{width:100px;height:100px;border-radius:50%;background:var(--lime);display:inline-flex;align-items:center;justify-content:center;box-shadow:0 12px 34px rgba(160,200,40,.45)}
+.medal{width:46px;height:46px;border-radius:50%;background:var(--lime);color:var(--ink);display:flex;align-items:center;justify-content:center;font:800 20px Inter,sans-serif;flex:none}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;text-align:center}
+.tiles div{background:var(--surface2);border-radius:12px;padding:10px 4px}.tiles b{display:block;font-size:15px;font-weight:800;white-space:nowrap}.tiles span{font-size:11.5px;color:var(--muted)}
+.seg{display:flex;padding:4px;border-radius:14px;margin:12px 0}
+.seg button{flex:1;min-height:40px;border-radius:11px;font-weight:700;font-size:14px}
+.seg button[aria-selected=true]{background:var(--pri);color:var(--pri-text)}
+.grow{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.grow:first-child{border-top:0}
+.gi{width:38px;height:38px;border-radius:11px;background:var(--surface2);display:flex;align-items:center;justify-content:center;flex:none;color:var(--icon)}
+.thin{height:6px;border-radius:9px;background:var(--surface2);margin-top:6px}.thin i{display:block;height:100%;border-radius:9px;background:var(--accent)}
+.addg{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;border-radius:var(--r-btn);border:1.5px dashed var(--accent)!important;color:var(--accent);font-weight:700;margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.chips button{min-height:38px;padding:0 13px;border-radius:11px;font-size:13.5px;font-weight:600;background:var(--surface2);border:1px solid var(--gb)}
+.chips button[aria-pressed=true]{background:var(--pri);color:var(--pri-text);border-color:transparent}
+.cursym{font-size:15px;color:var(--muted);white-space:nowrap}
+.list .irow{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.list .irow:first-child{border-top:0}
+.tag{font-size:11.5px;font-weight:700;padding:4px 8px;border-radius:8px;white-space:nowrap}
+.t-paid{background:#E9F9C8;color:#3F5A00}.t-due{background:#ECEAFB;color:#4A3CD0}.t-late{background:#FFE4DC;color:#B23A12}
+.st{margin-top:4px}
+.st-h{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px}
+.st-sum{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.st-sum div{background:var(--surface2);border-radius:12px;padding:10px}.st-sum span{display:block;font-size:11.5px;color:var(--muted)}.st-sum b{font-size:15px;white-space:nowrap}
+.st table{width:100%;border-collapse:collapse;font-size:12.5px}
+.st th{text-align:left;font-weight:600;color:var(--muted);padding:6px 4px;border-bottom:1px solid var(--line)}
+.st td{padding:8px 4px;border-bottom:1px solid var(--line);vertical-align:top}
+.st td.n,.st th.n{text-align:right;white-space:nowrap}
+.pos{color:#3F7A00}:root[data-theme=dark] .pos{color:#C8F04D}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]) .pos{color:#C8F04D}}
+.nrow{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-top:1px solid var(--gb);width:100%;text-align:left}
+.nrow:first-child{border-top:0}
+.nrow .dot{width:10px;height:10px;border-radius:50%;margin-top:6px;flex:none}
+.nrow .tx{flex:1;font-size:14px}.nrow .tx small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.nrow.unread .tx{font-weight:700}
+.nrow .new{font-size:10.5px;font-weight:800;color:var(--ink);background:var(--lime);border-radius:6px;padding:2px 6px;flex:none}
+.banner{position:absolute;left:14px;right:14px;top:52px;z-index:40;display:flex;gap:10px;align-items:center;padding:12px 14px;border-radius:16px;background:var(--glass-hi);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border:1px solid var(--gb);box-shadow:var(--gshadow);font-size:14px;font-weight:600;transform:translateY(-140%);opacity:0;transition:transform .35s ease,opacity .35s;cursor:pointer}
+.banner.on{transform:none;opacity:1}
+@media(max-width:860px){.banner{top:max(10px,env(safe-area-inset-top))}}
+@media(prefers-reduced-motion:reduce){.banner{transition:none}}
+#v-goals,#v-invite,#v-stmt,#v-pay{padding-bottom:100px}
+.goal{cursor:default}
+
+/* ===== Wheel date & time picker ===== */
+.dtbtn{width:100%;min-height:48px;display:flex;align-items:center;gap:10px;text-align:left;font-size:16px}
+.dtbtn .dv{flex:1}.dtbtn .dv.ph{color:var(--ph)}
+.dt-prev{text-align:center;font-weight:800;font-size:18px;margin:4px 0 10px}
+.wheels{position:relative;display:flex;gap:4px;height:200px;border-radius:16px;background:var(--surface2);overflow:hidden;
+  -webkit-mask-image:linear-gradient(transparent,#000 30%,#000 70%,transparent);mask-image:linear-gradient(transparent,#000 30%,#000 70%,transparent)}
+.wheels .band{position:absolute;left:8px;right:8px;top:80px;height:40px;border-radius:11px;background:var(--glass-hi);border:1px solid var(--gb);pointer-events:none}
+.wcol{position:relative;flex:1;overflow-y:scroll;scroll-snap-type:y mandatory;scrollbar-width:none;padding:80px 0;outline:none}
+.wcol::-webkit-scrollbar{display:none}
+.wcol:focus-visible{box-shadow:inset 0 0 0 2px var(--accent);border-radius:12px}
+.wcol div{height:40px;display:flex;align-items:center;justify-content:center;scroll-snap-align:center;font-size:17px;color:var(--muted);user-select:none;cursor:pointer;transition:color .15s,font-weight .15s}
+.wcol div.sel{color:var(--text);font-weight:700}
+.wcol.wide{flex:1.5}
+
+/* ===== Me ===== */
+.prof{display:flex;gap:14px;align-items:center;margin-top:10px}
+.ph-wrap{position:relative;flex:none}
+.ph-av{width:76px;height:76px;border-radius:50%;background:var(--coral);color:var(--ink);display:flex;align-items:center;justify-content:center;font:800 26px Inter,sans-serif;overflow:hidden}
+.ph-av img,.av img{width:100%;height:100%;object-fit:cover;display:block}
+.av{overflow:hidden}
+.ph-cam{position:absolute;right:-4px;bottom:-4px;width:34px;height:34px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;border:3px solid var(--bg);cursor:pointer}
+.ph-cam:focus-within,.ph-cam:hover{outline:2px solid var(--accent)}
+.srow{display:flex;align-items:center;gap:12px;width:100%;min-height:52px;text-align:left;font-size:15px}
+.srow .n{flex:1;font-weight:600}.srow .n small{display:block;font-weight:500;color:var(--muted);font-size:12.5px}
+.srow.tap{cursor:pointer}
+.sw{width:50px;height:30px;border-radius:15px;background:var(--line);position:relative;flex:none;transition:background .2s}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.25);transition:transform .2s}
+.sw[aria-checked=true]{background:#7CB518}.sw[aria-checked=true]::after{transform:translateX(20px)}
+@media(prefers-reduced-motion:reduce){.sw,.sw::after{transition:none}}
+.seg-s{margin:0 0 4px}
+.seg-s button[aria-pressed=true]{background:var(--pri);color:var(--pri-text)}
+.seg-s button{flex:1;min-height:40px;border-radius:11px;font-weight:700;font-size:14px}
+.bk{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.bk:first-child{border-top:0}
+.bk .mi{width:40px;height:40px;border-radius:12px;background:var(--surface2);display:flex;align-items:center;justify-content:center;flex:none}
+#v-me{padding-bottom:110px}
+.bka{display:flex;flex-direction:column;align-items:flex-end;flex:none}.bka .linkish{font-size:13px;min-height:32px;white-space:nowrap}
+
+/* ===== Phone fit: safe areas + calmer sizes ===== */
+.view{padding-left:max(18px,env(safe-area-inset-left));padding-right:max(18px,env(safe-area-inset-right))}
+.view{padding-top:14px}
+@media(max-width:860px){.view{padding-top:calc(env(safe-area-inset-top) + 18px)}
+  .nav{left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));bottom:calc(env(safe-area-inset-bottom) + 10px)}}
+.hero{padding:14px 16px;border-radius:20px}
+.amt{font-size:clamp(26px,7.6vw,32px);margin:2px 0 10px;line-height:1.1}
+.payamt{font-size:clamp(30px,9vw,36px)}
+.hero .pill{font-size:11.5px;padding:4px 9px}
+.curchip{min-height:28px;font-size:11.5px;padding:0 8px}
+.baleye{width:32px;height:32px}
+.qa button{min-height:60px;padding:10px 0;font-size:11.5px}
+.hd{margin-bottom:14px}
+.goal .disp{font-size:20px!important}
+@media(max-width:360px){
+  .view{padding-left:14px;padding-right:14px}
+  .qa{gap:6px}.qa button{font-size:10.5px}
+  .two{gap:8px}
+  .ftitle,#v-signup .ftitle,#v-login .ftitle{font-size:24px}
+  .w-top h2{font-size:28px}.logo-tile{width:140px;height:140px;border-radius:42px}
+  .nav button{min-width:44px;font-size:10px}
+  .tiles b{font-size:13px}
+}
+
+/* ===== Autofill: keep glass look, no grey/blue browser fill ===== */
+.in input:-webkit-autofill,.in input:-webkit-autofill:hover,.in input:-webkit-autofill:focus{
+  -webkit-text-fill-color:var(--text);caret-color:var(--text);
+  -webkit-box-shadow:0 0 0 40px transparent inset;box-shadow:0 0 0 40px transparent inset;
+  transition:background-color 99999s ease-out 0s}
+.in input:autofill{background:transparent}
+.in input::selection{background:rgba(124,108,255,.30)}
+
+/* ===== KYC ===== */
+.kprog{height:6px;border-radius:6px;background:var(--surface2);margin-top:12px;overflow:hidden}.kprog i{display:block;height:100%;background:var(--lime);border-radius:6px;transition:width .3s}
+.kyc{display:flex;gap:12px;align-items:center;margin-bottom:18px}
+.kyc .ki{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none}
+.pick2{width:100%;min-height:48px;display:flex;align-items:center;gap:10px;text-align:left;font-size:16px;font-weight:600}
+.pick2 .n{flex:1}
+.up{display:flex;align-items:center;gap:12px;width:100%;min-height:72px;padding:12px;border-radius:16px;border:1.5px dashed var(--accent);color:var(--text);cursor:pointer;margin-bottom:10px;text-align:left}
+.up:focus-within{outline:2px solid var(--accent)}
+.up .th{width:56px;height:44px;border-radius:9px;background:var(--surface2);flex:none;overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--icon)}
+.up .th img{width:100%;height:100%;object-fit:cover}
+.up.done{border-style:solid;border-color:#7CB518}
+.up.selfie .th{width:56px;height:56px;border-radius:50%}
+.up b{display:block;font-size:14.5px}.up small{color:var(--muted);font-size:12.5px}
+.rv{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:8px 0;border-top:1px solid var(--line)}.rv:first-child{border-top:0}.rv span{color:var(--muted)}
+.ctag{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:700;padding:3px 7px;border-radius:7px;background:var(--surface2);margin:2px 4px 0 0}
+#v-kyc{padding-bottom:40px}
+.kh{font-size:20px;margin:14px 0 12px}
+#sheet-bg,#dt-bg{z-index:32}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="phone"><div class="screen">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="status"><span>9:41</span><div class="notch"></div><span>100%</span></div>
+
+    <section class="view on" id="v-welcome" aria-label="Welcome">
+      <div class="hdrow" style="justify-content:flex-end"><button class="bell" type="button" data-mode="1"></button></div>
+      <div class="w-top">
+        <div class="logo-tile"><svg viewBox="0 0 256 256" width="124" height="124" role="img" aria-label="Chamaa logo"><ellipse fill="#16142E" cx="124" cy="136" rx="92" ry="74"/><path fill="#16142E" d="M164 74 L190 44 L196 92 Z"/><rect fill="#16142E" x="200" y="114" width="34" height="42" rx="12"/><rect fill="#16142E" x="66" y="186" width="28" height="44" rx="8"/><rect fill="#16142E" x="148" y="186" width="28" height="44" rx="8"/><rect fill="#fff" x="100" y="70" width="44" height="10" rx="5"/><path d="M124 140 A7 7 0 0 1 138 140 A14 14 0 0 1 110 140 A21 21 0 0 1 152 140 A28 28 0 0 1 96 140 A35 35 0 0 1 166 140" fill="none" stroke="#C8F04D" stroke-width="9" stroke-linecap="round"/></svg></div>
+        <h2 class="disp" data-t="tag"></h2>
+        <p data-t="sub"></p>
+      </div>
+      <div class="stack">
+        <button class="btn btn-ink" type="button" data-go="signup" data-t="create"></button>
+        <button class="btn btn-white" type="button" data-go="login" data-t="login"></button>
+        <button class="link" type="button" data-go="signup" data-invite="1" data-t="inv"></button>
+      </div>
+      <div class="lang" role="group" aria-label="Language"><button type="button" data-l="en" aria-pressed="true">English</button><button type="button" data-l="sw" aria-pressed="false">Kiswahili</button></div>
+    </section>
+
+    <section class="view" id="v-signup" aria-label="Create account">
+      <div class="hdrow"><button class="back" type="button" data-go="welcome" aria-label="Back"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button class="bell" type="button" data-mode="1"></button></div>
+      <h2 class="disp ftitle" data-t="suT"></h2>
+      <p class="fsub" data-t="suS"></p>
+      <form id="f-signup" novalidate>
+        <div class="two">
+          <div class="field"><label for="su-first" data-t="first"></label><div class="in"><input id="su-first" autocomplete="given-name" placeholder="Wanjiru"></div></div>
+          <div class="field"><label for="su-last" data-t="last"></label><div class="in"><input id="su-last" autocomplete="family-name" placeholder="Kamau"></div></div>
+        </div>
+        <div class="field"><label for="su-email" data-t="email"></label><div class="in"><input id="su-email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com"></div></div>
+        <div class="field"><label id="su-cl" data-t="phone"></label><div class="in" style="padding:0 6px 0 4px;gap:4px"><button type="button" class="pick country mini" id="su-country" data-cc="KE" aria-haspopup="dialog"></button><input id="su-phone" class="ph" inputmode="tel" autocomplete="tel-national" placeholder="712 345 678" aria-labelledby="su-cl"></div></div>
+        <div class="field"><label for="su-city" data-t="city"></label><div class="in"><input id="su-city" autocomplete="address-level2" placeholder="Nairobi"></div></div>
+        <div class="field"><label for="su-pw" data-t="newpw"></label><div class="in"><input id="su-pw" type="password" autocomplete="new-password" class="pw"><button type="button" class="eye" aria-label="Show password" data-eye="1"></button></div></div>
+        <p class="hint" data-t="pwHint"></p>
+        <div class="field" id="inv-field" hidden><label for="su-inv"><span data-t="invCode"></span> <span class="opt" data-t="optional"></span></label><div class="in"><input id="su-inv" autocapitalize="characters" placeholder="UMOJA-4821"></div></div>
+        <label class="check"><input type="checkbox" id="su-terms"><span data-t="terms"></span></label>
+        <p class="err" id="e-signup" role="alert"></p>
+        <button class="btn btn-ink" type="submit" data-t="create"></button>
+      </form>
+      <p class="swap"><span data-t="have"></span> <button type="button" data-go="login" data-t="login"></button></p>
+    </section>
+
+    <section class="view" id="v-login" aria-label="Log in">
+      <div class="hdrow"><button class="back" type="button" data-go="welcome" aria-label="Back"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button class="bell" type="button" data-mode="1"></button></div>
+      <h2 class="disp ftitle" data-t="liT"></h2>
+      <p class="fsub" data-t="liS"></p>
+      <form id="f-login" novalidate>
+        <div class="field"><label for="li-email" data-t="email"></label><div class="in"><input id="li-email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com"></div></div>
+        <div class="field"><label for="li-pw" data-t="pw"></label><div class="in"><input id="li-pw" type="password" autocomplete="current-password" class="pw"><button type="button" class="eye" aria-label="Show password" data-eye="1"></button></div></div>
+        <div style="text-align:right;margin:-4px 0 4px"><button type="button" class="forgot" data-toast="1" data-t="forgot"></button></div>
+        <p class="err" id="e-login" role="alert"></p>
+        <button class="btn btn-ink" type="submit" data-t="login"></button>
+      </form>
+      <p class="swap"><span data-t="new"></span> <button type="button" data-go="signup" data-t="create"></button></p>
+    </section>
+
+    <div class="sheet-bg" id="verify-bg"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="vf-t">
+      <div class="mail"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#16142E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.5 7l8.5 6 8.5-6"/></svg><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span></div>
+      <h3 id="vf-t" class="disp" data-t="vfT"></h3>
+      <p class="muted"><span data-t="vfS"></span><br><b id="vf-mail" style="color:var(--text);overflow-wrap:anywhere"></b></p>
+      <p class="muted" style="font-size:14px" data-t="vfS2"></p>
+      <button class="btn btn-ink" type="button" id="vf-ok" data-t="vfOk"></button>
+      <button class="link" type="button" id="vf-resend"></button>
+    </div></div>
+
+    <section class="view" id="v-home" aria-label="Home">
+      <div class="hd">
+        <div class="av" id="h-av" style="background:var(--coral);color:var(--ink)"></div>
+        <div style="flex:1"><div class="muted" style="font-size:13px" data-t="hi"></div><div style="font-size:17px;font-weight:700" id="h-name"></div></div>
+        <button class="bell" type="button" data-mode="1" style="margin-right:-4px"></button><button class="bell" type="button" id="bell" aria-label="Notifications"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15z"/><path d="M10 21h4"/></svg><b class="badge" id="badge" hidden></b></button>
+      </div>
+      <div class="hero">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span style="display:flex;align-items:center;gap:4px"><span style="font-size:13px;color:var(--hero-muted)" data-t="avail"></span><button type="button" class="baleye" id="baleye"></button></span><button type="button" class="curchip" id="curchip"></button></div>
+        <div class="amt" id="bal" aria-live="polite"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><span class="pill" style="background:var(--lime);color:var(--ink)">+ <span data-m="2000"></span> <span data-t="week"></span></span><span style="font-size:13px;color:var(--hero-muted)" data-t="three"></span></div>
+      </div>
+      <p class="locnote" id="locnote"></p>
+      <div class="qa" id="qa"></div>
+      <div class="sec"><span data-t="next"></span><a href="#" data-toast="1" data-t="all"></a></div>
+      <div class="card"><div class="row"><div class="av" style="background:#6D5DF5;color:#fff;width:36px;height:36px;font-size:12px">US</div><div style="flex:1"><div style="font-weight:700;font-size:15px">Umoja Sisters</div><div class="muted" style="font-size:13px"><span data-t="due"></span> · <span data-m="2000"></span></div></div><button class="btn-sm" style="background:var(--pri);color:var(--pri-text)" type="button" data-go="pay" data-t="pay"></button></div></div>
+      <div id="home-goal"></div>
+      <p class="sample" style="margin-top:14px" data-t="demo2"></p>
+    </section>
+
+    <section class="view" id="v-pay" aria-label="Pay">
+      <div class="hdrow"><button class="back" type="button" data-go="home" aria-label="Back"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><h2 class="vt" data-t="payT"></h2><button class="bell" type="button" data-mode="1"></button></div>
+      <div style="text-align:center;margin:14px 0 16px"><div class="muted" style="font-size:13px" data-t="payWk"></div><div class="disp payamt" data-m="2000"></div><span class="chip-s" data-t="streak"></span></div>
+      <div class="card" style="margin-bottom:10px"><div class="lbl2" data-t="payWith"></div><div id="methods" role="radiogroup"></div></div>
+      <div class="card" style="margin-bottom:14px">
+        <div class="kv"><span class="muted" data-t="contrib"></span><b data-m="2000"></b></div>
+        <div class="kv"><span class="muted" data-t="toward"></span><button type="button" class="linkish" id="paygoal"></button></div>
+        <div class="kv"><span class="muted" data-t="fee"></span><b data-m="0"></b></div>
+      </div>
+      <button class="btn btn-lime" type="button" id="paybtn"></button>
+      <p class="muted" style="text-align:center;font-size:13px;margin:10px 0 0" id="paynote"></p>
+    </section>
+
+    <section class="view" id="v-paid" aria-label="Payment received">
+      <div class="hdrow" style="justify-content:flex-end"><button class="bell" type="button" data-mode="1"></button></div>
+      <div style="text-align:center;padding-top:10px"><div class="okc"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#16142E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h2 class="disp" style="font-size:28px;margin:18px 0 6px" data-t="paidT"></h2><p class="muted" style="margin:0;font-size:14px" id="paidref"></p></div>
+      <div class="hero" style="margin:20px 0 10px;display:flex;gap:12px;align-items:center"><div class="medal">7</div><div><div style="font-weight:800;font-size:16px" data-t="streak7"></div><div style="font-size:13px;color:var(--hero-muted)" data-t="streakSub"></div></div></div>
+      <div class="card" style="margin-bottom:14px"><div style="font-size:13px;font-weight:700;margin-bottom:8px" data-t="summary"></div><div class="tiles"><div><b data-m="14000"></b><span data-t="savedHere"></span></div><div><b id="paid-gp"></b><span data-t="goalW"></span></div><div><b data-t="wks3"></b><span data-t="toPayout"></span></div></div></div>
+      <button class="btn btn-ink" type="button" data-go="home" data-t="done"></button>
+      <a class="link" id="share-wa" target="_blank" rel="noopener" style="text-decoration:none;display:flex;align-items:center;justify-content:center" data-t="shareR"></a>
+    </section>
+
+    <section class="view" id="v-goals" aria-label="Goals">
+      <div class="hdrow"><button class="back" type="button" data-go="home" aria-label="Back"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><h2 class="vt" data-t="goalsT"></h2><button class="bell" type="button" data-mode="1"></button></div>
+      <div class="seg" role="tablist"><button type="button" role="tab" data-seg="me" aria-selected="true" data-t="me"></button><button type="button" role="tab" data-seg="we" aria-selected="false" data-t="we"></button></div>
+      <div id="goals-me"></div>
+      <div id="goals-we" hidden></div>
+    </section>
+
+    <section class="view" id="v-invite" aria-label="Invite">
+      <div class="hdrow"><button class="back" type="button" data-go="home" aria-label="Back"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><h2 class="vt" data-t="invT"></h2><button class="bell" type="button" data-mode="1"></button></div>
+      <div class="hero" style="margin:12px 0 10px"><div style="font-size:13px;color:var(--hero-muted)" data-t="yourCode"></div><div class="disp" style="font-size:30px;margin:4px 0 12px;letter-spacing:.02em">WANJIRU-4821</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn-sm" style="background:var(--lime);color:var(--ink)" id="copylink" data-t="copyLink"></button><a class="btn-sm" style="background:rgba(255,255,255,.14);color:#fff;text-decoration:none" id="wa" target="_blank" rel="noopener" data-t="wa"></a></div></div>
+      <p class="muted" style="font-size:13px;margin:0 0 14px" data-t="invSub"></p>
+      <form id="f-invite" novalidate><div class="field"><label for="inv-to" data-t="invTo"></label><div class="in" style="padding-right:6px"><input id="inv-to" autocomplete="off" placeholder="friend@example.com"><button class="btn-sm" type="submit" style="background:var(--pri);color:var(--pri-text);min-height:40px" data-t="send"></button></div></div><p class="err" id="e-inv" role="alert"></p></form>
+      <div class="sec"><span data-t="invited"></span><span class="muted" style="font-size:13px;font-weight:600" id="invcount"></span></div>
+      <div class="card list" id="invlist"></div>
+    </section>
+
+    <section class="view" id="v-stmt" aria-label="Statement">
+      <div class="hdrow"><button class="back" type="button" data-go="home" aria-label="Back"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><h2 class="vt" data-t="stT"></h2><button class="bell" type="button" data-mode="1"></button></div>
+      <div class="card" style="margin:12px 0 10px" id="st-form">
+        <div class="lbl2" data-t="stChama"></div><div class="chips" id="st-chama"></div>
+        <div class="lbl2" data-t="stPeriod"></div><div class="chips" id="st-period"></div>
+        <div id="st-custom" hidden><div class="field"><label for="st-from" data-t="from"></label><div class="in"><button type="button" class="dtbtn" id="st-from" data-dt="past"><span class="dv"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted);flex:none"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button></div></div><div class="field"><label for="st-to" data-t="to"></label><div class="in"><button type="button" class="dtbtn" id="st-to" data-dt="past"><span class="dv"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted);flex:none"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button></div></div></div>
+        <div class="lbl2" data-t="stFormat"></div><div class="chips" id="st-format"></div>
+        <p class="err" id="e-st" role="alert"></p>
+        <button class="btn btn-ink" type="button" id="st-gen" data-t="generate"></button>
+      </div>
+      <div id="st-out"></div>
+    </section>
+
+    <section class="view" id="v-me" aria-label="Me">
+      <div class="hdrow"><h2 class="vt" style="text-align:left;margin:0;font-size:24px" data-t="meT"></h2><button class="bell" type="button" data-mode="1"></button></div>
+      <div class="card prof">
+        <div class="ph-wrap"><div class="ph-av" id="me-av"></div><label class="ph-cam" for="me-photo" data-tt="chgPhoto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16142E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></label><input type="file" id="me-photo" accept="image/*" hidden></div>
+        <div style="flex:1;min-width:0"><div style="font-weight:800;font-size:18px" id="me-name"></div><div class="muted" style="font-size:13px;overflow-wrap:anywhere" id="me-mail"></div><div class="muted" style="font-size:13px" id="me-city"></div></div>
+      </div>
+      <div class="two" style="margin:10px 0 18px"><button type="button" class="btn btn-white" id="edit-prof" style="min-height:46px;font-size:14px" data-t="editProf"></button><button type="button" class="btn btn-white" id="rm-photo" style="min-height:46px;font-size:14px" data-t="rmPhoto"></button></div>
+
+      <div id="kyc-card"></div>
+      <div class="sec"><span data-t="banks"></span></div>
+      <div class="card list" id="banklist"></div>
+      <p class="locnote" id="bank-note" style="margin:8px 2px 0"></p>
+      <button type="button" class="addg glassb" id="addbank" style="margin-bottom:18px"></button>
+
+      <div class="sec"><span data-t="notifSet"></span></div>
+      <div class="card" id="nset"></div>
+      <div class="lbl2" style="margin:14px 2px 8px" data-t="sendBy"></div>
+      <div class="card" id="nch" style="margin-bottom:18px"></div>
+
+      <div class="sec"><span data-t="appSet"></span></div>
+      <div class="card" style="margin-bottom:18px">
+        <div class="srow"><span class="n" data-t="appear"></span></div><div class="seg seg-s" id="appear"></div>
+        <div class="srow" style="border-top:1px solid var(--line);margin-top:10px"><span class="n" data-t="language"></span></div><div class="seg seg-s" id="langseg"><button type="button" data-l="en">English</button><button type="button" data-l="sw">Kiswahili</button></div>
+        <button type="button" class="srow tap" id="me-cur" style="border-top:1px solid var(--line);margin-top:10px"><span class="n" data-t="currency"></span><span class="muted" id="me-curv"></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--muted)"><path d="M9 6l6 6-6 6"/></svg></button>
+        <div class="srow" style="border-top:1px solid var(--line)"><span class="n"><span data-t="hideBal"></span><small data-t="hideBalS"></small></span><button type="button" class="sw" role="switch" id="hidebal"></button></div>
+      </div>
+
+      <div class="card" style="margin-bottom:14px">
+        <button type="button" class="srow tap" data-toast="1"><span class="n" data-t="help"></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--muted)"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button type="button" class="srow tap" data-toast="1" style="border-top:1px solid var(--line)"><span class="n" data-t="termsL"></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--muted)"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button type="button" class="srow tap" data-toast="1" style="border-top:1px solid var(--line)"><span class="n" data-t="privacy"></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="color:var(--muted)"><path d="M9 6l6 6-6 6"/></svg></button>
+      </div>
+      <button type="button" class="btn btn-white" id="logout" style="color:var(--late)" data-t="logout"></button>
+      <p class="sample" style="text-align:center;margin-top:10px">Chamaa · v0.1 preview</p>
+    </section>
+
+    <section class="view" id="v-kyc" aria-label="Verify identity">
+      <div class="hdrow"><button class="back" type="button" id="kyc-back" aria-label="Back"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><h2 class="vt" data-t="kycT"></h2><button class="bell" type="button" data-mode="1"></button></div>
+      <div class="kprog" aria-hidden="true"><i id="kbar"></i></div>
+      <p class="muted" style="font-size:12.5px;margin:6px 0 2px" id="kstep"></p>
+      <form id="f-kyc" novalidate><div id="kbody"></div><p class="err" id="e-kyc" role="alert"></p><button class="btn btn-ink" type="submit" id="knext"></button></form>
+      <p class="sample" style="text-align:center;margin-top:12px" data-t="kycSafe"></p>
+    </section>
+
+    <section class="view" id="v-kycdone" aria-label="Verification submitted">
+      <div class="hdrow" style="justify-content:flex-end"><button class="bell" type="button" data-mode="1"></button></div>
+      <div style="text-align:center;padding-top:30px"><div class="okc"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#16142E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></div><h2 class="disp" style="font-size:26px;margin:18px 0 8px" data-t="kSubT"></h2><p class="muted" style="margin:0 0 22px;font-size:15px" data-t="kSubS"></p></div>
+      <button class="btn btn-ink" type="button" data-go="me" data-t="backMe"></button>
+      <p class="sample" style="text-align:center;margin-top:12px" data-t="kDemo"></p>
+    </section>
+
+    <nav class="nav" id="nav" aria-label="Main"></nav>
+    <div class="sheet-bg" id="sheet-bg"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sh-t"><div class="grab"></div><h3 id="sh-t"></h3><div class="in"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="color:var(--muted)"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="sh-q" type="search" autocomplete="off" aria-label="Search"></div><div class="clist" id="clist" role="listbox"></div></div></div>
+    <div class="sheet-bg" id="notif-bg"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="nt-t"><div class="grab"></div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><h3 id="nt-t" style="margin:0" data-t="notifT"></h3><button type="button" class="linkish" id="markall" data-t="markAll"></button></div><div class="clist" id="nlist"></div></div></div>
+    <div class="sheet-bg" id="goal-bg"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="ng-t"><div class="grab"></div><h3 id="ng-t" data-t="ngT"></h3>
+      <form id="f-goal" novalidate style="overflow-y:auto">
+        <div class="lbl2" data-t="ngFor"></div><div class="chips" id="ng-cat"></div>
+        <div class="field"><label for="ng-name" data-t="ngName"></label><div class="in"><input id="ng-name" maxlength="40"></div></div>
+        <div class="field"><label for="ng-amt" data-t="ngAmt"></label><div class="in"><b class="cursym" id="ng-sym"></b><input id="ng-amt" inputmode="numeric" placeholder="50,000"></div></div><div class="field"><label for="ng-date" data-t="ngDate"></label><div class="in"><button type="button" class="dtbtn" id="ng-date" data-dt="future"><span class="dv"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted);flex:none"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button></div></div>
+        <p class="err" id="e-goal" role="alert"></p>
+        <button class="btn btn-lime" type="submit" data-t="ngSave"></button>
+      </form></div></div>
+    <div class="sheet-bg" id="prof-bg"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="pf-t"><div class="grab"></div><h3 id="pf-t" data-t="editProf"></h3>
+      <form id="f-prof" novalidate style="overflow-y:auto">
+        <div class="two"><div class="field"><label for="pf-first" data-t="first"></label><div class="in"><input id="pf-first" autocomplete="given-name"></div></div><div class="field"><label for="pf-last" data-t="last"></label><div class="in"><input id="pf-last" autocomplete="family-name"></div></div></div>
+        <div class="field"><label for="pf-mail" data-t="email"></label><div class="in"><input id="pf-mail" type="email" autocomplete="email"></div></div>
+        <div class="field"><label for="pf-phone" data-t="phone"></label><div class="in"><input id="pf-phone" inputmode="tel" autocomplete="tel"></div></div>
+        <div class="field"><label for="pf-city" data-t="city"></label><div class="in"><input id="pf-city" autocomplete="address-level2"></div></div>
+        <p class="err" id="e-prof" role="alert"></p>
+        <button class="btn btn-ink" type="submit" data-t="saveCh"></button>
+      </form></div></div>
+    <div class="sheet-bg" id="bank-bg"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="bk-t"><div class="grab"></div><h3 id="bk-t" data-t="addBank"></h3>
+      <form id="f-bank" novalidate style="overflow-y:auto">
+        <div class="field"><label data-t="bankCountry"></label><div class="in"><button type="button" class="pick2" id="bk-cc"></button></div></div>
+        <div class="chips" id="bk-type"></div>
+        <div class="field"><label for="bk-name" id="bk-name-l"></label><div class="in"><input id="bk-name" autocomplete="off"></div></div>
+        <div class="field"><label for="bk-holder" data-t="holder"></label><div class="in"><input id="bk-holder" autocomplete="name"></div></div>
+        <div class="field"><label for="bk-no" id="bk-no-l"></label><div class="in"><input id="bk-no" inputmode="numeric" autocomplete="off"></div></div>
+        <div class="field" id="bk-swift-f"><label for="bk-swift"><span data-t="swift"></span> <span class="opt" data-t="optional"></span></label><div class="in"><input id="bk-swift" autocapitalize="characters" autocomplete="off"></div></div>
+        <label class="check"><input type="checkbox" id="bk-def"><span data-t="makeDef"></span></label>
+        <p class="err" id="e-bank" role="alert"></p>
+        <button class="btn btn-lime" type="submit" data-t="saveBank"></button>
+      </form></div></div>
+    <div class="sheet-bg" id="gate-bg"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="gt-t" style="text-align:center"><div class="grab"></div>
+      <div class="okc" style="width:80px;height:80px;margin:6px auto 0"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#16142E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></div>
+      <h3 id="gt-t" class="disp" style="font-size:22px;margin:14px 0 6px"></h3><p class="muted" id="gt-s" style="margin:0 0 16px;font-size:15px"></p>
+      <button class="btn btn-ink" type="button" id="gt-go"></button><button class="link" type="button" id="gt-no" data-t="notNow"></button>
+    </div></div>
+    <div class="sheet-bg" id="dt-bg"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="dt-t">
+      <div class="grab"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><button type="button" class="linkish" id="dt-cancel" data-t="cancel"></button><h3 id="dt-t" style="margin:0;font-size:16px"></h3><button type="button" class="linkish" id="dt-done" data-t="doneBtn"></button></div>
+      <div class="dt-prev" id="dt-prev" aria-live="polite"></div>
+      <div class="wheels" id="w-date"><div class="band"></div></div>
+      <div class="lbl2" style="margin:12px 0 6px" data-t="time" id="w-time-l"></div>
+      <div class="wheels" id="w-time"><div class="band"></div></div>
+    </div></div>
+    <div class="toast" id="toast" role="status"></div>
+  </div></div>
+
+  <aside class="notes">
+    <h1 class="disp">Chamaa · first build</h1>
+    <p>A working preview of sprint 1, built from the approved UI/UX. Tap through it in the phone.</p>
+    <ol>
+      <li>Create account, "check your email" pop-up, log in</li>
+      <li>Dashboard: balance counts up, currency from your location</li>
+      <li>Pay: M-Pesa, card or bank transfer, then receipt</li>
+      <li>Goals: set goals for different things</li>
+      <li>Invite friends, generate a statement, live notifications</li>
+    </ol>
+    <p>Screens only: no emails are sent and no accounts are saved yet. Works worldwide, in English and Kiswahili, light and dark.</p>
+  </aside>
+</div>
+
+<script>
+{
+/* ---------- data ---------- */
+const C=[["KE","Kenya","254","KES"],["UG","Uganda","256","UGX"],["TZ","Tanzania","255","TZS"],["RW","Rwanda","250","RWF"],["ET","Ethiopia","251","ETB"],["NG","Nigeria","234","NGN"],["GH","Ghana","233","GHS"],["ZA","South Africa","27","ZAR"],["ZM","Zambia","260","ZMW"],["ZW","Zimbabwe","263","USD"],["CM","Cameroon","237","XAF"],["SN","Senegal","221","XOF"],["EG","Egypt","20","EGP"],["MA","Morocco","212","MAD"],["AE","United Arab Emirates","971","AED"],["SA","Saudi Arabia","966","SAR"],["QA","Qatar","974","QAR"],["IN","India","91","INR"],["PK","Pakistan","92","PKR"],["PH","Philippines","63","PHP"],["GB","United Kingdom","44","GBP"],["IE","Ireland","353","EUR"],["DE","Germany","49","EUR"],["FR","France","33","EUR"],["NL","Netherlands","31","EUR"],["IT","Italy","39","EUR"],["ES","Spain","34","EUR"],["SE","Sweden","46","SEK"],["US","United States","1","USD"],["CA","Canada","1","CAD"],["JM","Jamaica","1","JMD"],["BR","Brazil","55","BRL"],["MX","Mexico","52","MXN"],["AU","Australia","61","AUD"],["NZ","New Zealand","64","NZD"]];
+/* approximate units per 1 USD, preview only */
+const FX={USD:1,KES:129,UGX:3700,TZS:2600,RWF:1400,ETB:125,NGN:1550,GHS:12.5,ZAR:18,ZMW:27,XAF:600,XOF:600,EGP:49,MAD:10,AED:3.67,SAR:3.75,QAR:3.64,INR:85,PKR:280,PHP:57,GBP:.78,EUR:.92,SEK:10.6,CAD:1.38,JMD:157,BRL:5.6,MXN:18.5,AUD:1.53,NZD:1.68};
+const TZC={"Africa/Nairobi":"KE","Africa/Kampala":"UG","Africa/Dar_es_Salaam":"TZ","Africa/Kigali":"RW","Africa/Addis_Ababa":"ET","Africa/Lagos":"NG","Africa/Accra":"GH","Africa/Johannesburg":"ZA","Africa/Lusaka":"ZM","Africa/Harare":"ZW","Africa/Douala":"CM","Africa/Dakar":"SN","Africa/Cairo":"EG","Africa/Casablanca":"MA","Asia/Dubai":"AE","Asia/Riyadh":"SA","Asia/Qatar":"QA","Asia/Kolkata":"IN","Asia/Calcutta":"IN","Asia/Karachi":"PK","Asia/Manila":"PH","Europe/London":"GB","Europe/Dublin":"IE","Europe/Berlin":"DE","Europe/Paris":"FR","Europe/Amsterdam":"NL","Europe/Rome":"IT","Europe/Madrid":"ES","Europe/Stockholm":"SE","America/Toronto":"CA","America/Vancouver":"CA","America/Jamaica":"JM","America/Sao_Paulo":"BR","America/Mexico_City":"MX","Australia/Sydney":"AU","Australia/Melbourne":"AU","Pacific/Auckland":"NZ"};
+const T={
+ en:{tag:"Save together.<br>Grow together.",sub:"Run your chama in one place.<br>No more lost WhatsApp records.",create:"Create account",login:"Log in",inv:"I have an invite code",
+  suT:"Create your account",suS:"Join your chama in a minute.",first:"First name",last:"Last name",email:"Email",phone:"Phone number",city:"City",newpw:"Create a password",pw:"Password",
+  pwHint:"At least 8 characters, with a number.",optional:"(optional)",invCode:"Invite code",terms:"I agree to the Terms and Privacy Policy",have:"Already have an account?",new:"New to Chamaa?",
+  liT:"Welcome back",liS:"Log in with your email and password.",forgot:"Forgot password?",
+  vfT:"Check your email",vfS:"We've sent a verification link to",vfS2:"Tap the link in the email to activate your account, then log in.",vfOk:"Go to log in",vfResend:"Resend email in {s}s",vfResendNow:"Didn't get it? Resend email",
+  hi:"Habari,",avail:"Available balance",week:"this week",three:"3 chamas",next:"Next contribution",all:"See all",due:"Due Fri, 4 Dec",pay:"Pay",
+  of:"of",demo2:"Names and amounts are sample data.",
+  loc:"Amounts shown in {cur} because you're in {country}. Tap the currency to change it.",locPick:"Amounts shown in {cur}. You picked {country}.",curT:"Show amounts in",
+  qa:["Pay","Goals","Invite","Statement"],nav:["Home","Chamas","Goals","Me"],
+  payT:"Pay contribution",payWk:"Umoja Sisters · Week 49",streak:"On time · 6 weeks in a row",payWith:"Pay with",contrib:"Contribution",toward:"Towards my goal",fee:"Fee",
+  m_mpesa:"M-Pesa",m_mpesaS:"0712 ••• 678 · prompt on your phone",m_card:"Debit or credit card",m_cardS:"Visa, Mastercard",m_bank:"Bank transfer",m_bankS:"Treasurer confirms when it arrives",
+  n_mpesa:"You'll get an M-Pesa prompt on your phone. Enter your PIN to confirm.",n_card:"You'll enter your card details on the next step.",n_bank:"We'll show the chama's bank details. The treasurer confirms your payment.",
+  payBtn:"Pay {amt}",paying:"Waiting for confirmation…",
+  paidT:"Payment received",paidRef:"{amt} to Umoja Sisters · Ref {ref}",streak7:"7-week streak!",streakSub:"You're one of 4 members always on time",summary:"Your summary",savedHere:"Saved here",goalW:"Goal",wks3:"3 wks",toPayout:"To payout",done:"Done",shareR:"Share receipt on WhatsApp",
+  goalsT:"Goals",me:"Me",we:"We",newGoal:"New goal",saved:"saved",target:"Target",by:"by",groupGoal:"Group goal · Umoja Sisters",saving:"12 members saving",
+  ngT:"Set a new goal",ngFor:"What are you saving for?",ngName:"Goal name",ngAmt:"Target amount",ngDate:"Target date",ngSave:"Save goal",
+  cats:["School fees","Rent","Business","Emergency","Land","Travel","Wedding","Car","Other"],
+  eGName:"Give your goal a name.",eGAmt:"Enter a target amount.",eGDate:"Pick a date in the future.",goalAdded:"Goal saved.",
+  invT:"Invite friends",yourCode:"Your invite code",copyLink:"Copy invite link",wa:"Share on WhatsApp",copied:"Invite link copied.",
+  invSub:"Friends who sign up with your link join Chamaa and can be added to your chamas.",invTo:"Invite by email or phone",send:"Send",invited:"Invited",
+  eInv:"Enter an email address or phone number.",invSent:"Invite sent to {who}.",pending:"Pending",joined:"Joined",waText:"Join me on Chamaa, the easy way to run our savings group: {link}",
+  stT:"Statement",stChama:"Chama",stPeriod:"Period",stFormat:"Format",from:"From",to:"To",generate:"Generate statement",allCh:"All chamas",
+  per:["This month","Last 3 months","This year","Custom"],eSt:"Pick both dates, with From before To.",
+  stHead:"Statement of account",opening:"Opening balance",paidIn:"Paid in",paidOut:"Paid out",closing:"Closing balance",
+  date:"Date",desc:"Details",amount:"Amount",balance:"Balance",dlPdf:"Download PDF",dlCsv:"Download Excel (CSV)",emailMe:"Email it to me",dlSoon:"Downloads arrive with the real app.",
+  kycT:"Verify your identity",kycSafe:"Your details are encrypted and only used to confirm who you are.",kSubT:"Thanks! We're checking your details",kSubS:"This usually takes a few minutes. We'll let you know in your notifications.",backMe:"Back to Me",kDemo:"Preview: you'll be verified automatically in a few seconds.",notNow:"Not now",stepOf:"Step {a} of {b} · {t}",kSteps:["Your ID","Photos of your ID","Take a selfie","Where you live","Check and submit"],idCountry:"Country that issued your ID",idType:"Type of ID",idTypes:["Passport","National ID","Driver's licence","Residence permit"],idNo:"ID number",dob:"Date of birth",front:"Front of your ID",backS:"Back of your ID",passPage:"Photo page of your passport",upHint:"All corners showing, no glare",tapUp:"Tap to take or upload a photo",selfieT:"Your selfie",selfieHint:"Face the camera in good light. No hat or sunglasses.",resCountry:"Country you live in",addr:"Street address",proof:"Proof of address",proofHint:"Utility bill or bank statement from the last 3 months",confirm:"I confirm these details are true and belong to me",nextK:"Continue",submitK:"Submit for verification",eK0:"Choose the ID type and enter the ID number and date of birth.",eK1:"Add clear photos of your ID.",eK2:"Add your selfie.",eK3:"Enter your city and street address, and add a proof of address.",eK4:"Please tick the box to confirm.",kycNone:"Verify your identity",kycNoneS:"Needed before you pay in, receive payouts or add a bank account. About 3 minutes.",startK:"Start",kycPend:"Checking your details",kycPendS:"Usually a few minutes. You can keep using the app.",kycOk:"Identity verified",kycOkS:"Verified countries:",addCountry:"Verify another country",gateT:"Verify your identity first",gateS:"To keep everyone's money safe, verify who you are before you pay in, receive payouts or add a bank account. It takes about 3 minutes.",gatePendT:"Almost there",gatePendS:"We're still checking your details. You can do this as soon as you're verified.",verifyNow:"Verify now",okBtn:"OK",bankCountry:"Country of the account",bankNote:"You can add accounts in {list}: the countries on your verified ID and address. To add another country, verify your ID or address there.",bankNoteNone:"Bank accounts can be added once your identity is verified.",kVerifiedN:"Your identity is verified. You can now pay in and add bank accounts.",meT:"Me",showBal:"Show balance",hideBal2:"Hide balance",editProf:"Edit profile",rmPhoto:"Remove photo",addPhoto:"Add photo",chgPhoto:"Change photo",photoErr:"Choose an image under 5 MB.",photoOk:"Profile photo updated.",memberSince:"Member since Nov 2026",banks:"Bank accounts",addBank:"Add bank account",noBank:"No accounts yet. Add one to receive payouts.",defaultT:"Default",setDef:"Make default",remove:"Remove",bankType:["Bank account","Mobile money"],bankName:"Bank name",mmName:"Provider (e.g. M-Pesa)",holder:"Account holder name",accNo:"Account number",mmNo:"Mobile money number",swift:"Branch or SWIFT code",makeDef:"Use this account for my payouts",saveBank:"Save account",eBank:"Fill in the name, holder and number.",bankAdded:"Account added.",notifSet:"Notifications",sendBy:"Send them by",nItems:[["remind","Contribution reminders","Before and after a due date"],["payout","Payouts","When it is your turn, and when money is sent"],["pay","Payments","When a payment is received"],["goal","Goal progress","Milestones on your goals"],["join","Invites and new members","When someone joins your chama"],["late","Late payments","When a member in your chama is late"]],chans:[["push","Push notifications"],["email","Email"],["sms","SMS"]],appSet:"App settings",appear:"Appearance",appearO:["System","Light","Dark"],language:"Language",currency:"Display currency",hideBal:"Hide balance on home",hideBalS:"Also with the eye on the balance card",help:"Help and support",termsL:"Terms of service",privacy:"Privacy policy",logout:"Log out",saveCh:"Save changes",profSaved:"Profile saved.",saved2:"Saved.",notifT:"Notifications",markAll:"Mark all as read",cancel:"Cancel",doneBtn:"Done",time:"Time",pickDate:"Choose date and time",dtGoal:"Target date",dtFrom:"From",dtTo:"To",justNow:"Just now",minAgo:"{n} min ago",hAgo:"{n} h ago",newTag:"NEW",
+  soon:"Coming in the next builds.",sent:"Verification email sent again.",choose:"Choose your country",search:"Search countries",none:"No country matches that.",dark:"Dark mode",light:"Light mode",show:"Show password",hide:"Hide password",
+  eFirst:"Enter your first name.",eLast:"Enter your last name.",eEmail:"Enter a valid email address.",ePhone:"Enter a valid phone number.",eCity:"Enter your city.",ePw:"Use at least 8 characters, including a number.",eTerms:"Please agree to the Terms to continue.",eLogin:"Enter your email and password."},
+ sw:{tag:"Tuweke pamoja.<br>Tukue pamoja.",sub:"Endesha chama chako mahali pamoja.<br>Hakuna tena rekodi zilizopotea WhatsApp.",create:"Fungua akaunti",login:"Ingia",inv:"Nina msimbo wa mwaliko",
+  suT:"Fungua akaunti yako",suS:"Jiunge na chama chako kwa dakika moja.",first:"Jina la kwanza",last:"Jina la mwisho",email:"Barua pepe",phone:"Nambari ya simu",city:"Mji",newpw:"Unda nenosiri",pw:"Nenosiri",
+  pwHint:"Angalau herufi 8, pamoja na nambari.",optional:"(si lazima)",invCode:"Msimbo wa mwaliko",terms:"Nakubali Masharti na Sera ya Faragha",have:"Tayari una akaunti?",new:"Mpya kwa Chamaa?",
+  liT:"Karibu tena",liS:"Ingia kwa barua pepe na nenosiri lako.",forgot:"Umesahau nenosiri?",
+  vfT:"Angalia barua pepe yako",vfS:"Tumetuma kiungo cha uthibitisho kwa",vfS2:"Gusa kiungo kwenye barua pepe kuwasha akaunti yako, kisha uingie.",vfOk:"Nenda kuingia",vfResend:"Tuma tena baada ya sekunde {s}",vfResendNow:"Hukupokea? Tuma tena",
+  hi:"Habari,",avail:"Salio linalopatikana",week:"wiki hii",three:"Chama 3",next:"Mchango unaofuata",all:"Ona zote",due:"Ijumaa, 4 Des",pay:"Lipa",
+  of:"kati ya",demo2:"Majina na kiasi ni mifano tu.",
+  loc:"Kiasi kinaonyeshwa kwa {cur} kwa sababu uko {country}. Gusa sarafu kubadilisha.",locPick:"Kiasi kinaonyeshwa kwa {cur}. Ulichagua {country}.",curT:"Onyesha kiasi kwa",
+  qa:["Lipa","Malengo","Alika","Taarifa"],nav:["Nyumbani","Chama","Malengo","Mimi"],
+  payT:"Lipa mchango",payWk:"Umoja Sisters · Wiki 49",streak:"Kwa wakati · wiki 6 mfululizo",payWith:"Lipa kwa",contrib:"Mchango",toward:"Kuelekea lengo langu",fee:"Ada",
+  m_mpesa:"M-Pesa",m_mpesaS:"0712 ••• 678 · ombi kwenye simu yako",m_card:"Kadi ya benki",m_cardS:"Visa, Mastercard",m_bank:"Uhamisho wa benki",m_bankS:"Mweka hazina atathibitisha",
+  n_mpesa:"Utapokea ombi la M-Pesa kwenye simu. Weka PIN yako kuthibitisha.",n_card:"Utaweka maelezo ya kadi hatua inayofuata.",n_bank:"Tutaonyesha akaunti ya benki ya chama. Mweka hazina atathibitisha.",
+  payBtn:"Lipa {amt}",paying:"Inasubiri uthibitisho…",
+  paidT:"Malipo yamepokelewa",paidRef:"{amt} kwa Umoja Sisters · Kumb {ref}",streak7:"Wiki 7 mfululizo!",streakSub:"Wewe ni mmoja wa wanachama 4 wanaolipa kwa wakati",summary:"Muhtasari wako",savedHere:"Akiba hapa",goalW:"Lengo",wks3:"Wiki 3",toPayout:"Hadi malipo",done:"Maliza",shareR:"Shiriki risiti WhatsApp",
+  goalsT:"Malengo",me:"Mimi",we:"Sisi",newGoal:"Lengo jipya",saved:"zimewekwa",target:"Lengo",by:"kufikia",groupGoal:"Lengo la kikundi · Umoja Sisters",saving:"Wanachama 12 wanaweka akiba",
+  ngT:"Weka lengo jipya",ngFor:"Unaweka akiba kwa ajili ya nini?",ngName:"Jina la lengo",ngAmt:"Kiasi lengwa",ngDate:"Tarehe lengwa",ngSave:"Hifadhi lengo",
+  cats:["Karo ya shule","Kodi","Biashara","Dharura","Shamba","Safari","Harusi","Gari","Nyingine"],
+  eGName:"Lipe lengo lako jina.",eGAmt:"Weka kiasi lengwa.",eGDate:"Chagua tarehe ya baadaye.",goalAdded:"Lengo limehifadhiwa.",
+  invT:"Alika marafiki",yourCode:"Msimbo wako wa mwaliko",copyLink:"Nakili kiungo",wa:"Shiriki WhatsApp",copied:"Kiungo kimenakiliwa.",
+  invSub:"Marafiki wanaojisajili kwa kiungo chako wanajiunga na Chamaa na wanaweza kuongezwa kwenye chama zako.",invTo:"Alika kwa barua pepe au simu",send:"Tuma",invited:"Walioalikwa",
+  eInv:"Weka barua pepe au nambari ya simu.",invSent:"Mwaliko umetumwa kwa {who}.",pending:"Inasubiri",joined:"Amejiunga",waText:"Jiunge nami kwenye Chamaa, njia rahisi ya kuendesha kikundi chetu cha akiba: {link}",
+  stT:"Taarifa",stChama:"Chama",stPeriod:"Kipindi",stFormat:"Muundo",from:"Kuanzia",to:"Hadi",generate:"Tengeneza taarifa",allCh:"Chama zote",
+  per:["Mwezi huu","Miezi 3 iliyopita","Mwaka huu","Chagua"],eSt:"Chagua tarehe zote mbili, Kuanzia kabla ya Hadi.",
+  stHead:"Taarifa ya akaunti",opening:"Salio la mwanzo",paidIn:"Iliyolipwa",paidOut:"Iliyotolewa",closing:"Salio la mwisho",
+  date:"Tarehe",desc:"Maelezo",amount:"Kiasi",balance:"Salio",dlPdf:"Pakua PDF",dlCsv:"Pakua Excel (CSV)",emailMe:"Nitumie kwa barua pepe",dlSoon:"Upakuaji utakuja na programu halisi.",
+  kycT:"Thibitisha utambulisho",kycSafe:"Taarifa zako zimesimbwa na zinatumika tu kuthibitisha wewe ni nani.",kSubT:"Asante! Tunakagua taarifa zako",kSubS:"Kwa kawaida huchukua dakika chache. Tutakujulisha kwenye arifa.",backMe:"Rudi kwa Mimi",kDemo:"Onyesho: utathibitishwa kiotomatiki baada ya sekunde chache.",notNow:"Si sasa",stepOf:"Hatua {a} kati ya {b} · {t}",kSteps:["Kitambulisho chako","Picha za kitambulisho","Piga selfie","Unapoishi","Kagua na utume"],idCountry:"Nchi iliyotoa kitambulisho",idType:"Aina ya kitambulisho",idTypes:["Pasipoti","Kitambulisho cha taifa","Leseni ya udereva","Kibali cha ukaazi"],idNo:"Nambari ya kitambulisho",dob:"Tarehe ya kuzaliwa",front:"Mbele ya kitambulisho",backS:"Nyuma ya kitambulisho",passPage:"Ukurasa wa picha wa pasipoti",upHint:"Pembe zote zionekane, bila mwako",tapUp:"Gusa kupiga au kupakia picha",selfieT:"Selfie yako",selfieHint:"Angalia kamera kwenye mwanga mzuri. Bila kofia wala miwani ya jua.",resCountry:"Nchi unayoishi",addr:"Anwani ya mtaa",proof:"Uthibitisho wa anwani",proofHint:"Bili ya huduma au taarifa ya benki ya miezi 3 iliyopita",confirm:"Nathibitisha taarifa hizi ni za kweli na ni zangu",nextK:"Endelea",submitK:"Tuma kwa uthibitisho",eK0:"Chagua aina ya kitambulisho, weka nambari na tarehe ya kuzaliwa.",eK1:"Ongeza picha wazi za kitambulisho.",eK2:"Ongeza selfie yako.",eK3:"Weka mji na anwani, na uongeze uthibitisho wa anwani.",eK4:"Tafadhali weka alama kuthibitisha.",kycNone:"Thibitisha utambulisho wako",kycNoneS:"Inahitajika kabla ya kulipa, kupokea malipo au kuongeza akaunti ya benki. Dakika 3 hivi.",startK:"Anza",kycPend:"Tunakagua taarifa zako",kycPendS:"Kwa kawaida dakika chache. Unaweza kuendelea kutumia programu.",kycOk:"Utambulisho umethibitishwa",kycOkS:"Nchi zilizothibitishwa:",addCountry:"Thibitisha nchi nyingine",gateT:"Thibitisha utambulisho kwanza",gateS:"Ili kulinda pesa za kila mtu, thibitisha wewe ni nani kabla ya kulipa, kupokea malipo au kuongeza akaunti ya benki. Inachukua dakika 3 hivi.",gatePendT:"Karibu kumaliza",gatePendS:"Bado tunakagua taarifa zako. Utaweza kufanya hivi ukishathibitishwa.",verifyNow:"Thibitisha sasa",okBtn:"Sawa",bankCountry:"Nchi ya akaunti",bankNote:"Unaweza kuongeza akaunti za {list}: nchi zilizo kwenye kitambulisho na anwani yako iliyothibitishwa. Kwa nchi nyingine, thibitisha kitambulisho au anwani yako huko.",bankNoteNone:"Akaunti za benki zinaweza kuongezwa ukishathibitisha utambulisho.",kVerifiedN:"Utambulisho wako umethibitishwa. Sasa unaweza kulipa na kuongeza akaunti za benki.",meT:"Mimi",showBal:"Onyesha salio",hideBal2:"Ficha salio",editProf:"Hariri wasifu",rmPhoto:"Ondoa picha",addPhoto:"Ongeza picha",chgPhoto:"Badilisha picha",photoErr:"Chagua picha chini ya MB 5.",photoOk:"Picha ya wasifu imesasishwa.",memberSince:"Mwanachama tangu Nov 2026",banks:"Akaunti za benki",addBank:"Ongeza akaunti ya benki",noBank:"Bado hakuna akaunti. Ongeza moja kupokea malipo.",defaultT:"Kuu",setDef:"Fanya kuu",remove:"Ondoa",bankType:["Akaunti ya benki","Pesa za simu"],bankName:"Jina la benki",mmName:"Mtoa huduma (k.m. M-Pesa)",holder:"Jina la mwenye akaunti",accNo:"Nambari ya akaunti",mmNo:"Nambari ya pesa za simu",swift:"Tawi au msimbo wa SWIFT",makeDef:"Tumia akaunti hii kwa malipo yangu",saveBank:"Hifadhi akaunti",eBank:"Jaza jina, mwenye akaunti na nambari.",bankAdded:"Akaunti imeongezwa.",notifSet:"Arifa",sendBy:"Zitume kwa",nItems:[["remind","Vikumbusho vya mchango","Kabla na baada ya tarehe ya kulipa"],["payout","Malipo ya zamu","Zamu yako ikifika, na pesa zikitumwa"],["pay","Malipo","Malipo yakipokelewa"],["goal","Maendeleo ya malengo","Hatua muhimu za malengo yako"],["join","Mialiko na wanachama wapya","Mtu akijiunga na chama chako"],["late","Malipo yaliyochelewa","Mwanachama akichelewa kulipa"]],chans:[["push","Arifa za simu"],["email","Barua pepe"],["sms","SMS"]],appSet:"Mipangilio ya programu",appear:"Mwonekano",appearO:["Mfumo","Mwanga","Giza"],language:"Lugha",currency:"Sarafu ya kuonyesha",hideBal:"Ficha salio nyumbani",hideBalS:"Pia kwa jicho kwenye kadi ya salio",help:"Msaada",termsL:"Masharti ya huduma",privacy:"Sera ya faragha",logout:"Toka",saveCh:"Hifadhi mabadiliko",profSaved:"Wasifu umehifadhiwa.",saved2:"Imehifadhiwa.",notifT:"Arifa",markAll:"Soma zote",cancel:"Ghairi",doneBtn:"Sawa",time:"Saa",pickDate:"Chagua tarehe na saa",dtGoal:"Tarehe lengwa",dtFrom:"Kuanzia",dtTo:"Hadi",justNow:"Sasa hivi",minAgo:"Dakika {n} zilizopita",hAgo:"Saa {n} zilizopita",newTag:"MPYA",
+  soon:"Inakuja katika hatua zijazo.",sent:"Barua pepe ya uthibitisho imetumwa tena.",choose:"Chagua nchi yako",search:"Tafuta nchi",none:"Hakuna nchi inayolingana.",dark:"Hali ya giza",light:"Hali ya mwanga",show:"Onyesha nenosiri",hide:"Ficha nenosiri",
+  eFirst:"Weka jina lako la kwanza.",eLast:"Weka jina lako la mwisho.",eEmail:"Weka barua pepe sahihi.",ePhone:"Weka nambari sahihi ya simu.",eCity:"Weka mji wako.",ePw:"Tumia angalau herufi 8, pamoja na nambari.",eTerms:"Tafadhali kubali Masharti ili uendelee.",eLogin:"Weka barua pepe na nenosiri lako."}
+};
+const NPOOL={en:[["pay","Faith M. paid her contribution to Umoja Sisters"],["remind","Reminder: your Umoja Sisters contribution is due Friday"],["payout","Achieng O. receives the payout on Saturday"],["join","Zawadi A. joined Kazi Bora using your invite"],["goal","You're 62% of the way to School fees 2027"],["swap","Joy N. asked to swap payout turns with you"],["late","Rose M.'s contribution is 1 day late"]],
+ sw:[["pay","Faith M. amelipa mchango wake kwa Umoja Sisters"],["remind","Kumbusho: mchango wako wa Umoja Sisters unadaiwa Ijumaa"],["payout","Achieng O. atapokea malipo Jumamosi"],["join","Zawadi A. amejiunga na Kazi Bora kwa mwaliko wako"],["goal","Umefikia 62% ya lengo la Karo ya shule 2027"],["swap","Joy N. ameomba kubadilishana zamu ya malipo nawe"],["late","Mchango wa Rose M. umechelewa siku 1"]]};
+const NCOL={pay:'#7CB518',remind:'#6D5DF5',payout:'#C8F04D',join:'#6D5DF5',goal:'#C8F04D',swap:'#6D5DF5',late:'#FF8B6B'};
+const I={pay:'<path d="M4 12l16-8-6 16-3-7z"/>',goals:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>',invite:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14.5c2.4.2 4 1.8 4.5 4.5"/>',stmt:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>',home:'<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>',me:'<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4.3-7 8-7s7 2.5 8 7"/>',eye:'<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',eyeOff:'<path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7c1.8 0 3.4-.5 4.8-1.3M9.9 9.9a3 3 0 0 0 4.2 4.2"/>',phone:'<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>',card:'<rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6 15h4"/>',bank:'<path d="M3 10l9-6 9 6M5 10v8M9.7 10v8M14.3 10v8M19 10v8M3 20h18"/>',plus:'<path d="M12 5v14M5 12h14"/>',chev:'<path d="M6 9l6 6 6-6"/>'};
+const ic=(k,c,sz)=>`<svg width="${sz||20}" height="${sz||20}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[k]}</svg>`;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){}return null}
+const cty=cc=>C.find(x=>x[0]===cc)||C[0];
+const emailOk=v=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
+const reduce=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- state ---------- */
+let lang='en',timer=null,left=0,pickFor=null,cur='welcome';
+let user={first:'Wanjiru',last:'Kamau',cc:'KE'};
+const tz=(()=>{try{return Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){return ''}})();
+let geo=TZC[tz]||(tz.startsWith('America/')?'US':tz.startsWith('Europe/')?'DE':'KE');
+let disp=store('chamaa-cc')||geo, picked=!!store('chamaa-cc');
+let balanceKES=48500, method=null, goalSel=0, shownBal=0;
+let goals=[{cat:0,name:'School fees 2027',saved:31000,target:50000,date:'2027-01-15'},{cat:3,name:'Emergency fund',saved:16000,target:20000,date:'2027-06-30'},{cat:4,name:'Plot in Kitengela',saved:42000,target:300000,date:'2028-12-31'}];
+let invites=[{who:'faith.m@example.com',st:'joined'},{who:'+254 722 118 904',st:'joined'},{who:'joy.n@example.com',st:'pending'}];
+let notes=[], nid=0, nPool=0;
+let st={ch:0,per:1,fmt:0};
+let photo=null,profile={email:'wanjiru.kamau@example.com',phone:'+254 712 345 678',city:'Nairobi'};
+let banks=[];
+let kyc={status:'none',countries:[]},kd=null,kStep=0,bankCC=null;
+let nprefs={remind:true,payout:true,pay:true,goal:true,join:true,late:false},chprefs={push:true,email:true,sms:false},hideBal=false,bkType=0;
+
+/* ---------- money ---------- */
+const curOf=cc=>cty(cc)[3];
+function conv(kes){const c=curOf(disp);return kes/FX.KES*(FX[c]||1)}
+function money(kes,raw){const c=curOf(disp),v=raw?kes:conv(kes);
+  const dec=Math.abs(v)<100&&v%1!==0?2:0;
+  if(c==='KES')return 'KSh '+Math.round(v).toLocaleString('en-US');
+  try{return new Intl.NumberFormat('en-US',{style:'currency',currency:c,currencyDisplay:'narrowSymbol',minimumFractionDigits:dec,maximumFractionDigits:dec}).format(v)}catch(e){return c+' '+Math.round(v).toLocaleString('en-US')}}
+function sym(){const p=money(0).replace(/[\d.,\s]/g,'');return p||curOf(disp)}
+function countUp(){if(hideBal){paintBal();return}const el=$('bal'),end=conv(balanceKES),from=shownBal&&shownBal<end?shownBal:0;
+  if(reduce()){el.textContent=money(end,true);shownBal=end;return}
+  const t0=performance.now(),dur=1400;cancelAnimationFrame(el._r);
+  const step=t=>{const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);el.textContent=money(from+(end-from)*e,true);if(p<1)el._r=requestAnimationFrame(step);else shownBal=end};
+  el._r=requestAnimationFrame(step)}
+
+/* ---------- country picker ---------- */
+function setCountry(btn,cc){const c=cty(cc);btn.dataset.cc=c[0];
+  btn.innerHTML=`<span class="cc">${c[0]}</span><span>+${c[2]}</span>${ic('chev','currentColor',14)}`;
+  btn.setAttribute('aria-label',T[lang].choose+': '+c[1]+' +'+c[2]);$('su-phone').placeholder=c[0]==='KE'?'712 345 678':'';}
+function listC(q){q=(q||'').trim().toLowerCase();const forCur=pickFor==='cur',pk=pickFor&&pickFor.kyc;
+  const r=C.filter(c=>(pk!=='bank'||kyc.countries.includes(c[0]))).filter(c=>!q||c[1].toLowerCase().includes(q)||c[2].startsWith(q.replace('+',''))||c[0].toLowerCase()===q||c[3].toLowerCase().startsWith(q));
+  const selCC=forCur?disp:pk?(pk==='bank'?bankCC:kd&&kd[pk]):pickFor&&pickFor.dataset&&pickFor.dataset.cc;
+  $('clist').innerHTML=r.length?r.map(c=>`<button type="button" role="option" data-cc="${c[0]}" aria-selected="${selCC===c[0]}"><span class="cc">${c[0]}</span><span class="n">${esc(c[1])}</span><span class="d">${forCur?c[3]:pk?'':'+'+c[2]}</span></button>`).join(''):`<div class="empty">${T[lang].none}</div>`;}
+function openSheet(target){pickFor=target;const t=T[lang];$('sh-t').textContent=target==='cur'?t.curT:t.choose;$('sh-q').value='';$('sh-q').placeholder=t.search;listC('');$('sheet-bg').classList.add('on');setTimeout(()=>{const sel=$('clist').querySelector('[aria-selected=true]');sel&&sel.scrollIntoView({block:'center'});$('sh-q').focus()},30)}
+function closeSheet(){$('sheet-bg').classList.remove('on');if(pickFor&&pickFor.focus)pickFor.focus();pickFor=null}
+
+/* ---------- theme ---------- */
+function isDark(){const a=document.documentElement.dataset.theme;return a?a==='dark':matchMedia('(prefers-color-scheme: dark)').matches}
+const SUN='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></svg>';
+const MOON='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>';
+function modeUI(){const d=isDark(),t=T[lang];document.querySelectorAll('[data-mode]').forEach(b=>{b.setAttribute('aria-label',d?t.light:t.dark);b.innerHTML=d?SUN:MOON})}
+function eyeUI(){document.querySelectorAll('[data-eye]').forEach(b=>{const inp=b.previousElementSibling,sh=inp.type==='text';b.innerHTML=ic(sh?'eyeOff':'eye','currentColor');b.setAttribute('aria-label',sh?T[lang].hide:T[lang].show)})}
+
+/* ---------- render pieces ---------- */
+const pct=g=>Math.min(100,Math.round(g.saved/g.target*100));
+const fmtDate=d=>{try{return new Date(d.includes('T')?d:d+'T00:00:00').toLocaleDateString(lang==='sw'?'sw-KE':'en-GB',{day:'numeric',month:'short',year:'numeric'})}catch(e){return d}};
+function homeGoal(){const g=goals[0],t=T[lang];$('home-goal').innerHTML=`<div class="goal"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-weight:700;font-size:15px">${esc(g.name)}</span><span class="disp" style="font-size:22px">${pct(g)}%</span></div><div class="bar"><i style="width:${pct(g)}%"></i></div><div style="font-size:13px;margin-top:8px">${money(g.saved)} ${t.of} ${money(g.target)} · ${t.by} ${fmtDate(g.date)}</div></div>`}
+function renderGoals(){const t=T[lang];if(!goals.length){$('goals-me').innerHTML='';return}
+  const [g0,...rest]=goals;
+  $('goals-me').innerHTML=`<div class="goal" style="margin-top:0"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px"><div><div style="font-size:12.5px">${esc(t.cats[g0.cat])}</div><div style="font-weight:800;font-size:17px;margin-top:2px">${esc(g0.name)}</div></div><div class="disp" style="font-size:32px">${pct(g0)}%</div></div><div class="bar" style="margin:12px 0 8px"><i style="width:${pct(g0)}%"></i></div><div style="display:flex;justify-content:space-between;font-size:13px;gap:8px;flex-wrap:wrap"><span>${money(g0.saved)} ${t.saved}</span><span>${t.target} ${money(g0.target)} · ${fmtDate(g0.date)}</span></div></div>`+
+  (rest.length?`<div class="card" style="margin-top:10px">${rest.map(g=>`<div class="grow"><div class="gi">${ic('goals','currentColor',18)}</div><div style="flex:1"><div style="display:flex;justify-content:space-between;gap:8px"><b style="font-size:14.5px">${esc(g.name)}</b><b style="font-size:14px">${pct(g)}%</b></div><div class="muted" style="font-size:12.5px">${esc(t.cats[g.cat])} · ${money(g.saved)} ${t.of} ${money(g.target)} · ${fmtDate(g.date)}</div><div class="thin"><i style="width:${pct(g)}%"></i></div></div></div>`).join('')}</div>`:'')+
+  `<button type="button" class="addg glassb" id="addgoal">${ic('plus','currentColor',18)}${t.newGoal}</button>`;
+  $('goals-we').innerHTML=`<div class="hero"><div style="display:flex;justify-content:space-between"><div><div style="font-size:12.5px;color:var(--hero-muted)">${t.groupGoal}</div><div style="font-weight:800;font-size:17px;margin-top:2px">Plot in Kitengela</div></div><div class="disp" style="font-size:28px">41%</div></div><div class="bar" style="margin:12px 0 8px;background:rgba(255,255,255,.16)"><i style="width:41%;background:var(--lime)"></i></div><div style="display:flex;justify-content:space-between;font-size:13px;color:var(--hero-muted);flex-wrap:wrap;gap:6px"><span>${money(492000)} ${t.of} ${money(1200000)}</span><span>${t.saving}</span></div></div>`;
+}
+function renderMethods(){const t=T[lang],ke=curOf(disp)==='KES'||geo==='KE';
+  const ms=(ke?['mpesa','card','bank']:['card','bank']);if(!ms.includes(method))method=ms[0];
+  const icn={mpesa:'phone',card:'card',bank:'bank'};
+  $('methods').innerHTML=ms.map(m=>`<button type="button" class="mrow" role="radio" aria-checked="${m===method}" data-method="${m}"><span class="mi">${ic(icn[m],'var(--text)',18)}</span><span class="n">${t['m_'+m]}<small>${t['m_'+m+'S']}</small></span><span class="radio"></span></button>`).join('');
+  $('paynote').textContent=t['n_'+method];$('paybtn').textContent=t.payBtn.replace('{amt}',money(2000));
+  $('paygoal').textContent=goals[goalSel]?goals[goalSel].name:'—';}
+function renderInvites(){const t=T[lang];$('invcount').textContent=invites.filter(i=>i.st==='joined').length+' '+t.joined.toLowerCase()+' · '+invites.length;
+  $('invlist').innerHTML=invites.map(i=>`<div class="irow"><div class="av" style="width:34px;height:34px;font-size:12px;background:var(--surface2);color:var(--text)">${esc((i.who.replace(/[^A-Za-z]/g,'')[0]||'#').toUpperCase())}</div><div style="flex:1;font-size:14px;font-weight:600;overflow-wrap:anywhere">${esc(i.who)}</div><span class="tag ${i.st==='joined'?'t-paid':'t-due'}">${i.st==='joined'?t.joined:t.pending}</span></div>`).join('');
+  const link='https://chamaa.app/join/WANJIRU-4821';$('wa').href='https://wa.me/?text='+encodeURIComponent(t.waText.replace('{link}',link));}
+function chipRow(id,labels,sel,key){$(id).innerHTML=labels.map((l,i)=>`<button type="button" aria-pressed="${i===sel}" data-chip="${key}" data-i="${i}">${esc(l)}</button>`).join('')}
+function renderStForm(){const t=T[lang];chipRow('st-chama',[t.allCh,'Umoja Sisters','Kazi Bora','Family Fund'],st.ch,'ch');chipRow('st-period',t.per,st.per,'per');chipRow('st-format',['PDF','Excel (CSV)'],st.fmt,'fmt');$('st-custom').hidden=st.per!==3}
+function renderNotifs(){const t=T[lang],now=Date.now(),u=notes.filter(n=>!n.read).length;
+  const b=$('badge');b.hidden=!u;b.textContent=u>9?'9+':u;$('bell').setAttribute('aria-label',t.notifT+(u?' ('+u+')':''));
+  const ago=ts=>{const m=Math.floor((now-ts)/60000);return m<1?t.justNow:m<60?t.minAgo.replace('{n}',m):t.hAgo.replace('{n}',Math.floor(m/60))};
+  $('nlist').innerHTML=notes.map(n=>`<div class="nrow${n.read?'':' unread'}"><span class="dot" style="background:${n.read?'var(--line)':NCOL[n.k]}"></span><span class="tx">${esc(n.txt||NPOOL[lang][n.i][1])}<small>${ago(n.ts)}</small></span>${n.fresh?`<span class="new">${t.newTag}</span>`:''}</div>`).join('');}
+function addNotif(fresh){const i=nPool%NPOOL.en.length;nPool++;notes.unshift({id:++nid,i,k:NPOOL.en[i][0],ts:Date.now(),read:false,fresh});if(notes.length>20)notes.pop();renderNotifs();
+}
+function locNote(){const t=T[lang],c=cty(disp);$('locnote').textContent=(picked?t.locPick:t.loc).replace('{cur}',c[3]).replace('{country}',c[1]);
+  $('curchip').innerHTML=`${c[3]}${ic('chev','currentColor',12)}`;$('curchip').setAttribute('aria-label',t.curT+' '+c[3])}
+
+function render(){
+  const t=T[lang];document.documentElement.lang=lang;
+  document.querySelectorAll('[data-t]').forEach(el=>{const v=t[el.dataset.t];if(typeof v==='string')el.innerHTML=v});
+  document.querySelectorAll('[data-l]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===lang));
+  document.querySelectorAll('[data-m]').forEach(el=>{el.textContent=money(+el.dataset.m)});
+  $('h-name').textContent=user.first;
+  const qk=['pay','goals','invite','stmt'],qg=['pay','goals','invite','stmt'];
+  $('qa').innerHTML=qk.map((k,i)=>`<button type="button" data-go="${qg[i]}">${ic(k,'currentColor')}${t.qa[i]}</button>`).join('');
+  const n=t.nav;
+  $('nav').innerHTML=`<button type="button" data-go="home" ${cur==='home'?'aria-current="page"':''}>${ic('home','currentColor')}${n[0]}</button><button type="button" data-toast="1">${ic('invite','currentColor')}${n[1]}</button><button type="button" class="plus" aria-label="${esc(t.qa[0])}" data-go="pay">${ic('plus','#16142E',24)}</button><button type="button" data-go="goals" ${cur==='goals'?'aria-current="page"':''}>${ic('goals','currentColor')}${n[2]}</button><button type="button" data-go="me" ${cur==='me'?'aria-current="page"':''}>${ic('me','currentColor')}${n[3]}</button>`;
+  document.querySelectorAll('.pick').forEach(b=>setCountry(b,b.dataset.cc));
+  $('bal').textContent=money(balanceKES);shownBal=conv(balanceKES);
+  homeGoal();renderGoals();renderMethods();renderInvites();renderStForm();renderNotifs();locNote();
+  $('paid-gp').textContent=goals[goalSel]?pct(goals[goalSel])+'%':'—';
+  modeUI();eyeUI();resendLabel();
+  document.querySelectorAll('.dtbtn').forEach(b=>setDt(b,b.dataset.v));
+  renderMe();paintBal();
+  if($('st-out').innerHTML)genStatement(true);
+}
+function show(v){cur=v;document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
+  $('nav').classList.toggle('on',v==='home'||v==='goals'||v==='me');
+  $('nav').querySelectorAll('[data-go]').forEach(b=>b.toggleAttribute('aria-current',b.dataset.go===v&&!b.classList.contains('plus')));
+  document.querySelectorAll('.err').forEach(e=>e.textContent='');
+  const vw=$('v-'+v);if(vw)vw.scrollTop=0;
+  if(v==='home'){countUp()}
+  if(v==='pay'){renderMethods();$('paybtn').disabled=false}
+  if(v==='signup'||v==='login'){const f=document.querySelector('#v-'+v+' input');if(f)setTimeout(()=>f.focus(),60)}}
+function toast(m){const e=$('toast');e.textContent=m;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2000)}
+function resendLabel(){const b=$('vf-resend'),t=T[lang];b.textContent=left>0?t.vfResend.replace('{s}',left):t.vfResendNow;b.disabled=left>0;b.style.opacity=left>0?.55:1}
+function startTimer(){left=30;resendLabel();clearInterval(timer);timer=setInterval(()=>{left--;resendLabel();if(left<=0)clearInterval(timer)},1000)}
+function openVerify(mail){$('vf-mail').textContent=mail;$('verify-bg').classList.add('on');startTimer();setTimeout(()=>$('vf-ok').focus(),60)}
+
+/* ---------- statement ---------- */
+function genStatement(silent){const t=T[lang],er=$('e-st');
+  let from,to;const now=new Date(2026,11,4);
+  if(st.per===0){from=new Date(2026,11,1);to=now}else if(st.per===1){from=new Date(2026,8,4);to=now}else if(st.per===2){from=new Date(2026,0,1);to=now}
+  else{from=new Date($('st-from').dataset.v||'x');to=new Date($('st-to').dataset.v||'x');if(isNaN(from)||isNaN(to)||from>to){if(!silent)er.textContent=t.eSt;return}}
+  er.textContent='';const chamas=['Umoja Sisters','Kazi Bora','Family Fund'],names=st.ch?[chamas[st.ch-1]]:chamas;
+  const rows=[];let d=new Date(to);let i=0;
+  while(d>=from&&rows.length<12){const ch=names[i%names.length];
+    if(i%4===3)rows.push([new Date(d),(lang==='sw'?'Malipo ya zamu · ':'Payout · ')+ch,-24000]);
+    else rows.push([new Date(d),(lang==='sw'?'Mchango · ':'Contribution · ')+ch+' · M-Pesa',2000]);
+    d.setDate(d.getDate()-7);i++}
+  rows.reverse();let open=30500,bal=open,inn=0,out=0;
+  const body=rows.map(r=>{bal+=r[2];r[2]>0?inn+=r[2]:out+=-r[2];return `<tr><td>${r[0].toLocaleDateString(lang==='sw'?'sw-KE':'en-GB',{day:'numeric',month:'short'})}</td><td>${esc(r[1])}</td><td class="n ${r[2]>0?'pos':''}">${r[2]>0?'+':'−'}${money(Math.abs(r[2]))}</td><td class="n">${money(bal)}</td></tr>`}).join('');
+  const fd=x=>x.toLocaleDateString(lang==='sw'?'sw-KE':'en-GB',{day:'numeric',month:'short',year:'numeric'});
+  $('st-out').innerHTML=`<div class="card st"><div class="st-h"><div><div class="disp" style="font-size:18px">chamaa</div><div style="font-weight:700;font-size:14px;margin-top:6px">${t.stHead}</div><div class="muted" style="font-size:12.5px">${esc(user.first+' '+user.last)} · ${esc(st.ch?names[0]:t.allCh)}</div></div><div class="muted" style="font-size:12.5px;text-align:right">${fd(from)} –<br>${fd(to)}<br>${curOf(disp)}</div></div>
+  <div class="st-sum"><div><span>${t.opening}</span><b>${money(open)}</b></div><div><span>${t.closing}</span><b>${money(bal)}</b></div><div><span>${t.paidIn}</span><b class="pos">+${money(inn)}</b></div><div><span>${t.paidOut}</span><b>−${money(out)}</b></div></div>
+  <div style="overflow-x:auto"><table><thead><tr><th>${t.date}</th><th>${t.desc}</th><th class="n">${t.amount}</th><th class="n">${t.balance}</th></tr></thead><tbody>${body||`<tr><td colspan="4" class="muted">—</td></tr>`}</tbody></table></div>
+  <div style="display:grid;gap:8px;margin-top:14px"><button type="button" class="btn btn-lime" data-toast="dl">${st.fmt?t.dlCsv:t.dlPdf}</button><button type="button" class="btn btn-white" data-toast="dl">${t.emailMe}</button></div>
+  <p class="sample" style="margin:10px 0 0">${t.demo2}</p></div>`;
+  if(!silent)setTimeout(()=>$('st-out').scrollIntoView({behavior:reduce()?'auto':'smooth',block:'start'}),50)}
+
+
+/* ---------- wheel date & time picker ---------- */
+const MON={en:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],sw:["Jan","Feb","Mac","Apr","Mei","Jun","Jul","Ago","Sep","Okt","Nov","Des"]};
+const pad=n=>String(n).padStart(2,'0');
+const loc=()=>lang==='sw'?'sw-KE':'en-GB';
+function fmtDT(v){const d=new Date(v.includes('T')?v:v+'T12:00');if(isNaN(d))return v;if(!v.includes('T'))return d.toLocaleDateString(loc(),{day:'numeric',month:'short',year:'numeric'});return d.toLocaleDateString(loc(),{day:'numeric',month:'short',year:'numeric'})+', '+d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}
+function setDt(btn,v){btn.dataset.v=v||'';const sp=btn.querySelector('.dv');if(!v){sp.textContent=T[lang].pickDate;sp.classList.add('ph')}else{sp.textContent=fmtDT(v);sp.classList.remove('ph')}}
+let dtBtn=null,dts=null,yrs=[];
+const dim=(y,m)=>new Date(y,m+1,0).getDate();
+function wcol(parent,key,items,sel,wide){const c=document.createElement('div');c.className='wcol'+(wide?' wide':'');c.tabIndex=0;c.dataset.k=key;c.setAttribute('role','listbox');
+  c.innerHTML=items.map((t,i)=>`<div data-i="${i}" role="option">${t}</div>`).join('');parent.appendChild(c);
+  const mark=i=>{[...c.children].forEach((el,j)=>{el.classList.toggle('sel',j===i);el.setAttribute('aria-selected',j===i)})};
+  c._set=(i,smooth)=>{c.scrollTo({top:i*40,behavior:smooth&&!reduce()?'smooth':'auto'});mark(i)};
+  let tm;c.addEventListener('scroll',()=>{clearTimeout(tm);const i0=Math.round(c.scrollTop/40);mark(i0);tm=setTimeout(()=>{const i=Math.max(0,Math.min(items.length-1,Math.round(c.scrollTop/40)));pickWheel(key,i)},90)});
+  c.addEventListener('click',e=>{const it=e.target.closest('[data-i]');if(it)c._set(+it.dataset.i,true)});
+  c.addEventListener('keydown',e=>{const i=Math.round(c.scrollTop/40);if(e.key==='ArrowDown'){e.preventDefault();c._set(Math.min(items.length-1,i+1),true)}if(e.key==='ArrowUp'){e.preventDefault();c._set(Math.max(0,i-1),true)}});
+  requestAnimationFrame(()=>c._set(sel,false));return c}
+function buildDate(){const w=$('w-date');w.querySelectorAll('.wcol').forEach(x=>x.remove());
+  const days=Array.from({length:dim(dts.y,dts.m)},(_,i)=>i+1);if(dts.d>days.length)dts.d=days.length;
+  wcol(w,'d',days,dts.d-1);wcol(w,'m',MON[lang],dts.m,true);wcol(w,'y',yrs,yrs.indexOf(dts.y)<0?0:yrs.indexOf(dts.y));}
+function buildTime(){const w=$('w-time');w.querySelectorAll('.wcol').forEach(x=>x.remove());
+  const h12=dts.h%12||12;wcol(w,'h',Array.from({length:12},(_,i)=>i+1),h12-1);wcol(w,'mi',Array.from({length:60},(_,i)=>pad(i)),dts.mi);wcol(w,'ap',['AM','PM'],dts.h>=12?1:0);}
+function dtPrev(){const dob=dtBtn&&dtBtn.dataset.dt==='dob';$('dt-prev').textContent=fmtDT(`${dts.y}-${pad(dts.m+1)}-${pad(dts.d)}`+(dob?'':`T${pad(dts.h)}:${pad(dts.mi)}`))}
+function pickWheel(k,i){if(k==='d')dts.d=i+1;else if(k==='m'){dts.m=i;if(dts.d>dim(dts.y,dts.m)){dts.d=dim(dts.y,dts.m)}buildDayOnly()}else if(k==='y'){dts.y=yrs[i];if(dts.d>dim(dts.y,dts.m))dts.d=dim(dts.y,dts.m);buildDayOnly()}
+  else if(k==='h'){const pm=dts.h>=12;dts.h=(i+1)%12+(pm?12:0)}else if(k==='mi')dts.mi=i;else if(k==='ap'){const h=dts.h%12;dts.h=h+(i?12:0)}dtPrev()}
+function buildDayOnly(){const w=$('w-date'),old=w.querySelector('[data-k=d]'),n=dim(dts.y,dts.m);if(old&&old.children.length===n)return;if(old)old.remove();const c=wcol(w,'d',Array.from({length:n},(_,i)=>i+1),dts.d-1);w.insertBefore(c,w.querySelector('[data-k=m]'))}
+function openDt(btn){dtBtn=btn;const t=T[lang],now=new Date(),mode=btn.dataset.dt;
+  const y0=now.getFullYear();yrs=mode==='future'?Array.from({length:11},(_,i)=>y0+i):mode==='dob'?Array.from({length:86},(_,i)=>y0-100+i):Array.from({length:8},(_,i)=>y0-7+i);
+  const dob=mode==='dob';$('w-time').hidden=dob;$('w-time-l').hidden=dob;
+  let d=btn.dataset.v?new Date(btn.dataset.v):null;
+  if(!d||isNaN(d)){d=new Date(now);if(mode==='dob'){d=new Date(1990,0,1,12,0)}else if(mode==='future'){d.setMonth(d.getMonth()+6);d.setHours(9,0,0,0)}else if(btn.id==='st-from'){d.setMonth(d.getMonth()-1);d.setHours(0,0,0,0)}else{d.setHours(23,59,0,0)}}
+  dts={y:d.getFullYear(),m:d.getMonth(),d:d.getDate(),h:d.getHours(),mi:d.getMinutes()};if(!yrs.includes(dts.y))dts.y=yrs[0];
+  $('dt-t').textContent=btn.id==='ng-date'?t.dtGoal:btn.id==='st-from'?t.dtFrom:mode==='dob'?t.dob:t.dtTo;
+  $('dt-bg').classList.add('on');buildDate();buildTime();dtPrev();setTimeout(()=>$('w-date').querySelector('.wcol').focus({preventScroll:true}),80)}
+function closeDt(){$('dt-bg').classList.remove('on');if(dtBtn)dtBtn.focus();dtBtn=null}
+$('dt-cancel').addEventListener('click',closeDt);
+$('dt-done').addEventListener('click',()=>{if(!dtBtn)return;const dob=dtBtn.dataset.dt==='dob';setDt(dtBtn,`${dts.y}-${pad(dts.m+1)}-${pad(dts.d)}`+(dob?'':`T${pad(dts.h)}:${pad(dts.mi)}`));if(dob&&kd)kd.dob=dtBtn.dataset.v;
+  const er=dtBtn.closest('form,#st-form');if(er){const e=er.querySelector('.err');if(e)e.textContent=''}closeDt()});
+$('dt-bg').addEventListener('click',e=>{if(e.target.id==='dt-bg')closeDt()});
+document.addEventListener('click',e=>{const b=e.target.closest('.dtbtn');if(b)openDt(b)});
+
+
+/* ---------- Me ---------- */
+const initials=()=>((user.first[0]||'')+(user.last[0]||'')).toUpperCase();
+function avHTML(){return photo?`<img src="${photo}" alt="">`:esc(initials())}
+function renderMe(){const t=T[lang];
+  $('me-av').innerHTML=avHTML();$('h-av').innerHTML=avHTML();
+  $('me-name').textContent=user.first+' '+user.last;$('me-mail').textContent=profile.email;$('me-city').textContent=profile.city+' · '+t.memberSince;
+  $('rm-photo').textContent=photo?t.rmPhoto:t.addPhoto;
+  $('kyc-card').innerHTML=kycCard();
+  $('bank-note').textContent=kyc.status==='verified'?t.bankNote.replace('{list}',kyc.countries.map(c=>cty(c)[1]).join(', ')):t.bankNoteNone;
+  document.querySelector('.ph-cam').setAttribute('aria-label',photo?t.chgPhoto:t.addPhoto);
+  const mask=n=>'•••• '+String(n).replace(/\D/g,'').slice(-4);
+  $('banklist').innerHTML=banks.length?banks.map((b,i)=>`<div class="bk"><span class="mi">${ic(b.type?'phone':'bank','var(--text)',18)}</span><div style="flex:1;min-width:0"><div style="font-weight:700;font-size:15px">${esc(b.name)} ${b.def?`<span class="tag t-paid" style="margin-left:4px">${t.defaultT}</span>`:''}</div><div class="muted" style="font-size:13px">${esc(b.holder)} · ${mask(b.no)}</div><span class="ctag">${b.cc} · ${esc(cty(b.cc)[1])}</span></div><div class="bka">${b.def?'':`<button type="button" class="linkish" data-bdef="${i}">${t.setDef}</button>`}<button type="button" class="linkish" data-brm="${i}" style="color:var(--late)">${t.remove}</button></div></div>`).join(''):`<p class="muted" style="margin:6px 0;font-size:14px">${t.noBank}</p>`;
+  $('addbank').innerHTML=ic('plus','currentColor',18)+t.addBank;
+  $('nset').innerHTML=t.nItems.map(([k,a,b],i)=>`<div class="srow"${i?' style="border-top:1px solid var(--line)"':''}><span class="n">${a}<small>${b}</small></span><button type="button" class="sw" role="switch" aria-checked="${nprefs[k]}" aria-label="${esc(a)}" data-np="${k}"></button></div>`).join('');
+  $('nch').innerHTML=t.chans.map(([k,a],i)=>`<div class="srow"${i?' style="border-top:1px solid var(--line)"':''}><span class="n">${a}</span><button type="button" class="sw" role="switch" aria-checked="${chprefs[k]}" aria-label="${esc(a)}" data-ch="${k}"></button></div>`).join('');
+  const th=document.documentElement.dataset.theme||'system';
+  $('appear').innerHTML=t.appearO.map((o,i)=>`<button type="button" aria-pressed="${['system','light','dark'][i]===th}" data-ap="${['system','light','dark'][i]}">${o}</button>`).join('');
+  const c=cty(disp);$('me-curv').textContent=c[3]+' · '+c[1];
+  $('hidebal').setAttribute('aria-checked',hideBal);$('hidebal').setAttribute('aria-label',t.hideBal);
+}
+function bankForm(){const t=T[lang];if(!kyc.countries.includes(bankCC))bankCC=kyc.countries[0];const bc=cty(bankCC);$('bk-cc').innerHTML=`<span class="cc">${bc[0]}</span><span class="n">${esc(bc[1])}</span>${ic('chev','currentColor',14)}`;chipRow('bk-type',t.bankType,bkType,'bk');$('bk-name-l').textContent=bkType?t.mmName:t.bankName;$('bk-no-l').textContent=bkType?t.mmNo:t.accNo;$('bk-swift-f').hidden=!!bkType;$('bk-name').placeholder=bkType?'M-Pesa':'Equity Bank'}
+$('me-photo').addEventListener('change',e=>{const f=e.target.files[0];e.target.value='';if(!f)return;
+  if(!/^image\//.test(f.type)||f.size>5*1024*1024){toast(T[lang].photoErr);return}
+  const r=new FileReader();r.onload=()=>{const img=new Image();img.onload=()=>{const c=document.createElement('canvas'),S=256,m=Math.min(img.width,img.height);c.width=c.height=S;
+      c.getContext('2d').drawImage(img,(img.width-m)/2,(img.height-m)/2,m,m,0,0,S,S);photo=c.toDataURL('image/jpeg',.85);store('chamaa-photo',photo);renderMe();toast(T[lang].photoOk)};img.src=r.result};r.readAsDataURL(f)});
+$('rm-photo').addEventListener('click',()=>{if(photo){photo=null;try{localStorage.removeItem('chamaa-photo')}catch(e){}renderMe()}else $('me-photo').click()});
+$('edit-prof').addEventListener('click',()=>{$('pf-first').value=user.first;$('pf-last').value=user.last;$('pf-mail').value=profile.email;$('pf-phone').value=profile.phone;$('pf-city').value=profile.city;$('e-prof').textContent='';$('prof-bg').classList.add('on');setTimeout(()=>$('pf-first').focus(),60)});
+$('f-prof').addEventListener('submit',e=>{e.preventDefault();const t=T[lang],v=id=>$(id).value.trim(),er=$('e-prof');
+  if(!v('pf-first'))return er.textContent=t.eFirst;if(!v('pf-last'))return er.textContent=t.eLast;if(!emailOk(v('pf-mail')))return er.textContent=t.eEmail;
+  const dg=v('pf-phone').replace(/\D/g,'');if(dg.length<6||dg.length>15)return er.textContent=t.ePhone;if(!v('pf-city'))return er.textContent=t.eCity;
+  user.first=v('pf-first');user.last=v('pf-last');profile={email:v('pf-mail'),phone:v('pf-phone'),city:v('pf-city')};$('prof-bg').classList.remove('on');render();toast(t.profSaved)});
+$('addbank').addEventListener('click',()=>{if(needKyc())return;bankCC=kyc.countries.includes(geo)?geo:kyc.countries[0];bkType=0;['bk-name','bk-holder','bk-no','bk-swift'].forEach(id=>$(id).value='');$('bk-holder').value=user.first+' '+user.last;$('bk-def').checked=!banks.length;$('e-bank').textContent='';bankForm();$('bank-bg').classList.add('on');setTimeout(()=>$('bk-name').focus(),60)});
+$('f-bank').addEventListener('submit',e=>{e.preventDefault();const t=T[lang],v=id=>$(id).value.trim(),no=v('bk-no').replace(/\D/g,'');
+  if(!v('bk-name')||!v('bk-holder')||no.length<6){$('e-bank').textContent=t.eBank;return}
+  const def=$('bk-def').checked||!banks.length;if(def)banks.forEach(b=>b.def=false);if(!kyc.countries.includes(bankCC))return;banks.push({type:bkType,name:v('bk-name'),holder:v('bk-holder'),no,def,cc:bankCC});
+  $('bank-bg').classList.remove('on');renderMe();toast(t.bankAdded)});
+$('me-cur').addEventListener('click',()=>openSheet('cur'));
+$('hidebal').addEventListener('click',()=>{hideBal=!hideBal;store('chamaa-hide',hideBal?'1':'0');renderMe();paintBal()});
+$('logout').addEventListener('click',()=>{show('welcome')});
+$('h-av').style.cursor='pointer';$('h-av').addEventListener('click',()=>show('me'));
+function paintBal(){const e=$('baleye');if(e){e.innerHTML=ic(hideBal?'eyeOff':'eye','currentColor',18);e.setAttribute('aria-label',hideBal?T[lang].showBal:T[lang].hideBal2);e.setAttribute('aria-pressed',hideBal)}if(hideBal){cancelAnimationFrame($('bal')._r);$('bal').textContent='••••••';$('bal').style.cursor='pointer'}else{$('bal').textContent=money(balanceKES);$('bal').style.cursor=''}}
+$('baleye').addEventListener('click',()=>{hideBal=!hideBal;store('chamaa-hide',hideBal?'1':'0');renderMe();if(hideBal)paintBal();else{paintBal();shownBal=0;countUp()}});
+$('bal').addEventListener('click',()=>{if(hideBal&&$('bal').textContent.startsWith('•')){$('bal').textContent=money(balanceKES);setTimeout(()=>{if(hideBal)$('bal').textContent='••••••'},4000)}});
+document.addEventListener('click',e=>{
+  const np=e.target.closest('[data-np]');if(np){nprefs[np.dataset.np]=!nprefs[np.dataset.np];np.setAttribute('aria-checked',nprefs[np.dataset.np]);toast(T[lang].saved2);return}
+  const chn=e.target.closest('[data-ch]');if(chn){chprefs[chn.dataset.ch]=!chprefs[chn.dataset.ch];chn.setAttribute('aria-checked',chprefs[chn.dataset.ch]);toast(T[lang].saved2);return}
+  const ap=e.target.closest('[data-ap]');if(ap){const v=ap.dataset.ap;if(v==='system'){delete document.documentElement.dataset.theme;try{localStorage.removeItem('chamaa-mode')}catch(x){}}else{document.documentElement.dataset.theme=v;store('chamaa-mode',v)}renderMe();return}
+  const bd=e.target.closest('[data-bdef]');if(bd){banks.forEach((b,i)=>b.def=i===+bd.dataset.bdef);renderMe();return}
+  const br=e.target.closest('[data-brm]');if(br){const i=+br.dataset.brm,was=banks[i].def;banks.splice(i,1);if(was&&banks.length)banks[0].def=true;renderMe();return}
+});
+
+
+/* ---------- KYC ---------- */
+const UPI='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>';
+function newKd(){return{idc:geo,type:1,no:'',dob:'',front:null,back:null,selfie:null,resc:geo,city:'',addr:'',proof:null,ok:false}}
+function startKyc(){kd=newKd();kStep=0;show('kyc');renderKyc()}
+function cbtn(k){const c=cty(kd[k]);return `<button type="button" class="pick2" data-kpick="${k}"><span class="cc">${c[0]}</span><span class="n">${esc(c[1])}</span>${ic('chev','currentColor',14)}</button>`}
+function upl(k,title,hint,selfie){const v=kd[k];return `<label class="up glassb${v?' done':''}${selfie?' selfie':''}"><span class="th">${v?`<img src="${v}" alt="">`:UPI}</span><span style="flex:1"><b>${title}</b><small>${v?'✓ '+esc(T[lang].tapUp):hint}</small></span><input type="file" accept="image/*,application/pdf" data-up="${k}" ${selfie?'capture="user"':''} hidden></label>`}
+function renderKyc(){const t=T[lang],n=t.kSteps.length;$('kbar').style.width=((kStep+1)/n*100)+'%';$('kstep').textContent=t.stepOf.replace('{a}',kStep+1).replace('{b}',n).replace('{t}',t.kSteps[kStep]);
+  $('knext').textContent=kStep===n-1?t.submitK:t.nextK;$('e-kyc').textContent='';let h='';
+  if(kStep===0)h=`<h3 class="kh">${t.kSteps[0]}</h3><div class="field"><label>${t.idCountry}</label><div class="in">${cbtn('idc')}</div></div><div class="lbl2">${t.idType}</div><div class="chips" id="k-type">${t.idTypes.map((x,i)=>`<button type="button" aria-pressed="${i===kd.type}" data-ktype="${i}">${x}</button>`).join('')}</div><div class="field"><label for="k-no">${t.idNo}</label><div class="in"><input id="k-no" autocomplete="off" autocapitalize="characters" value="${esc(kd.no)}" data-kf="no"></div></div><div class="field"><label>${t.dob}</label><div class="in"><button type="button" class="dtbtn" id="k-dob" data-dt="dob"><span class="dv"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted);flex:none"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button></div></div>`;
+  if(kStep===1)h=`<h3 class="kh">${t.kSteps[1]}</h3>`+(kd.type===0?upl('front',t.passPage,t.upHint):upl('front',t.front,t.upHint)+upl('back',t.backS,t.upHint));
+  if(kStep===2)h=`<h3 class="kh">${t.kSteps[2]}</h3><p class="muted" style="font-size:14px;margin:0 0 12px">${t.selfieHint}</p>`+upl('selfie',t.selfieT,t.tapUp,true);
+  if(kStep===3)h=`<h3 class="kh">${t.kSteps[3]}</h3><div class="field"><label>${t.resCountry}</label><div class="in">${cbtn('resc')}</div></div><div class="field"><label for="k-city">${t.city}</label><div class="in"><input id="k-city" autocomplete="address-level2" value="${esc(kd.city)}" data-kf="city"></div></div><div class="field"><label for="k-addr">${t.addr}</label><div class="in"><input id="k-addr" autocomplete="street-address" value="${esc(kd.addr)}" data-kf="addr"></div></div>`+upl('proof',t.proof,t.proofHint);
+  if(kStep===4){const c1=cty(kd.idc),c2=cty(kd.resc);h=`<h3 class="kh">${t.kSteps[4]}</h3><div class="card" style="margin-bottom:12px"><div class="rv"><span>${t.idCountry}</span><b>${esc(c1[1])}</b></div><div class="rv"><span>${t.idType}</span><b>${t.idTypes[kd.type]}</b></div><div class="rv"><span>${t.idNo}</span><b>${esc(kd.no.slice(0,2)+'•••'+kd.no.slice(-2))}</b></div><div class="rv"><span>${t.dob}</span><b>${fmtDT(kd.dob)}</b></div><div class="rv"><span>${t.resCountry}</span><b>${esc(c2[1])}</b></div><div class="rv"><span>${t.addr}</span><b style="text-align:right">${esc(kd.addr)}, ${esc(kd.city)}</b></div></div><label class="check"><input type="checkbox" id="k-ok" ${kd.ok?'checked':''}><span>${t.confirm}</span></label>`}
+  $('kbody').innerHTML=h;const db=$('k-dob');if(db)setDt(db,kd.dob);$('v-kyc').scrollTop=0}
+function kycValid(){const t=T[lang];
+  if(kStep===0&&(!kd.no.trim()||kd.no.trim().length<5||!kd.dob))return t.eK0;
+  if(kStep===1&&(!kd.front||(kd.type!==0&&!kd.back)))return t.eK1;
+  if(kStep===2&&!kd.selfie)return t.eK2;
+  if(kStep===3&&(!kd.city.trim()||!kd.addr.trim()||!kd.proof))return t.eK3;
+  if(kStep===4&&!kd.ok)return t.eK4;return ''}
+$('f-kyc').addEventListener('submit',e=>{e.preventDefault();const m=kycValid();if(m){$('e-kyc').textContent=m;return}
+  if(kStep<T[lang].kSteps.length-1){kStep++;renderKyc();return}
+  const add=[kd.idc,kd.resc];kyc.status=kyc.status==='verified'?'verified':'pending';kyc.pendingAdd=add;show('kycdone');renderMe();
+  setTimeout(()=>{add.forEach(c=>{if(!kyc.countries.includes(c))kyc.countries.push(c)});kyc.status='verified';kyc.pendingAdd=null;
+    notes.unshift({id:++nid,i:0,k:'goal',ts:Date.now(),read:false,fresh:true,txt:T[lang].kVerifiedN});renderNotifs();renderMe()},5000)});
+$('f-kyc').addEventListener('input',e=>{const f=e.target.dataset.kf;if(f)kd[f]=e.target.value;if(e.target.id==='k-ok')kd.ok=e.target.checked;$('e-kyc').textContent=''});
+$('f-kyc').addEventListener('change',e=>{if(e.target.id==='k-ok')kd.ok=e.target.checked;const k=e.target.dataset.up;if(!k)return;const f=e.target.files[0];if(!f)return;
+  if(f.size>10*1024*1024){$('e-kyc').textContent=T[lang].photoErr;return}
+  if(f.type==='application/pdf'){kd[k]='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 44"><rect width="56" height="44" fill="#C8F04D"/><text x="28" y="27" font-size="12" font-family="sans-serif" font-weight="800" text-anchor="middle" fill="#16142E">PDF</text></svg>');renderKyc();return}
+  const r=new FileReader();r.onload=()=>{const img=new Image();img.onload=()=>{const c=document.createElement('canvas'),S=160,sc=S/Math.max(img.width,img.height);c.width=img.width*sc;c.height=img.height*sc;c.getContext('2d').drawImage(img,0,0,c.width,c.height);kd[k]=c.toDataURL('image/jpeg',.8);renderKyc()};img.src=r.result};r.readAsDataURL(f)});
+$('kyc-back').addEventListener('click',()=>{if(kStep>0){kStep--;renderKyc()}else show('me')});
+function needKyc(){if(kyc.status==='verified')return false;const t=T[lang],p=kyc.status==='pending';
+  $('gt-t').textContent=p?t.gatePendT:t.gateT;$('gt-s').textContent=p?t.gatePendS:t.gateS;$('gt-go').textContent=p?t.okBtn:t.verifyNow;$('gt-go').dataset.p=p?'1':'';$('gate-bg').classList.add('on');return true}
+$('gt-go').addEventListener('click',()=>{$('gate-bg').classList.remove('on');if(!$('gt-go').dataset.p)startKyc()});
+$('gt-no').addEventListener('click',()=>$('gate-bg').classList.remove('on'));
+$('gate-bg').addEventListener('click',e=>{if(e.target.id==='gate-bg')$('gate-bg').classList.remove('on')});
+function kycCard(){const t=T[lang];const SHI='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>';
+  if(kyc.status==='verified')return `<div class="card kyc"><span class="ki" style="background:#E9F9C8;color:#3F5A00">${SHI}</span><div style="flex:1"><b style="font-size:15px">${t.kycOk}</b><div class="muted" style="font-size:12.5px">${t.kycOkS}</div><div>${kyc.countries.map(c=>`<span class="ctag">${c} · ${esc(cty(c)[1])}</span>`).join('')}</div><button type="button" class="linkish" id="kyc-more" style="font-size:13px">${t.addCountry}</button></div></div>`;
+  if(kyc.status==='pending')return `<div class="card kyc"><span class="ki" style="background:#ECEAFB;color:#4A3CD0">${SHI}</span><div style="flex:1"><b style="font-size:15px">${t.kycPend}</b><div class="muted" style="font-size:12.5px">${t.kycPendS}</div></div></div>`;
+  return `<div class="card kyc" style="border-color:rgba(255,139,107,.6)"><span class="ki" style="background:#FFE4DC;color:#B23A12">${SHI}</span><div style="flex:1"><b style="font-size:15px">${t.kycNone}</b><div class="muted" style="font-size:12.5px">${t.kycNoneS}</div></div><button type="button" class="btn-sm" style="background:var(--pri);color:var(--pri-text)" id="kyc-start">${t.startK}</button></div>`}
+document.addEventListener('click',e=>{
+  if(e.target.closest('#kyc-start')||e.target.closest('#kyc-more')){startKyc();return}
+  const kp=e.target.closest('[data-kpick]');if(kp){openSheet({kyc:kp.dataset.kpick});return}
+  const kt=e.target.closest('[data-ktype]');if(kt){kd.type=+kt.dataset.ktype;document.querySelectorAll('[data-ktype]').forEach(b=>b.setAttribute('aria-pressed',b===kt));return}
+  if(e.target.closest('#bk-cc')){openSheet({kyc:'bank'});return}
+},true);
+
+/* ---------- events ---------- */
+document.querySelectorAll('.pick').forEach(b=>b.addEventListener('click',()=>openSheet(b)));
+document.querySelectorAll('form').forEach(f=>f.addEventListener('input',()=>{const e=f.querySelector('.err');if(e)e.textContent=''}));
+$('curchip').addEventListener('click',()=>openSheet('cur'));
+$('sh-q').addEventListener('input',e=>listC(e.target.value));
+$('clist').addEventListener('click',e=>{const o=e.target.closest('[data-cc]');if(!o||!pickFor)return;
+  if(pickFor&&pickFor.kyc){const k=pickFor.kyc;if(k==='bank'){bankCC=o.dataset.cc;bankForm()}else{kd[k]=o.dataset.cc;renderKyc()}$('sheet-bg').classList.remove('on');pickFor=null;return}
+  if(pickFor==='cur'){disp=o.dataset.cc;picked=true;store('chamaa-cc',disp);$('sheet-bg').classList.remove('on');pickFor=null;shownBal=0;render();countUp();return}
+  setCountry(pickFor,o.dataset.cc);closeSheet()});
+['sheet-bg','notif-bg','goal-bg','prof-bg','bank-bg'].forEach(id=>$(id).addEventListener('click',e=>{if(e.target.id===id){$(id).classList.remove('on');if(id==='sheet-bg')pickFor=null}}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){['sheet-bg','notif-bg','goal-bg','dt-bg','prof-bg','bank-bg','gate-bg'].forEach(id=>$(id).classList.remove('on'));pickFor=null}});
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',modeUI);
+new MutationObserver(modeUI).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+$('f-signup').addEventListener('submit',e=>{e.preventDefault();const t=T[lang],er=$('e-signup');
+  const v=id=>$(id).value.trim(),ph=v('su-phone').replace(/\D/g,'').replace(/^0+/,''),pw=$('su-pw').value;
+  const fail=(m,id)=>{er.textContent=m;$(id).focus()};
+  if(!v('su-first'))return fail(t.eFirst,'su-first');if(!v('su-last'))return fail(t.eLast,'su-last');
+  if(!emailOk(v('su-email')))return fail(t.eEmail,'su-email');if(ph.length<6||ph.length>14)return fail(t.ePhone,'su-phone');
+  if(!v('su-city'))return fail(t.eCity,'su-city');if(pw.length<8||!/\d/.test(pw))return fail(t.ePw,'su-pw');
+  if(!$('su-terms').checked)return fail(t.eTerms,'su-terms');
+  er.textContent='';user.first=v('su-first');user.last=v('su-last');$('li-email').value=v('su-email');openVerify(v('su-email'))});
+$('f-login').addEventListener('submit',e=>{e.preventDefault();if(!emailOk($('li-email').value)||!$('li-pw').value){$('e-login').textContent=T[lang].eLogin;return}render();show('home')});
+$('vf-ok').addEventListener('click',()=>{$('verify-bg').classList.remove('on');show('login');setTimeout(()=>$('li-pw').focus(),80)});
+$('vf-resend').addEventListener('click',()=>{startTimer();toast(T[lang].sent)});
+
+$('paybtn').addEventListener('click',()=>{const b=$('paybtn'),t=T[lang];b.disabled=true;b.textContent=t.paying;
+  setTimeout(()=>{balanceKES+=2000;if(goals[goalSel])goals[goalSel].saved+=2000;
+    const ref='QK'+Math.random().toString(36).slice(2,8).toUpperCase();
+    $('paidref').textContent=t.paidRef.replace('{amt}',money(2000)).replace('{ref}',ref);
+    $('share-wa').href='https://wa.me/?text='+encodeURIComponent(t.paidRef.replace('{amt}',money(2000)).replace('{ref}',ref)+' — Chamaa');
+    homeGoal();renderGoals();$('paid-gp').textContent=goals[goalSel]?pct(goals[goalSel])+'%':'—';
+    notes.unshift({id:++nid,i:0,k:'pay',ts:Date.now(),read:false,fresh:true,txt:(lang==='sw'?'Malipo yako ya {a} kwa Umoja Sisters yamepokelewa':'Your payment of {a} to Umoja Sisters was received').replace('{a}',money(2000))});renderNotifs();show('paid')},1600)});
+$('paygoal').addEventListener('click',()=>{goalSel=(goalSel+1)%goals.length;renderMethods()});
+
+document.querySelectorAll('[data-seg]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-seg]').forEach(x=>x.setAttribute('aria-selected',x===b));$('goals-me').hidden=b.dataset.seg!=='me';$('goals-we').hidden=b.dataset.seg!=='we'}));
+let ngCat=0;
+function openGoal(){const t=T[lang];ngCat=0;chipRow('ng-cat',t.cats,0,'cat');$('ng-name').value=t.cats[0]+' '+new Date().getFullYear();$('ng-amt').value='';setDt($('ng-date'),'');$('ng-sym').textContent=sym();$('e-goal').textContent='';$('goal-bg').classList.add('on');setTimeout(()=>$('ng-amt').focus(),60)}
+$('ng-amt').addEventListener('input',e=>{const d=e.target.value.replace(/\D/g,'').slice(0,12);e.target.value=d?(+d).toLocaleString('en-US'):''});
+$('f-goal').addEventListener('submit',e=>{e.preventDefault();const t=T[lang],er=$('e-goal'),nm=$('ng-name').value.trim(),amt=+$('ng-amt').value.replace(/\D/g,''),dt=$('ng-date').dataset.v||'';
+  if(!nm){er.textContent=t.eGName;return}if(!amt){er.textContent=t.eGAmt;return}if(!dt||new Date(dt)<=new Date()){er.textContent=t.eGDate;return}
+  const kes=amt/(FX[curOf(disp)]||1)*FX.KES;goals.push({cat:ngCat,name:nm,saved:0,target:Math.round(kes),date:dt});
+  $('goal-bg').classList.remove('on');renderGoals();toast(t.goalAdded)});
+
+$('f-invite').addEventListener('submit',e=>{e.preventDefault();const t=T[lang],v=$('inv-to').value.trim(),dg=v.replace(/\D/g,'');
+  if(!emailOk(v)&&!(dg.length>=7&&dg.length<=15&&/^[+\d\s()-]+$/.test(v))){$('e-inv').textContent=t.eInv;return}
+  invites.unshift({who:v,st:'pending'});$('inv-to').value='';renderInvites();toast(t.invSent.replace('{who}',v))});
+$('copylink').addEventListener('click',async()=>{try{await navigator.clipboard.writeText('https://chamaa.app/join/WANJIRU-4821');toast(T[lang].copied)}catch(err){toast('chamaa.app/join/WANJIRU-4821')}});
+
+$('st-gen').addEventListener('click',()=>genStatement(false));
+
+$('bell').addEventListener('click',()=>{renderNotifs();$('notif-bg').classList.add('on');setTimeout(()=>{notes.forEach(n=>{n.read=true;n.fresh=false});renderNotifs()},1500)});
+$('markall').addEventListener('click',()=>{notes.forEach(n=>{n.read=true;n.fresh=false});renderNotifs()});
+
+document.addEventListener('click',e=>{
+  const ey=e.target.closest('[data-eye]');if(ey){const i=ey.previousElementSibling;i.type=i.type==='password'?'text':'password';eyeUI();return}
+  const ch=e.target.closest('[data-chip]');if(ch){const k=ch.dataset.chip,i=+ch.dataset.i;
+    if(k==='cat'){ngCat=i;chipRow('ng-cat',T[lang].cats,i,'cat');const nm=$('ng-name');if(!nm.value||T[lang].cats.some(c=>nm.value.startsWith(c)))nm.value=T[lang].cats[i]+' '+new Date().getFullYear();return}
+    if(k==='bk'){bkType=i;bankForm();return}
+    st[k]=i;renderStForm();$('e-st').textContent='';return}
+  const mt=e.target.closest('[data-method]');if(mt){method=mt.dataset.method;renderMethods();return}
+  if(e.target.closest('#addgoal')){openGoal();return}
+  const g=e.target.closest('[data-go]');if(g){if(g.dataset.go==='pay'&&needKyc())return;if(g.dataset.go==='signup')$('inv-field').hidden=!g.dataset.invite;show(g.dataset.go);return}
+  const l=e.target.closest('[data-l]');if(l){lang=l.dataset.l;store('chamaa-lang',lang);render();return}
+  const m=e.target.closest('[data-mode]');if(m){const d=!isDark();document.documentElement.dataset.theme=d?'dark':'light';store('chamaa-mode',d?'dark':'light');renderMe();return}
+  const q=e.target.closest('[data-toast]');if(q){e.preventDefault();toast(q.dataset.toast==='dl'?T[lang].dlSoon:T[lang].soon)}
+});
+
+/* ---------- start ---------- */
+const saved=store('chamaa-lang');if(saved&&T[saved])lang=saved;
+photo=store('chamaa-photo')||null;hideBal=store('chamaa-hide')==='1';
+const sm=store('chamaa-mode');if(sm==='dark'||sm==='light')document.documentElement.dataset.theme=sm;
+addNotif(false);addNotif(false);addNotif(false);notes.forEach((n,i)=>n.ts=Date.now()-(i+1)*17*60000);
+render();
+setInterval(()=>{if(cur!=='welcome'&&cur!=='signup'&&cur!=='login')addNotif(true)},25000);
+setInterval(()=>{if(!$('notif-bg').classList.contains('on'))renderNotifs()},60000);
+}
+</script>
+</body>
+</html>
