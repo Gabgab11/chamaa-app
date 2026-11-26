@@ -17,7 +17,7 @@
    PICTURE: the phone itself, clickable: welcome -> sign up or log in -> SMS code -> home.
    COLOUR and TYPE: approved tokens only (ink, lavender, lime, violet, coral); Inter, display cut for amounts.
    LAYOUT: full-screen on a phone; framed phone + build notes beside it on wider screens. */
-:root{--pig:#16142E;color-scheme:light;
+:root{--avink:#16142E;--pig:#16142E;color-scheme:light;
   --ink:#16142E;--lime:#C8F04D;--coral:#FF8B6B;--late:#B23A12;--r-card:18px;--r-btn:14px;--frame:#0E0D1C;
   --bg:#EEECFB;--surface:#FFFFFF;--surface2:#F4F3FD;--text:#16142E;--muted:#55526F;--ph:#6E6B8F;--accent:#5B4BE8;
   --hero:#16142E;--hero-text:#FFFFFF;--hero-muted:#C9C6E8;--pri:#16142E;--pri-text:#FFFFFF;--sec:#FFFFFF;--sec-text:#16142E;
@@ -25,11 +25,11 @@
 :root[data-theme=dark]{color-scheme:dark;
   --bg:#100F22;--surface:#1E1C3A;--surface2:#2A2850;--text:#F6F5FF;--muted:#CFCCEE;--ph:#A9A6CF;--accent:#B3ABFF;
   --hero:#2C2958;--hero-text:#FFFFFF;--hero-muted:#D6D3F5;--pri:#F6F5FF;--pri-text:#16142E;--sec:#1E1C3A;--sec-text:#F6F5FF;
-  --navoff:#B0ADD6;--line:#3A3766;--icon:#B3ABFF;--scrim:rgba(0,0,0,.6);--late:#FFB59E;--pig:#F6F5FF}
+  --navoff:#B0ADD6;--line:#3A3766;--icon:#B3ABFF;--scrim:rgba(0,0,0,.6);--late:#FFB59E;--pig:#F6F5FF;--avink:#4A4590}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;
   --bg:#100F22;--surface:#1E1C3A;--surface2:#2A2850;--text:#F6F5FF;--muted:#CFCCEE;--ph:#A9A6CF;--accent:#B3ABFF;
   --hero:#2C2958;--hero-text:#FFFFFF;--hero-muted:#D6D3F5;--pri:#F6F5FF;--pri-text:#16142E;--sec:#1E1C3A;--sec-text:#F6F5FF;
-  --navoff:#B0ADD6;--line:#3A3766;--icon:#B3ABFF;--scrim:rgba(0,0,0,.6);--late:#FFB59E;--pig:#F6F5FF}}
+  --navoff:#B0ADD6;--line:#3A3766;--icon:#B3ABFF;--scrim:rgba(0,0,0,.6);--late:#FFB59E;--pig:#F6F5FF;--avink:#4A4590}}
 *{box-sizing:border-box;min-width:0}
 body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 Inter,system-ui,sans-serif;overflow-x:clip}
 .disp{font-variation-settings:"opsz" 32;font-weight:800;letter-spacing:-.03em}
@@ -381,6 +381,50 @@ body{background:var(--bg)}
 #sp-tag{font-size:14px;color:var(--muted);opacity:0;margin-top:4px}
 #splash.out{animation:spOut .45s ease forwards}
 @keyframes spOut{to{opacity:0;transform:scale(1.06)}}
+
+/* ===== Chamas ===== */
+.chc{display:block;width:100%;text-align:left;border-radius:var(--r-card);padding:14px 16px;margin-bottom:10px;color:var(--text)}
+.chc .top{display:flex;align-items:center;gap:12px}
+.chc .meta{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--muted);margin-top:10px;flex-wrap:wrap}
+.mchip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:5px 10px;border-radius:10px;background:var(--surface2);border:1px solid var(--gb)}
+.ring-row{display:flex;gap:14px;align-items:center}
+.ring{position:relative;width:86px;height:86px;flex:none}
+.ring svg{width:86px;height:86px;transform:rotate(-90deg)}
+.ring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800}
+.fund{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.fund div{background:var(--surface2);border-radius:12px;padding:10px 12px}.fund span{display:block;font-size:11.5px;color:var(--muted)}.fund b{font-size:15px;white-space:nowrap}
+.fund small{display:block;font-size:11px;color:var(--muted);margin-top:2px}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:flex;gap:12px;position:relative;padding-bottom:12px}
+.tl li:last-child{padding-bottom:0}
+.tl li::before{content:"";position:absolute;left:11px;top:24px;bottom:0;width:2px;background:var(--line)}
+.tl li:last-child::before{display:none}
+.tl li.done::before{background:#7CB518}
+.tl .st{width:24px;height:24px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;background:var(--surface2);border:2px solid var(--line);position:relative;z-index:1}
+.tl .done .st{background:var(--lime);border-color:var(--lime)}
+.tl .cur .st{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px rgba(124,108,255,.25)}
+.tl .tx{flex:1;font-size:14px;padding-top:2px}
+.tl .tx small{display:block;color:var(--muted);font-size:12.5px}
+.tl .cur .tx b{color:var(--accent)}
+.tl .todo .tx{color:var(--muted)}
+.hring{position:relative;width:74px;height:74px;flex:none}
+.hring svg{width:74px;height:74px;transform:rotate(-90deg)}
+.hring b{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:18px;font-weight:800;line-height:1}
+.hring b small{font-size:10px;font-weight:600;color:var(--muted);margin-top:2px}
+.hrow{display:flex;align-items:center;gap:12px;padding:12px 14px;border-top:1px solid var(--gb)}
+.hrow:first-child{border-top:0}
+.hrow .n{flex:1;font-size:14px}.hrow .n small{display:block;color:var(--muted);font-size:12px}
+.hrow b{font-size:14px;white-space:nowrap}
+.rot{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+.rot .pin{width:22px;display:flex;justify-content:center;flex:none}
+.rot .card{flex:1;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px}
+.rot .card.next{background:var(--hero);color:#fff;border-color:rgba(255,255,255,.16)}
+.rot .card.mine{background:var(--lime);color:var(--ink)}
+.rot .card.past{opacity:.6}
+.swr{display:flex;align-items:center;gap:12px;width:100%;padding:0 14px;min-height:56px;border-top:1px solid var(--gb);text-align:left;color:var(--text)}
+.swr:first-child{border-top:0}
+.swr[aria-checked=true]{font-weight:700}
+#v-chamas,#v-chama,#v-rot{padding-bottom:110px}
 </style>
 </head>
 <body>
@@ -465,7 +509,7 @@ body{background:var(--bg)}
       <p class="locnote" id="locnote"></p>
       <div class="qa" id="qa"></div>
       <div class="sec"><span data-t="next"></span><a href="#" data-toast="1" data-t="all"></a></div>
-      <div class="card"><div class="row"><div class="av" style="background:#6D5DF5;color:#fff;width:36px;height:36px;font-size:12px">US</div><div style="flex:1"><div style="font-weight:700;font-size:15px">Umoja Sisters</div><div class="muted" style="font-size:13px"><span data-t="due"></span> · <span data-m="2000"></span></div></div><button class="btn-sm" style="background:var(--pri);color:var(--pri-text)" type="button" data-go="pay" data-t="pay"></button></div></div>
+      <div class="card"><div class="row"><div class="av" style="background:#6D5DF5;color:#fff;width:36px;height:36px;font-size:12px">US</div><div style="flex:1"><button type="button" data-chama="0" style="text-align:left;color:inherit"><div style="font-weight:700;font-size:15px">Umoja Sisters</div><div class="muted" style="font-size:13px"><span data-t="due"></span> · <span data-m="2000"></span></div></button></div><button class="btn-sm" style="background:var(--pri);color:var(--pri-text)" type="button" data-go="pay" data-t="pay"></button></div></div>
       <div id="home-goal"></div>
       <p class="sample" style="margin-top:14px" data-t="demo2"></p>
     </section>
@@ -574,6 +618,25 @@ body{background:var(--bg)}
       <p class="sample" style="text-align:center;margin-top:12px" data-t="kDemo"></p>
     </section>
 
+    <section class="view" id="v-chamas" aria-label="My chamas">
+      <div class="hdrow"><h2 class="vt" style="text-align:left;margin:0;font-size:24px" data-t="chT"></h2><button class="bell" type="button" data-mode="1"></button></div>
+      <div class="two" style="margin:12px 0 14px"><button type="button" class="btn btn-ink" data-toast="1" style="min-height:46px;font-size:14px" data-t="chNew"></button><button type="button" class="btn btn-white" data-toast="1" style="min-height:46px;font-size:14px" data-t="chJoin"></button></div>
+      <div id="chlist"></div>
+    </section>
+
+    <section class="view" id="v-chama" aria-label="Chama">
+      <div class="hdrow"><button class="back" type="button" data-go="chamas" aria-label="Back"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><div style="flex:1;display:flex;align-items:center;gap:10px;margin:0 10px;min-width:0"><div class="av" id="cm-av" style="width:38px;height:38px;font-size:13px"></div><div style="min-width:0"><div style="font-weight:800;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="cm-name"></div><div class="muted" style="font-size:12.5px" id="cm-sub"></div></div></div><button class="bell" type="button" data-mode="1"></button></div>
+      <div id="cm-body"></div>
+    </section>
+
+    <section class="view" id="v-rot" aria-label="Payout rotation">
+      <div class="hdrow"><button class="back" type="button" data-go="chama" aria-label="Back"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><h2 class="vt" data-t="rotT"></h2><button class="bell" type="button" data-mode="1"></button></div>
+      <p class="muted" style="font-size:13px;text-align:center;margin:4px 0 12px" id="rot-sub"></p>
+      <div class="seg" role="tablist" id="rot-tabs"></div>
+      <div id="rot-body"></div>
+      <button type="button" class="addg glassb" id="swapbtn" style="margin-top:12px"></button>
+    </section>
+
     <nav class="nav" id="nav" aria-label="Main"></nav>
     <div class="sheet-bg" id="sheet-bg"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sh-t"><div class="grab"></div><h3 id="sh-t"></h3><div class="in"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="color:var(--muted)"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="sh-q" type="search" autocomplete="off" aria-label="Search"></div><div class="clist" id="clist" role="listbox"></div></div></div>
     <div class="sheet-bg" id="notif-bg"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="nt-t"><div class="grab"></div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><h3 id="nt-t" style="margin:0" data-t="notifT"></h3><button type="button" class="linkish" id="markall" data-t="markAll"></button></div><div class="clist" id="nlist"></div></div></div>
@@ -611,6 +674,8 @@ body{background:var(--bg)}
       <h3 id="gt-t" class="disp" style="font-size:22px;margin:14px 0 6px"></h3><p class="muted" id="gt-s" style="margin:0 0 16px;font-size:15px"></p>
       <button class="btn btn-ink" type="button" id="gt-go"></button><button class="link" type="button" id="gt-no" data-t="notNow"></button>
     </div></div>
+    <div class="sheet-bg" id="health-bg"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="hl-t"><div class="grab"></div><h3 id="hl-t" data-t="hlHow"></h3><p class="muted" style="font-size:13.5px;margin:-4px 0 12px" data-t="hlHowS"></p><div class="clist" id="hl-list" style="margin-top:0"></div></div></div>
+    <div class="sheet-bg" id="swap-bg"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sw-t"><div class="grab"></div><h3 id="sw-t" data-t="swT"></h3><p class="muted" style="font-size:13.5px;margin:-4px 0 12px" data-t="swS"></p><div class="clist" id="sw-list" style="margin-top:0"></div><p class="err" id="e-sw" role="alert"></p><button class="btn btn-ink" type="button" id="sw-send" data-t="swSend"></button></div></div>
     <div class="sheet-bg" id="dt-bg"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="dt-t">
       <div class="grab"></div>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><button type="button" class="linkish" id="dt-cancel" data-t="cancel"></button><h3 id="dt-t" style="margin:0;font-size:16px"></h3><button type="button" class="linkish" id="dt-done" data-t="doneBtn"></button></div>
@@ -656,7 +721,7 @@ const T={
   per:["This month","Last 3 months","This year","Custom"],eSt:"Pick both dates, with From before To.",
   stHead:"Statement of account",opening:"Opening balance",paidIn:"Paid in",paidOut:"Paid out",closing:"Closing balance",
   date:"Date",desc:"Details",amount:"Amount",balance:"Balance",dlPdf:"Download PDF",dlCsv:"Download Excel (CSV)",emailMe:"Email it to me",dlSoon:"Downloads arrive with the real app.",
-  kycT:"Verify your identity",kycSafe:"Your details are encrypted and only used to confirm who you are.",kSubT:"Thanks! We're checking your details",kSubS:"This usually takes a few minutes. We'll let you know in your notifications.",backMe:"Back to Me",kDemo:"Preview: you'll be verified automatically in a few seconds.",notNow:"Not now",stepOf:"Step {a} of {b} · {t}",kSteps:["Your ID","Photos of your ID","Take a selfie","Where you live","Check and submit"],idCountry:"Country that issued your ID",idType:"Type of ID",idTypes:["Passport","National ID","Driver's licence","Residence permit"],idNo:"ID number",dob:"Date of birth",front:"Front of your ID",backS:"Back of your ID",passPage:"Photo page of your passport",upHint:"All corners showing, no glare",tapUp:"Tap to take or upload a photo",selfieT:"Your selfie",selfieHint:"Face the camera in good light. No hat or sunglasses.",resCountry:"Country you live in",addr:"Street address",proof:"Proof of address",proofHint:"Utility bill or bank statement from the last 3 months",confirm:"I confirm these details are true and belong to me",nextK:"Continue",submitK:"Submit for verification",eK0:"Choose the ID type and enter the ID number and date of birth.",eK1:"Add clear photos of your ID.",eK2:"Add your selfie.",eK3:"Enter your city and street address, and add a proof of address.",eK4:"Please tick the box to confirm.",kycNone:"Verify your identity",kycNoneS:"Needed before you pay in, receive payouts or add a bank account. About 3 minutes.",startK:"Start",kycPend:"Checking your details",kycPendS:"Usually a few minutes. You can keep using the app.",kycOk:"Identity verified",kycOkS:"Verified countries:",addCountry:"Verify another country",gateT:"Verify your identity first",gateS:"To keep everyone's money safe, verify who you are before you pay in, receive payouts or add a bank account. It takes about 3 minutes.",gatePendT:"Almost there",gatePendS:"We're still checking your details. You can do this as soon as you're verified.",verifyNow:"Verify now",okBtn:"OK",bankCountry:"Country of the account",bankNote:"You can add accounts in {list}: the countries on your verified ID and address. To add another country, verify your ID or address there.",bankNoteNone:"Bank accounts can be added once your identity is verified.",kVerifiedN:"Your identity is verified. You can now pay in and add bank accounts.",meT:"Me",showBal:"Show balance",hideBal2:"Hide balance",editProf:"Edit profile",rmPhoto:"Remove photo",addPhoto:"Add photo",chgPhoto:"Change photo",photoErr:"Choose an image under 5 MB.",photoOk:"Profile photo updated.",memberSince:"Member since Nov 2026",banks:"Bank accounts",addBank:"Add bank account",noBank:"No accounts yet. Add one to receive payouts.",defaultT:"Default",setDef:"Make default",remove:"Remove",bankType:["Bank account","Mobile money"],bankName:"Bank name",mmName:"Provider (e.g. M-Pesa)",holder:"Account holder name",accNo:"Account number",mmNo:"Mobile money number",swift:"Branch or SWIFT code",makeDef:"Use this account for my payouts",saveBank:"Save account",eBank:"Fill in the name, holder and number.",bankAdded:"Account added.",notifSet:"Notifications",sendBy:"Send them by",nItems:[["remind","Contribution reminders","Before and after a due date"],["payout","Payouts","When it is your turn, and when money is sent"],["pay","Payments","When a payment is received"],["goal","Goal progress","Milestones on your goals"],["join","Invites and new members","When someone joins your chama"],["late","Late payments","When a member in your chama is late"]],chans:[["push","Push notifications"],["email","Email"],["sms","SMS"]],appSet:"App settings",appear:"Appearance",appearO:["System","Light","Dark"],language:"Language",currency:"Display currency",hideBal:"Hide balance on home",hideBalS:"Also with the eye on the balance card",help:"Help and support",termsL:"Terms of service",privacy:"Privacy policy",logout:"Log out",saveCh:"Save changes",profSaved:"Profile saved.",saved2:"Saved.",notifT:"Notifications",markAll:"Mark all as read",cancel:"Cancel",doneBtn:"Done",time:"Time",pickDate:"Choose date and time",dtGoal:"Target date",dtFrom:"From",dtTo:"To",justNow:"Just now",minAgo:"{n} min ago",hAgo:"{n} h ago",newTag:"NEW",
+  kycT:"Verify your identity",kycSafe:"Your details are encrypted and only used to confirm who you are.",kSubT:"Thanks! We're checking your details",kSubS:"This usually takes a few minutes. We'll let you know in your notifications.",backMe:"Back to Me",kDemo:"Preview: you'll be verified automatically in a few seconds.",notNow:"Not now",stepOf:"Step {a} of {b} · {t}",kSteps:["Your ID","Photos of your ID","Take a selfie","Where you live","Check and submit"],idCountry:"Country that issued your ID",idType:"Type of ID",idTypes:["Passport","National ID","Driver's licence","Residence permit"],idNo:"ID number",dob:"Date of birth",front:"Front of your ID",backS:"Back of your ID",passPage:"Photo page of your passport",upHint:"All corners showing, no glare",tapUp:"Tap to take or upload a photo",selfieT:"Your selfie",selfieHint:"Face the camera in good light. No hat or sunglasses.",resCountry:"Country you live in",addr:"Street address",proof:"Proof of address",proofHint:"Utility bill or bank statement from the last 3 months",confirm:"I confirm these details are true and belong to me",nextK:"Continue",submitK:"Submit for verification",eK0:"Choose the ID type and enter the ID number and date of birth.",eK1:"Add clear photos of your ID.",eK2:"Add your selfie.",eK3:"Enter your city and street address, and add a proof of address.",eK4:"Please tick the box to confirm.",kycNone:"Verify your identity",kycNoneS:"Needed before you pay in, receive payouts or add a bank account. About 3 minutes.",startK:"Start",kycPend:"Checking your details",kycPendS:"Usually a few minutes. You can keep using the app.",kycOk:"Identity verified",kycOkS:"Verified countries:",addCountry:"Verify another country",gateT:"Verify your identity first",gateS:"To keep everyone's money safe, verify who you are before you pay in, receive payouts or add a bank account. It takes about 3 minutes.",gatePendT:"Almost there",gatePendS:"We're still checking your details. You can do this as soon as you're verified.",verifyNow:"Verify now",okBtn:"OK",bankCountry:"Country of the account",bankNote:"You can add accounts in {list}: the countries on your verified ID and address. To add another country, verify your ID or address there.",bankNoteNone:"Bank accounts can be added once your identity is verified.",kVerifiedN:"Your identity is verified. You can now pay in and add bank accounts.",chT:"Chamas",chNew:"+ Create a chama",chJoin:"Join with a code",members:"members",weekly:"weekly",monthly:"monthly",nextPayout:"Next payout",yourTurn:"Your turn",modeRec:"Record only",modeMan:"Managed pool",thisPot:"This cycle's pot",closes:"closes",paidOf:"paid",fundT:"Funding check",fExp:"Expected",fCol:"Collected",fSet:"Settled",fAv:"Available",fColS:"Payments successful",fSetS:"Confirmed in the pool",fAvS:"Free for this payout",tlT:"Payout progress",whoPaid:"Who has paid this cycle",tPaid:"Paid",tDue:"Due",tLate:"Late",seeRot:"See payout rotation",hlT:"Circle Health",hlHow:"How Circle Health is calculated",hlHowS:"Worked out from your chama's records over the last 6 cycles. Nobody can edit it.",hlSee:"How it's calculated",bands:["Excellent","Good","Fair","Needs attention"],hNew:"New — not enough history yet",hF:[["Contributions completed","Share of expected contributions paid",30],["On-time payments","Paid by the due date",25],["Outstanding balance","Less unpaid is better",15],["Successful payouts","Payouts completed as planned",15],["Open disputes","Fewer is better",10],["Defaults","Members who missed and never paid",5]],grpGoal:"Group goal",stages:["Scheduled","Eligibility check","Awaiting contributions","Awaiting settlement","Reconciliation","Awaiting approval","Approved","Processing","Paid out"],stWait:"Waiting for {n} contributions",stDone:"Done",rotT:"Payout rotation",rotTabs:["Order","History"],paidOut:"Paid out",upcoming:"Upcoming",swapBtn:"Request a swap",swT:"Swap your payout turn",swS:"Pick who you'd like to swap with. They and the officials must agree.",swSend:"Send swap request",eSw:"Choose a member to swap with.",swSent:"Swap request sent to {n}. Officials will review it.",cycleOf:"Cycle {a} of {b}",you:"(you)",rolesT:"Treasurer",moneyMode:"Money mode",meT:"Me",showBal:"Show balance",hideBal2:"Hide balance",editProf:"Edit profile",rmPhoto:"Remove photo",addPhoto:"Add photo",chgPhoto:"Change photo",photoErr:"Choose an image under 5 MB.",photoOk:"Profile photo updated.",memberSince:"Member since Nov 2026",banks:"Bank accounts",addBank:"Add bank account",noBank:"No accounts yet. Add one to receive payouts.",defaultT:"Default",setDef:"Make default",remove:"Remove",bankType:["Bank account","Mobile money"],bankName:"Bank name",mmName:"Provider (e.g. M-Pesa)",holder:"Account holder name",accNo:"Account number",mmNo:"Mobile money number",swift:"Branch or SWIFT code",makeDef:"Use this account for my payouts",saveBank:"Save account",eBank:"Fill in the name, holder and number.",bankAdded:"Account added.",notifSet:"Notifications",sendBy:"Send them by",nItems:[["remind","Contribution reminders","Before and after a due date"],["payout","Payouts","When it is your turn, and when money is sent"],["pay","Payments","When a payment is received"],["goal","Goal progress","Milestones on your goals"],["join","Invites and new members","When someone joins your chama"],["late","Late payments","When a member in your chama is late"]],chans:[["push","Push notifications"],["email","Email"],["sms","SMS"]],appSet:"App settings",appear:"Appearance",appearO:["System","Light","Dark"],language:"Language",currency:"Display currency",hideBal:"Hide balance on home",hideBalS:"Also with the eye on the balance card",help:"Help and support",termsL:"Terms of service",privacy:"Privacy policy",logout:"Log out",saveCh:"Save changes",profSaved:"Profile saved.",saved2:"Saved.",notifT:"Notifications",markAll:"Mark all as read",cancel:"Cancel",doneBtn:"Done",time:"Time",pickDate:"Choose date and time",dtGoal:"Target date",dtFrom:"From",dtTo:"To",justNow:"Just now",minAgo:"{n} min ago",hAgo:"{n} h ago",newTag:"NEW",
   soon:"Coming in the next builds.",sent:"Verification email sent again.",choose:"Choose your country",search:"Search countries",none:"No country matches that.",dark:"Dark mode",light:"Light mode",show:"Show password",hide:"Hide password",
   eFirst:"Enter your first name.",eLast:"Enter your last name.",eEmail:"Enter a valid email address.",ePhone:"Enter a valid phone number.",eCity:"Enter your city.",ePw:"Use at least 8 characters, including a number.",eTerms:"Please agree to the Terms to continue.",eLogin:"Enter your email and password."},
  sw:{tag:"Tuweke pamoja.<br>Tukue pamoja.",tagPlain:"Tuweke pamoja. Tukue pamoja.",sub:"Michango, malipo ya zamu na malengo ya pamoja,<br>yakifuatiliwa kwa usalama mahali pamoja.",create:"Fungua akaunti",login:"Ingia",inv:"Nina msimbo wa mwaliko",
@@ -781,14 +846,14 @@ function locNote(){const t=T[lang],c=cty(disp);$('locnote').textContent=(picked?
 
 function render(){
   const t=T[lang];document.documentElement.lang=lang;
-  document.querySelectorAll('[data-t]').forEach(el=>{const v=t[el.dataset.t];if(typeof v==='string')el.innerHTML=v});
+  document.querySelectorAll('[data-t]').forEach(el=>{const v=t[el.dataset.t]??T.en[el.dataset.t];if(typeof v==='string')el.innerHTML=v});
   document.querySelectorAll('[data-l]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===lang));
   document.querySelectorAll('[data-m]').forEach(el=>{el.textContent=money(+el.dataset.m)});
   $('h-name').textContent=user.first;
   const qk=['pay','goals','invite','stmt'],qg=['pay','goals','invite','stmt'];
   $('qa').innerHTML=qk.map((k,i)=>`<button type="button" data-go="${qg[i]}">${ic(k,'currentColor')}${t.qa[i]}</button>`).join('');
   const n=t.nav;
-  $('nav').innerHTML=`<button type="button" data-go="home" ${cur==='home'?'aria-current="page"':''}>${ic('home','currentColor')}${n[0]}</button><button type="button" data-toast="1">${ic('invite','currentColor')}${n[1]}</button><button type="button" class="plus" aria-label="${esc(t.qa[0])}" data-go="pay">${ic('plus','#16142E',24)}</button><button type="button" data-go="goals" ${cur==='goals'?'aria-current="page"':''}>${ic('goals','currentColor')}${n[2]}</button><button type="button" data-go="me" ${cur==='me'?'aria-current="page"':''}>${ic('me','currentColor')}${n[3]}</button>`;
+  $('nav').innerHTML=`<button type="button" data-go="home" ${cur==='home'?'aria-current="page"':''}>${ic('home','currentColor')}${n[0]}</button><button type="button" data-go="chamas" ${cur==='chamas'||cur==='chama'||cur==='rot'?'aria-current="page"':''}>${ic('invite','currentColor')}${n[1]}</button><button type="button" class="plus" aria-label="${esc(t.qa[0])}" data-go="pay">${ic('plus','#16142E',24)}</button><button type="button" data-go="goals" ${cur==='goals'?'aria-current="page"':''}>${ic('goals','currentColor')}${n[2]}</button><button type="button" data-go="me" ${cur==='me'?'aria-current="page"':''}>${ic('me','currentColor')}${n[3]}</button>`;
   document.querySelectorAll('.pick').forEach(b=>setCountry(b,b.dataset.cc));
   $('bal').textContent=money(balanceKES);shownBal=conv(balanceKES);
   homeGoal();renderGoals();renderMethods();renderInvites();renderStForm();renderNotifs();locNote();
@@ -796,14 +861,16 @@ function render(){
   modeUI();eyeUI();resendLabel();
   document.querySelectorAll('.dtbtn').forEach(b=>setDt(b,b.dataset.v));
   renderMe();paintBal();
+  if(cur==='chamas')renderChamas();if(cur==='chama')renderChama();if(cur==='rot')renderRot();
   if($('st-out').innerHTML)genStatement(true);
 }
 function show(v){cur=v;document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
-  $('nav').classList.toggle('on',v==='home'||v==='goals'||v==='me');
+  $('nav').classList.toggle('on',['home','goals','me','chamas','chama','rot'].includes(v));
   $('nav').querySelectorAll('[data-go]').forEach(b=>b.toggleAttribute('aria-current',b.dataset.go===v&&!b.classList.contains('plus')));
   document.querySelectorAll('.err').forEach(e=>e.textContent='');
   const vw=$('v-'+v);if(vw)vw.scrollTop=0;
   if(v==='home'){countUp()}
+  if(v==='chamas')renderChamas();if(v==='chama')renderChama();if(v==='rot')renderRot();
   if(v==='pay'){renderMethods();$('paybtn').disabled=false}
   if(v==='signup'||v==='login'){const f=document.querySelector('#v-'+v+' input');if(f)setTimeout(()=>f.focus(),60)}}
 function toast(m){const e=$('toast');e.textContent=m;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2000)}
@@ -1005,6 +1072,72 @@ function runSplash(){const sp=$('splash');if(!sp)return;let done=false;
       tag.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:400,delay:150,fill:'forwards'});
       setTimeout(finish,1150)})})}
 
+
+/* ---------- Chamas ---------- */
+const tx=k=>T[lang][k]??T.en[k];
+const PEOPLE=[["Faith M.","#6D5DF5"],["Achieng O.","#16142E"],["Joy N.","#6D5DF5"],["Wanjiru K.","#FF8B6B"],["Zawadi A.","#6D5DF5"],["Rose M.","#16142E"],["Mary W.","#6D5DF5"],["Grace L.","#16142E"],["Neema K.","#6D5DF5"],["Halima S.","#FF8B6B"],["Esther N.","#16142E"],["Pauline O.","#6D5DF5"]];
+const CHAMAS=[
+ {name:'Umoja Sisters',ini:'US',col:'#6D5DF5',n:12,amt:2000,freq:'weekly',mode:'rec',cycle:3,paid:10,closes:'Fri 4 Dec',next:1,nextDate:'Sat 5 Dec',mine:3,mineDate:'19 Dec',stage:2,health:95,settled:18000,goal:['Plot in Kitengela',41,492000,1200000],status:[1,1,0,1,2,1,1,1,1,1,3,1]},
+ {name:'Kazi Bora',ini:'KB',col:'#16142E',n:8,amt:5000,freq:'monthly',mode:'man',cycle:5,paid:8,closes:'Mon 30 Nov',next:4,nextDate:'Tue 1 Dec',mine:3,mineDate:'Paid out Oct',stage:6,health:82,settled:40000,goal:['Shop stock',63,252000,400000],status:[1,1,1,1,1,1,1,1]},
+ {name:'Family Fund',ini:'FF',col:'#FF8B6B',n:6,amt:1000,freq:'weekly',mode:'rec',cycle:1,paid:4,closes:'Sun 6 Dec',next:0,nextDate:'Mon 7 Dec',mine:3,mineDate:'28 Dec',stage:2,health:null,settled:4000,goal:['Emergency fund',18,7200,40000],status:[1,1,3,1,0,2]}];
+let curCh=0,rotTab=0,swapWith=null;
+const tagOf=st=>st===1?['t-paid',tx('tPaid')]:st===2?['t-late',tx('tLate')]:['t-due',tx('tDue')];
+function band(h){const b=tx('bands');return h>=90?[b[0],'#7CB518']:h>=75?[b[1],'#6D5DF5']:h>=60?[b[2],'#E0A800']:[b[3],'#FF8B6B']}
+function avDot(i,sz){const p=PEOPLE[i%PEOPLE.length];const isMe=p[0]==='Wanjiru K.';const html=isMe&&photo?`<img src="${photo}" alt="">`:esc(p[0].split(' ').map(w=>w[0]).join(''));return `<div class="av" style="width:${sz}px;height:${sz}px;font-size:${Math.round(sz/2.8)}px;background:${p[1]==='#16142E'?'var(--avink)':p[1]};color:${p[1]==='#FF8B6B'?'#16142E':'#fff'}">${html}</div>`}
+function renderChamas(){$('chlist').innerHTML=CHAMAS.map((c,i)=>{const pct=Math.round(c.paid/c.n*100),[cl,lb]=tagOf(c.status[3]);return `<button type="button" class="chc glassb" data-chama="${i}"><div class="top"><div class="av" style="width:42px;height:42px;font-size:14px;background:${c.col==='#16142E'?'var(--avink)':c.col};color:${c.col==='#FF8B6B'?'#16142E':'#fff'}">${c.ini}</div><div style="flex:1;min-width:0"><div style="font-weight:800;font-size:16px">${esc(c.name)}</div><div class="muted" style="font-size:12.5px">${c.n} ${tx('members')} · ${money(c.amt)} ${tx(c.freq)}</div></div><span class="tag ${cl}">${lb}</span></div><div style="margin-top:12px" class="thin"><i style="width:${pct}%;background:var(--lime)"></i></div><div class="meta"><span>${c.paid}/${c.n} ${tx('paidOf')} · ${tx('closes')} ${c.closes}</span><span>${tx('nextPayout')}: ${esc(PEOPLE[c.next][0])} · ${c.nextDate}</span></div></button>`}).join('')}
+function ring(p,col,size,stroke){const r=(size-stroke)/2,C=2*Math.PI*r;return `<svg viewBox="0 0 ${size} ${size}"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="var(--surface2)" stroke-width="${stroke}"/><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${col}" stroke-width="${stroke}" stroke-linecap="round" stroke-dasharray="${(C*p/100).toFixed(1)} ${C.toFixed(1)}"/></svg>`}
+function renderChama(){const c=CHAMAS[curCh],t=T[lang];
+  $('cm-av').textContent=c.ini;$('cm-av').style.background=c.col==='#16142E'?'var(--avink)':c.col;$('cm-av').style.color=c.col==='#FF8B6B'?'#16142E':'#fff';
+  $('cm-name').textContent=c.name;$('cm-sub').textContent=`${c.n} ${tx('members')} · ${money(c.amt)} ${tx(c.freq)}`;
+  const exp=c.n*c.amt,col=c.paid*c.amt,av=c.stage>=6?0:c.settled,pct=Math.round(c.paid/c.n*100),wait=c.n-c.paid;
+  const st=tx('stages');
+  const tl=st.map((s,i)=>{const cls=i<c.stage?'done':i===c.stage?'cur':'todo';const note=i===c.stage&&i===2?tx('stWait').replace('{n}',wait):i<c.stage?tx('stDone'):'';
+    return `<li class="${cls}"><span class="st">${cls==='done'?'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#16142E" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>':''}</span><span class="tx"><b>${s}</b>${note?`<small>${note}</small>`:''}</span></li>`}).join('');
+  const shown=c.stage<=2?st.slice(0,5):st;
+  const h=c.health,[bl,bc]=h?band(h):[tx('hNew'),'var(--muted)'];
+  $('cm-body').innerHTML=`
+  <div style="display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 12px"><span class="mchip">${tx('moneyMode')}: ${c.mode==='man'?tx('modeMan'):tx('modeRec')}</span><span class="mchip">${tx('cycleOf').replace('{a}',c.cycle).replace('{b}',c.n)}</span></div>
+  <div class="card" style="margin-bottom:10px"><div class="ring-row"><div class="ring">${ring(pct,'var(--lime)',86,10)}<b>${c.paid}/${c.n}</b></div><div><div class="muted" style="font-size:12.5px">${tx('thisPot')}</div><div class="disp" style="font-size:24px">${money(col)}</div><div class="muted" style="font-size:12.5px">${t.of} ${money(exp)} · ${tx('closes')} ${c.closes}</div></div></div></div>
+  <div class="hero" style="margin-bottom:10px;display:flex;align-items:center;gap:12px">${avDot(c.next,38)}<div style="flex:1"><div style="font-size:12px;color:var(--hero-muted)">${tx('nextPayout')}</div><div style="font-weight:700;font-size:15px">${esc(PEOPLE[c.next][0])}</div></div><div style="text-align:right"><div style="font-weight:800;font-size:16px">${money(exp)}</div><div style="font-size:12px;color:#C8F04D">${c.nextDate}</div></div></div>
+  <div class="sec" style="margin-top:16px"><span>${tx('tlT')}</span></div>
+  <div class="card" style="margin-bottom:10px"><ul class="tl">${tl}</ul></div>
+  <div class="sec" style="margin-top:16px"><span>${tx('fundT')}</span></div>
+  <div class="card fund" style="margin-bottom:10px"><div><span>${tx('fExp')}</span><b>${money(exp)}</b></div><div><span>${tx('fCol')}</span><b>${money(col)}</b><small>${tx('fColS')}</small></div><div><span>${tx('fSet')}</span><b>${money(c.settled)}</b><small>${tx('fSetS')}</small></div><div><span>${tx('fAv')}</span><b>${money(av)}</b><small>${tx('fAvS')}</small></div></div>
+  <div class="sec" style="margin-top:16px"><span>${tx('whoPaid')}</span><span class="muted" style="font-size:13px;font-weight:600">${c.paid}/${c.n}</span></div>
+  <div class="card list" style="margin-bottom:10px">${c.status.map((stt,i)=>{const [cl,lb]=tagOf(stt);const me=PEOPLE[i][0]==='Wanjiru K.';return `<div class="irow">${avDot(i,30)}<div style="flex:1;font-size:14px;font-weight:600">${esc(PEOPLE[i][0])} ${me?`<span class="muted" style="font-weight:500">${tx('you')}</span>`:''}</div><span class="tag ${cl}">${lb}</span></div>`}).join('')}</div>
+  <button type="button" class="btn btn-white" data-go="rot" style="margin-bottom:16px">${tx('seeRot')}</button>
+  <div class="card" style="display:flex;gap:14px;align-items:center;margin-bottom:10px"><div class="hring">${ring(h||0,bc,74,8)}<b>${h??'–'}<small>/100</small></b></div><div style="flex:1"><div style="font-weight:800;font-size:16px">${tx('hlT')}</div><div style="font-size:13.5px;font-weight:700;color:${bc}">${bl}</div><button type="button" class="linkish" id="hl-open" style="font-size:13px;min-height:32px">${tx('hlSee')}</button></div></div>
+  <div class="hero" style="margin-top:10px"><div style="display:flex;justify-content:space-between"><div><div style="font-size:12px;color:var(--hero-muted)">${tx('grpGoal')}</div><div style="font-weight:800;font-size:16px">${esc(c.goal[0])}</div></div><div class="disp" style="font-size:24px">${c.goal[1]}%</div></div><div class="bar" style="margin:10px 0 6px;background:rgba(255,255,255,.16)"><i style="width:${c.goal[1]}%;background:var(--lime)"></i></div><div style="font-size:12.5px;color:var(--hero-muted)">${money(c.goal[2])} ${t.of} ${money(c.goal[3])}</div></div>`;
+  }
+function healthSheet(){const c=CHAMAS[curCh],h=c.health;
+  if(!h){$('hl-list').innerHTML=`<div class="empty">${tx('hNew')}</div>`}
+  else{const sc=[[29.4,30],[22.5,25],[14,15],[15,15],[10,10],[4,5]];const f=tx('hF');let tot=0;
+   $('hl-list').innerHTML=f.map((x,i)=>{const v=Math.round(sc[i][0]*h/95);tot+=v;return `<div class="hrow"><span class="n">${x[0]}<small>${x[1]}</small></span><b>${v}/${x[2]}</b></div>`}).join('')+`<div class="hrow"><span class="n"><b>${tx('hlT')}</b></span><b>${h}/100</b></div>`}
+  $('health-bg').classList.add('on')}
+function renderRot(){const c=CHAMAS[curCh];$('rot-sub').textContent=c.name+' · '+tx('cycleOf').replace('{a}',c.cycle).replace('{b}',c.n);
+  $('rot-tabs').innerHTML=tx('rotTabs').map((x,i)=>`<button type="button" role="tab" aria-selected="${i===rotTab}" data-rtab="${i}">${x}</button>`).join('');
+  const order=c.status.map((_,i)=>i);const rows=order.map((pi,k)=>{const past=k<c.next,next=k===c.next,mine=PEOPLE[pi][0]==='Wanjiru K.';
+    if(rotTab===1&&!past)return '';if(rotTab===0&&past&&k<c.next-1)return '';
+    const cls=next?'next':mine?'mine':past?'past':'';
+    const pin=past?'<svg width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="var(--pri)"/><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="var(--pri-text)" stroke-width="2.6" stroke-linecap="round"/></svg>':next?'<span style="width:18px;height:18px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--pri)"></span>':'<span style="width:16px;height:16px;border-radius:50%;border:2px solid var(--line)"></span>';
+    const lab=past?tx('paidOut'):next?tx('nextPayout'):mine?tx('yourTurn'):'';
+    return `<div class="rot"><span class="pin">${pin}</span><div class="card ${cls}${cls==='next'||cls==='mine'?'':' glassb'}">${avDot(pi,28)}<div style="flex:1"><div style="font-weight:700;font-size:14px">${esc(PEOPLE[pi][0])} ${mine?`<span style="font-weight:500;opacity:.75">${tx('you')}</span>`:''}</div><div style="font-size:12px;opacity:.75">${money(c.n*c.amt)}</div></div>${lab?`<span style="font-size:11.5px;font-weight:800">${lab}</span>`:''}</div></div>`}).join('');
+  $('rot-body').innerHTML=rows||`<p class="muted">—</p>`;
+  $('swapbtn').innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4L3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"/></svg>'+tx('swapBtn');$('swapbtn').hidden=rotTab===1}
+function swapSheet(){const c=CHAMAS[curCh];swapWith=null;$('e-sw').textContent='';
+  $('sw-list').innerHTML=c.status.map((_,i)=>i).filter(i=>i>c.next&&PEOPLE[i][0]!=='Wanjiru K.').map(i=>`<button type="button" class="swr" role="radio" aria-checked="false" data-sw="${i}">${avDot(i,30)}<span style="flex:1">${esc(PEOPLE[i][0])}</span><span class="radio"></span></button>`).join('');
+  $('swap-bg').classList.add('on')}
+document.addEventListener('click',e=>{
+  const ch=e.target.closest('[data-chama]');if(ch){curCh=+ch.dataset.chama;rotTab=0;show('chama');return}
+  if(e.target.closest('#hl-open')){healthSheet();return}
+  const rt=e.target.closest('[data-rtab]');if(rt){rotTab=+rt.dataset.rtab;renderRot();return}
+  if(e.target.closest('#swapbtn')){swapSheet();return}
+  const sw=e.target.closest('[data-sw]');if(sw){swapWith=+sw.dataset.sw;document.querySelectorAll('[data-sw]').forEach(b=>b.setAttribute('aria-checked',b===sw));$('e-sw').textContent='';return}
+  if(e.target.closest('#sw-send')){if(swapWith==null){$('e-sw').textContent=tx('eSw');return}const nm=PEOPLE[swapWith][0];$('swap-bg').classList.remove('on');toast(tx('swSent').replace('{n}',nm));
+    notes.unshift({id:++nid,i:0,k:'swap',ts:Date.now(),read:false,fresh:true,txt:tx('swSent').replace('{n}',nm)});renderNotifs();return}
+},true);
+['health-bg','swap-bg'].forEach(id=>$(id).addEventListener('click',e=>{if(e.target.id===id)$(id).classList.remove('on')}));
+
 /* ---------- events ---------- */
 document.querySelectorAll('.pick').forEach(b=>b.addEventListener('click',()=>openSheet(b)));
 document.querySelectorAll('form').forEach(f=>f.addEventListener('input',()=>{const e=f.querySelector('.err');if(e)e.textContent=''}));
@@ -1015,7 +1148,7 @@ $('clist').addEventListener('click',e=>{const o=e.target.closest('[data-cc]');if
   if(pickFor==='cur'){disp=o.dataset.cc;picked=true;store('chamaa-cc',disp);$('sheet-bg').classList.remove('on');pickFor=null;shownBal=0;render();countUp();return}
   setCountry(pickFor,o.dataset.cc);closeSheet()});
 ['sheet-bg','notif-bg','goal-bg','prof-bg','bank-bg'].forEach(id=>$(id).addEventListener('click',e=>{if(e.target.id===id){$(id).classList.remove('on');if(id==='sheet-bg')pickFor=null}}));
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){['sheet-bg','notif-bg','goal-bg','dt-bg','prof-bg','bank-bg','gate-bg'].forEach(id=>$(id).classList.remove('on'));pickFor=null}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){['sheet-bg','notif-bg','goal-bg','dt-bg','prof-bg','bank-bg','gate-bg','health-bg','swap-bg'].forEach(id=>$(id).classList.remove('on'));pickFor=null}});
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change',modeUI);
 new MutationObserver(modeUI).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 
