@@ -1,0 +1,48 @@
+/* Chamaa design tokens: midnight navy, ice blue, electric blue, chartreuse. Flat, no glass. */
+:root {
+  color-scheme: light;
+  --navy: #0B1B3F;
+  --ice: #EEF4FB;
+  --blue: #2F6BFF;
+  --lime: #C6F432;
+  --coral: #FF8B6B;
+  --ok: #3F8A00;
+  --late: #C2410C;
+
+  --bg: var(--ice);
+  --surface: #FFFFFF;
+  --surface2: #F1F6FC;
+  --text: var(--navy);
+  --muted: #50607D;
+  --line: #DCE6F2;
+  --icon: var(--blue);
+  --hero: var(--navy);
+  --hero-text: #FFFFFF;
+  --hero-muted: #AFC0DC;
+  --pri: var(--blue);
+  --pri-text: #FFFFFF;
+  --pig: var(--navy);
+  --navoff: #6B7C99;
+
+  --r-card: 14px;
+  --r-btn: 12px;
+  --r-in: 12px;
+  --font: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #08132B;
+  --surface: #0F1E3D;
+  --surface2: #172A4F;
+  --text: #EEF4FF;
+  --muted: #A9B8D3;
+  --line: #22365C;
+  --icon: #7FA6FF;
+  --hero: #13306B;
+  --hero-muted: #B8C8E6;
+  --pig: #EEF4FF;
+  --navoff: #8C9DBB;
+  --ok: #9BD13C;
+  --late: #FF9C7A;
+}
