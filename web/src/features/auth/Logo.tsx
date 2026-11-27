@@ -1,6 +1,6 @@
 export function Logo({ size = 40 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 256 256" aria-label="Chamaa" role="img">
+    <svg width={size} height={size} viewBox="0 0 256 256" aria-label="My Chaama" role="img">
       <g transform="translate(24 20) scale(.82)" fill="var(--pig)">
         <ellipse cx="124" cy="136" rx="92" ry="74" />
         <path d="M164 74 L190 44 L196 92 Z" />

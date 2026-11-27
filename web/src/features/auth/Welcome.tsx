@@ -2,6 +2,7 @@ import { useApp } from '../../app/app-state';
 import { useNav } from '../../app/nav';
 import { ThemeButton } from '../../components/TopBar';
 import { Logo } from './Logo';
+import { Wordmark } from '../../components/Wordmark';
 
 export function Welcome({ onInvite }: { onInvite: () => void }) {
   const { t, lang, setLang } = useApp();
@@ -11,6 +12,7 @@ export function Welcome({ onInvite }: { onInvite: () => void }) {
       <header className="topbar"><span /><span className="grow" /><div className="topbar-r"><ThemeButton /></div></header>
       <div className="welcome-body">
         <div className="logo-tile"><Logo size={96} /></div>
+        <div className="welcome-wm"><Wordmark /></div>
         <h1 className="disp tag">{t.tag.split('\n').map((l) => <span key={l}>{l}<br /></span>)}</h1>
         <p className="muted sub">{t.sub}</p>
       </div>

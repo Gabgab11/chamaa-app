@@ -8,7 +8,7 @@ const en = {
   newpw: 'Create a password', pwHint: 'At least 8 characters, with letters and a number.',
   invCode: 'Invite code', optional: '(optional)', terms: 'I agree to the Terms and Privacy Policy',
   have: 'Already have an account?', liT: 'Welcome back', liS: 'Log in with your email and password.',
-  pw: 'Password', forgot: 'Forgot password?', newTo: 'New to Chamaa?',
+  pw: 'Password', forgot: 'Forgot password?', newTo: 'New to My Chaama?',
   fgT: 'Reset your password', fgS: "Enter your email and we'll send you a link to choose a new password.",
   fgBtn: 'Send reset link', fgSent: 'If an account exists for {e}, a reset link is on its way.', backLogin: 'Back to log in',
   vfT: 'Check your email', vfS: "We've sent a verification link to", vfS2: 'Tap the link in the email to activate your account, then log in.',
@@ -31,7 +31,7 @@ const en = {
   demoNote: 'Everything you add is saved on this phone for now. Real accounts come with the backend.',
   of: 'of', by: 'by', next: 'Next contribution', all: 'See all', pay: 'Pay',
   soonT: 'Moving over next', soon: 'This screen is being moved to the new app. It works in the demo for now.',
-  welcomeN: 'Welcome to Chamaa, {n}! Create or join a chama to get started.',
+  welcomeN: 'Welcome to My Chaama, {n}! Create or join a chama to get started.',
   back: 'Back', close: 'Close', light: 'Light mode', dark: 'Dark mode', logout: 'Log out',
 };
 
@@ -46,7 +46,7 @@ const sw: Partial<Strings> = {
   first: 'Jina la kwanza', last: 'Jina la mwisho', email: 'Barua pepe', phone: 'Nambari ya simu', city: 'Mji',
   newpw: 'Unda nenosiri', invCode: 'Msimbo wa mwaliko', optional: '(si lazima)', terms: 'Nakubali Masharti na Sera ya Faragha',
   have: 'Tayari una akaunti?', liT: 'Karibu tena', liS: 'Ingia kwa barua pepe na nenosiri lako.', pw: 'Nenosiri',
-  forgot: 'Umesahau nenosiri?', newTo: 'Mpya kwa Chamaa?',
+  forgot: 'Umesahau nenosiri?', newTo: 'Mpya kwa My Chaama?',
   vfT: 'Angalia barua pepe yako', vfS: 'Tumetuma kiungo cha uthibitisho kwa',
   vfS2: 'Gusa kiungo kwenye barua pepe kuwasha akaunti yako, kisha uingie.', vfOk: 'Nenda kuingia',
   vfResend: 'Tuma tena baada ya sekunde {s}', vfResendNow: 'Hukupokea? Tuma tena', sent: 'Barua pepe ya uthibitisho imetumwa tena.',

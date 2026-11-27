@@ -1,5 +1,5 @@
-// Chamaa service worker: app shell offline, assets cache-first, never caches API or money calls.
-const VERSION = 'chamaa-v1';
+// My Chaama service worker: app shell offline, assets cache-first, never caches API or money calls.
+const VERSION = 'mychaama-v2';
 const SHELL = ['/', '/index.html', '/manifest.webmanifest', '/icon.svg', '/theme-boot.js'];
 
 self.addEventListener('install', (e) => {

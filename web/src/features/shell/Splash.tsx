@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useApp } from '../../app/app-state';
+import { Wordmark } from '../../components/Wordmark';
 
 const reduced = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
 const SPIRAL = 'M124 140 A7 7 0 0 1 138 140 A14 14 0 0 1 110 140 A21 21 0 0 1 152 140 A28 28 0 0 1 96 140 A35 35 0 0 1 166 140';
@@ -96,7 +97,7 @@ export function Splash({ onDone }: { onDone: () => void }) {
   }, []);
 
   return (
-    <div className="splash" ref={root} role="img" aria-label="Chamaa">
+    <div className="splash" ref={root} role="img" aria-label="My Chaama">
       <div className="sp-stack">
         <svg ref={pig} className="sp-pig" viewBox="0 0 256 256" aria-hidden="true">
           <ellipse fill="var(--pig)" cx="124" cy="136" rx="92" ry="74" />
@@ -107,7 +108,7 @@ export function Splash({ onDone }: { onDone: () => void }) {
           <rect fill="var(--bg)" x="100" y="70" width="44" height="10" rx="5" />
           <path ref={spiral} d={SPIRAL} fill="none" stroke="var(--lime)" strokeWidth="9" strokeLinecap="round" />
         </svg>
-        <div ref={word} className="sp-word">chamaa</div>
+        <div ref={word} className="sp-word"><Wordmark /></div>
         <div ref={tag} className="sp-tag">{t.tag.replace('\n', ' ')}</div>
       </div>
       <div ref={coin} className="sp-coin" aria-hidden="true">
