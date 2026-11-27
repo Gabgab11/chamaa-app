@@ -162,3 +162,14 @@ h1, h2, p { margin: 0; }
 @keyframes up { from { transform: translateY(24px); opacity: .6; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 @media (max-width: 350px) { .qa button { font-size: 11px; } .two { gap: 8px; } }
+
+/* opening intro */
+.splash { position: fixed; inset: 0; z-index: 100; background: var(--bg); display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: pointer; }
+.splash.out { animation: spOut .45s ease forwards; }
+.sp-stack { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 1; }
+.sp-pig { width: 132px; height: 132px; opacity: 0; transform: scale(.4); }
+.sp-word { font: 800 48px/1 var(--font); letter-spacing: -.04em; color: var(--text); opacity: 0; position: relative; z-index: 2; }
+.sp-tag { font-size: 14px; color: var(--muted); opacity: 0; margin-top: 4px; }
+.sp-coin { position: absolute; left: 0; top: 0; width: 26px; height: 26px; margin: -13px 0 0 -13px; z-index: 3; opacity: 0; will-change: transform; }
+.sp-coin.back { z-index: 1; }
+@keyframes spOut { to { opacity: 0; transform: scale(1.06); } }

@@ -7,6 +7,7 @@ import { Home } from '../features/dashboard/Home';
 import { BottomNav } from '../features/shell/BottomNav';
 import { MeScreen, Placeholder } from '../features/shell/Placeholder';
 import { Toast } from '../components/Toast';
+import { Splash } from '../features/shell/Splash';
 import { useApp } from './app-state';
 import { useNav } from './nav';
 
@@ -17,6 +18,10 @@ export function App() {
   const nav = useNav();
   const [invite, setInvite] = useState(false);
   const [loginEmail, setLoginEmail] = useState('');
+  // The intro plays once each time the app is opened (not on every screen change).
+  const [intro, setIntro] = useState(() => {
+    try { return sessionStorage.getItem('chamaa-intro') !== '1'; } catch { return true; }
+  });
 
   // Signed-out people can only see the sign-in screens, and signed-in people skip them.
   const authRoutes = ['welcome', 'signup', 'login', 'forgot'];
@@ -44,6 +49,7 @@ export function App() {
       {screen}
       {user && WITH_NAV.has(r) ? <BottomNav /> : null}
       <Toast />
+      {intro ? <Splash onDone={() => { try { sessionStorage.setItem('chamaa-intro', '1'); } catch { /* ignore */ } setIntro(false); }} /> : null}
     </div>
   );
 }
