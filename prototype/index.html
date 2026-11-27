@@ -452,6 +452,12 @@ body{background:var(--bg)}
 .dtable{width:100%;border-collapse:collapse;font-size:13px}.dtable th{text-align:left;font-weight:600;color:var(--muted);padding:6px 4px;border-bottom:1px solid var(--line)}.dtable td{padding:8px 4px;border-bottom:1px solid var(--line)}
 @media(min-width:900px){.phone.wide .dk{grid-template-columns:2fr 1fr}.phone.wide .dk .kpis{grid-template-columns:repeat(4,minmax(0,1fr));grid-column:1/-1}}
 #v-treas,#v-approve,#v-recon,#v-payout,#v-receipt,#v-desk,#v-create,#v-page{padding-bottom:40px}
+.hero .qa-in{margin:14px -6px -4px;padding-top:12px;border-top:1px solid rgba(255,255,255,.12);gap:2px}
+.hero .qa-in button{background:none!important;border:0!important;box-shadow:none!important;-webkit-backdrop-filter:none;backdrop-filter:none;color:#fff;min-height:58px;padding:6px 0;font-size:12px;font-weight:600;gap:7px;border-radius:14px}
+.hero .qa-in button svg{color:#fff;width:22px;height:22px}
+.hero .qa-in button:active{background:rgba(255,255,255,.08)!important}
+.hero .qa-in button span.qi{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.10)}
+@media (max-width:350px){.hero .qa-in button{font-size:11px}}
 </style>
 </head>
 <body>
@@ -532,9 +538,9 @@ body{background:var(--bg)}
         <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span style="display:flex;align-items:center;gap:4px"><span style="font-size:13px;color:var(--hero-muted)" data-t="avail"></span><button type="button" class="baleye" id="baleye"></button></span><button type="button" class="curchip" id="curchip"></button></div>
         <div class="amt" id="bal" aria-live="polite"></div>
         <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><span class="pill" id="home-week" style="background:var(--lime);color:var(--ink)"></span><span style="font-size:13px;color:var(--hero-muted)" id="home-count"></span></div>
+        <div class="qa qa-in" id="qa"></div>
       </div>
       <p class="locnote" id="locnote"></p>
-      <div class="qa" id="qa"></div>
       <div id="home-next"></div>
       <div id="home-goal"></div>
       <p class="sample" style="margin-top:14px" data-t="demoNote"></p>
@@ -945,7 +951,7 @@ function render(){
   document.querySelectorAll('[data-m]').forEach(el=>{el.textContent=money(+el.dataset.m)});
   $('h-name').textContent=user.first;
   const qk=['pay','goals','invite','stmt'],qg=['pay','goals','invite','stmt'];
-  $('qa').innerHTML=qk.map((k,i)=>`<button type="button" data-go="${qg[i]}">${ic(k,'currentColor')}${t.qa[i]}</button>`).join('');
+  $('qa').innerHTML=qk.map((k,i)=>`<button type="button" data-go="${qg[i]}"><span class="qi">${ic(k,'currentColor')}</span>${t.qa[i]}</button>`).join('');
   const n=t.nav;
   $('nav').innerHTML=`<button type="button" data-go="home" ${cur==='home'?'aria-current="page"':''}>${ic('home','currentColor')}${n[0]}</button><button type="button" data-go="chamas" ${cur==='chamas'||cur==='chama'||cur==='rot'?'aria-current="page"':''}>${ic('invite','currentColor')}${n[1]}</button><button type="button" class="plus" aria-label="${esc(t.qa[0])}" data-go="pay">${ic('plus','#16142E',24)}</button><button type="button" data-go="goals" ${cur==='goals'?'aria-current="page"':''}>${ic('goals','currentColor')}${n[2]}</button><button type="button" data-go="me" ${cur==='me'?'aria-current="page"':''}>${ic('me','currentColor')}${n[3]}</button>`;
   document.querySelectorAll('.pick').forEach(b=>setCountry(b,b.dataset.cc));
