@@ -1,5 +1,6 @@
 # My Chaama brand files
 
+- **`mychaama-lockup` / `-reversed`: the main logo (chosen 27 Nov).** The wordmark with the lime "my" tag and a small piggy sitting on the "m". Used on the welcome screen and the website header and footer.
 - `mychaama-logo-primary`: piggy bank + wordmark, for light backgrounds
 - `mychaama-logo-reversed`: the same on midnight navy
 - `mychaama-logo-stacked` / `-reversed`: piggy above the wordmark (app stores, social, splash)

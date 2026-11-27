@@ -49,8 +49,9 @@ h1, h2, p { margin: 0; }
 /* welcome */
 .welcome { display: flex; flex-direction: column; }
 .welcome-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 12px 0 24px; }
-.logo-tile { width: 140px; height: 140px; border-radius: 40px; background: var(--surface); border: 1px solid var(--line); display: grid; place-items: center; margin-bottom: 14px; }
-.welcome-wm { font-size: 30px; font-weight: 800; letter-spacing: -.045em; margin-bottom: 18px; }
+.logo-tile { width: min(250px, 72vw); aspect-ratio: 1; border-radius: 26%; background: var(--surface); border: 1px solid var(--line); display: grid; place-items: center; margin-bottom: 24px; }
+.logo-tile .lockup { width: 78%; height: auto; }
+.lockup { color: var(--pig); --lockup-slot: var(--surface); display: block; }
 .tag { font-size: clamp(30px, 9vw, 38px); line-height: 1.08; margin-bottom: 12px; }
 .sub { max-width: 330px; font-size: 15px; }
 
