@@ -197,15 +197,18 @@ async function subscribe() {
   if (perm !== 'granted') { $('msg').textContent = 'Notifications are blocked. Turn them on in your phone Settings → Notifications.'; return false; }
   reg = reg || await navigator.serviceWorker.ready;
   const sub = (await reg.pushManager.getSubscription()) || await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: keyBytes(VAPID_PUBLIC) });
+  await remember(sub);
   onState();
   return !!sub;
 }
+async function remember(sub) { try { await fetch('/api/push/subscribe', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ subscription: sub.toJSON() }) }); } catch (e) {} }
 function onState() { $('notify').innerHTML = '<div class="on-line"><span>🔔 Notifications are on</span><button class="btn sec" id="test" type="button">Test</button></div><div class="msg" id="msg" role="status"></div>'; $('test').addEventListener('click', sendTest); }
 
 async function setup() {
   if (!('serviceWorker' in navigator)) { $('on').hidden = true; $('nhint').textContent = 'This browser cannot show notifications. Use Safari on iPhone or Chrome on Android.'; return; }
   reg = await navigator.serviceWorker.register('/progress/sw.js', { scope: '/progress/' });
-  if (pushOK && Notification.permission === 'granted' && await reg.pushManager.getSubscription()) { onState(); return; }
+  const existing = pushOK && Notification.permission === 'granted' ? await reg.pushManager.getSubscription() : null;
+  if (existing) { remember(existing); onState(); return; }
   // First open from the iPhone home screen: ask straight away with one big button.
   let skipped = false; try { skipped = sessionStorage.getItem('mc-skip') === '1'; } catch (e) {}
   if (isIOS && standalone && pushOK && Notification.permission === 'default' && !skipped) $('welcome').hidden = false;
