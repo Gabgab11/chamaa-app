@@ -201,7 +201,21 @@ async function subscribe() {
   onState();
   return !!sub;
 }
-async function remember(sub) { try { await fetch('/api/push/subscribe', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ subscription: sub.toJSON() }) }); } catch (e) {} }
+async function remember(sub) {
+  // Tell the server this phone wants updates, and show whether it worked.
+  try {
+    const r = await fetch('/api/push/subscribe', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ subscription: sub.toJSON() }) });
+    const j = await r.json().catch(() => ({}));
+    setReg(r.ok && j.ok ? 'ok' : 'fail:' + (j.error || r.status));
+    return r.ok && j.ok;
+  } catch (e) { setReg('fail:offline'); return false; }
+}
+let regState = '';
+function setReg(st) { regState = st; const el = document.getElementById('reg'); if (el) el.textContent = st === 'ok' ? 'This phone is registered for updates ✓' : st ? 'Could not register this phone (' + st.slice(5) + '). Tap Test to try again.' : ''; }
+async function refreshReg() {
+  try { const r = reg || await navigator.serviceWorker.ready; const sub = await r.pushManager.getSubscription(); if (sub && Notification.permission === 'granted') await remember(sub); } catch (e) {}
+}
+document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshReg(); });
 function onState() { $('notify').innerHTML = '<div class="on-line"><span>🔔 Notifications are on</span><button class="btn sec" id="test" type="button">Test</button></div><div class="msg" id="msg" role="status"></div>'; $('test').addEventListener('click', sendTest); }
 
 async function setup() {
@@ -241,6 +255,7 @@ async function sendTest() {
   try {
     const sub = await (reg || await navigator.serviceWorker.ready).pushManager.getSubscription();
     if (!sub) throw new Error('not subscribed');
+    await remember(sub);
     const r = await fetch('/api/push/test', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ subscription: sub.toJSON(), delay: 6 }) });
     const j = await r.json().catch(() => ({}));
     if (!r.ok || !j.ok) throw new Error(j.error === 'not_configured' ? 'the notification key is not set up yet' : (j.error || r.status));
