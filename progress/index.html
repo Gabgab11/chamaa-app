@@ -64,6 +64,24 @@ h2{font-size:15px;margin:20px 2px 8px}
 .welcome h2{font-size:24px;margin:16px 0 6px;letter-spacing:-.02em}.welcome p{color:var(--muted);margin:0 0 22px;max-width:320px}
 .welcome .btn{max-width:340px}
 @media(prefers-reduced-motion:reduce){.arrow{animation:none}}
+.latest{display:flex;gap:12px;align-items:flex-start}
+.av{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:16px;color:#fff}
+.latest .who{font-size:13px;color:var(--muted)}.latest .who b{color:var(--text)}
+.latest h3{margin:2px 0 2px;font-size:17px;letter-spacing:-.01em}.latest p{margin:0;font-size:14px;color:var(--muted)}
+.latest time{display:block;font-size:12px;color:var(--muted);margin-top:6px}
+.fresh{display:inline-block;font-size:10.5px;font-weight:800;background:var(--lime);color:var(--navy);border-radius:6px;padding:2px 6px;margin-left:6px;vertical-align:1px}
+.calm{text-align:center;color:var(--muted);font-size:14px;padding:6px 0}
+.team{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.team .av{width:34px;height:34px;font-size:13px}
+.team-l{font-size:13px;color:var(--muted);margin-right:auto}
+.stack{display:flex}.stack .av{margin-left:-8px;border:2px solid var(--card)}.stack .av:first-child{margin-left:0}
+.ph{width:100%;display:flex;align-items:center;gap:12px;background:none;border:0;color:inherit;font:inherit;text-align:left;padding:12px 0;cursor:pointer;border-bottom:1px solid var(--line)}
+.ph:last-of-type{border-bottom:0}
+.ph .nm{flex:1;font-weight:700;font-size:15px}.ph .ct{font-size:13px;color:var(--muted)}
+.ph .mini{width:70px;height:6px;border-radius:6px;background:var(--line);overflow:hidden}.ph .mini i{display:block;height:100%;background:var(--lime)}
+.ph .chev{transition:transform .2s}.ph[aria-expanded=true] .chev{transform:rotate(180deg)}
+.ph-list{list-style:none;margin:0;padding:0 0 6px}
+.on-line{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px}
+.on-line button{width:auto;min-height:40px;padding:0 14px;font-size:13.5px;margin:0}
 </style>
 </head>
 <body>
@@ -107,11 +125,13 @@ h2{font-size:15px;margin:20px 2px 8px}
     <button class="btn sec" id="w-skip" type="button" style="max-width:340px">Not now</button>
   </div>
 
-  <h2>Steps to launch</h2>
-  <div class="card"><ol class="steps" id="steps"></ol></div>
+  <h2>Latest update</h2>
+  <div class="card" id="latest" aria-live="polite"></div>
 
-  <h2>What's new</h2>
-  <div class="card"><ul class="news" id="news"></ul></div>
+  <div class="card team" id="team"><span class="team-l">The team working on My Chaama</span><span class="stack" id="avatars"></span></div>
+
+  <h2>Steps to launch</h2>
+  <div class="card" id="steps"></div>
 
   <p class="foot">Updates appear here as soon as they're built. Last update <span id="upd">–</span>.</p>
 </div>
@@ -134,14 +154,30 @@ async function load() {
     $('count').textContent = done + ' of ' + all + ' steps done';
     $('launch').textContent = 'Launch ' + fmt(p.launch);
     $('upd').textContent = fmt(p.updated, true);
+    const COLORS = { John: '#2F6BFF', Marfee: '#E8704F', Mona: '#7A3CF0', Daniel: '#0E8A5F', Gabby: '#D97706' };
+    const av = (n) => '<span class="av" style="background:' + (COLORS[n] || '#2F6BFF') + '" title="' + esc(n) + '">' + esc((n || '?')[0]) + '</span>';
+    $('avatars').innerHTML = (p.team || []).map(av).join('');
+    // Show one update at a time. On this phone it stays for 20 minutes after it is first seen, then clears.
+    const seen = (() => { try { return JSON.parse(localStorage.getItem('mc-seen') || '{}'); } catch (e) { return {}; } })();
+    const now = Date.now(), FADE = 20 * 60 * 1000;
+    const top = (p.news || [])[0], fresh = top && (!seen[top.id] || now - seen[top.id] < FADE) ? top : null;   // only the newest update, never older ones
+    if (fresh) {
+      if (!seen[fresh.id]) { seen[fresh.id] = now; try { localStorage.setItem('mc-seen', JSON.stringify(seen)); } catch (e) {} }
+      $('latest').innerHTML = '<div class="latest">' + av(fresh.by) + '<div><div class="who"><b>' + esc(fresh.by || 'The team') + '</b> just made an update<span class="fresh">NEW</span></div><h3>' + esc(fresh.title) + '</h3><p>' + esc(fresh.body || '') + '</p><time>' + fmt(fresh.at, true) + '</time></div></div>';
+      clearTimeout(window.__fade); window.__fade = setTimeout(() => { lastStamp = ''; load(); }, Math.max(1000, FADE - (now - seen[fresh.id]) + 500));
+    } else {
+      $('latest').innerHTML = '<div class="calm">No new updates right now. You\'ll get a notification as soon as the team finishes the next step.</div>';
+    }
+    // Steps: one line per phase, tap to see the details.
     const label = { done: 'Done', progress: 'In progress', next: 'Next', waiting: 'Waiting' };
-    const phases = [...new Set(p.steps.map((s) => s.phase || ''))];
-    $('steps').innerHTML = phases.map((ph) => {
-      const items = p.steps.filter((s) => (s.phase || '') === ph), d = items.filter((s) => s.status === 'done').length;
-      return (ph ? '<li class="phase">' + esc(ph) + '<span class="ph-count">' + d + '/' + items.length + '</span></li>' : '') + items.map((s) => '<li class="step ' + s.status + '"><span class="dot">' + (s.status === 'done' ? '✓' : s.n) + '</span><div class="st"><b>' + esc(s.title) + '</b><span class="tag">' + label[s.status] + '</span>' +
-        (s.note ? '<small>' + esc(s.note) + '</small>' : '') + (s.date ? '<small>' + fmt(s.date) + '</small>' : '') + '</div></li>').join('');
+    const phases = [...new Set(p.steps.map((s) => s.phase || 'Steps'))];
+    const open = new Set([...document.querySelectorAll('.ph[aria-expanded=true]')].map((b) => b.dataset.ph));
+    $('steps').innerHTML = phases.map((ph, i) => {
+      const items = p.steps.filter((s) => (s.phase || 'Steps') === ph), d = items.filter((s) => s.status === 'done').length, isOpen = open.has(ph);
+      return '<button class="ph" type="button" data-ph="' + esc(ph) + '" aria-expanded="' + isOpen + '" aria-controls="ph' + i + '"><span class="nm">' + esc(ph) + '</span><span class="ct">' + d + '/' + items.length + '</span><span class="mini"><i style="width:' + (d / items.length) * 100 + '%"></i></span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>' +
+        '<ul class="ph-list" id="ph' + i + '"' + (isOpen ? '' : ' hidden') + '>' + items.map((s) => '<li class="step ' + s.status + '"><span class="dot">' + (s.status === 'done' ? '✓' : s.n) + '</span><div class="st"><b>' + esc(s.title) + '</b><span class="tag">' + label[s.status] + '</span>' + (s.note ? '<small>' + esc(s.note) + '</small>' : '') + '</div></li>').join('') + '</ul>';
     }).join('');
-    $('news').innerHTML = (p.news || []).map((n) => '<li><time>' + fmt(n.at, true) + '</time><br><b>' + esc(n.title) + '</b><p>' + esc(n.body) + '</p></li>').join('');
+    $('steps').querySelectorAll('.ph').forEach((b) => b.addEventListener('click', () => { const x = b.getAttribute('aria-expanded') !== 'true'; b.setAttribute('aria-expanded', x); document.getElementById(b.getAttribute('aria-controls')).hidden = !x; }));
   } catch (e) { /* offline: keep what is shown */ }
 }
 load();
@@ -164,7 +200,7 @@ async function subscribe() {
   onState();
   return !!sub;
 }
-function onState() { $('on').textContent = 'Updates are on ✓'; $('on').disabled = true; $('test').hidden = false; $('nhint').textContent = 'You will get a notification each time a step is finished.'; }
+function onState() { $('notify').innerHTML = '<div class="on-line"><span>🔔 Notifications are on</span><button class="btn sec" id="test" type="button">Test</button></div><div class="msg" id="msg" role="status"></div>'; $('test').addEventListener('click', sendTest); }
 
 async function setup() {
   if (!('serviceWorker' in navigator)) { $('on').hidden = true; $('nhint').textContent = 'This browser cannot show notifications. Use Safari on iPhone or Chrome on Android.'; return; }
@@ -197,7 +233,7 @@ $('w-on').addEventListener('click', async () => {
 });
 $('w-skip').addEventListener('click', () => { try { sessionStorage.setItem('mc-skip', '1'); } catch (e) {} $('welcome').hidden = true; });
 
-$('test').addEventListener('click', async () => {
+async function sendTest() {
   const b = $('test'); b.disabled = true;
   try {
     const sub = await (reg || await navigator.serviceWorker.ready).pushManager.getSubscription();
@@ -208,7 +244,7 @@ $('test').addEventListener('click', async () => {
     $('msg').textContent = 'Sent. Lock your phone or close the app: it arrives in about 6 seconds.';
   } catch (e) { $('msg').textContent = 'Test failed: ' + (e.message || e); }
   setTimeout(() => (b.disabled = false), 8000);
-});
+}
 setup();
 </script>
 </body>

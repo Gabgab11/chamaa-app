@@ -10,7 +10,7 @@ self.addEventListener('push', (e) => {
       const r = await fetch(SCOPE + 'progress.json', { cache: 'no-store' });
       const p = await r.json();
       const latest = (p.news || [])[0];
-      if (latest) { title = 'My Chaama: ' + latest.title; body = latest.body || body; }
+      if (latest) { title = (latest.by || 'The team') + ' just made an update'; body = latest.title + (latest.body ? ': ' + latest.body : ''); }
     } catch (_) { /* offline: use the default text */ }
     await self.registration.showNotification(title, { body, icon: SCOPE + 'icon-192.png', badge: SCOPE + 'icon-192.png', tag: 'mc-progress', data: { url: SCOPE } });
   })());

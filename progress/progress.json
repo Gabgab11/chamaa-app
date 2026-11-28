@@ -1,7 +1,7 @@
 {
  "project": "My Chaama",
  "launch": "2027-01-08",
- "updated": "2026-11-28T06:15:00+02:00",
+ "updated": "2026-11-28T06:25:00+02:00",
  "steps": [
   {
    "n": 1,
@@ -190,31 +190,43 @@
    "status": "next"
   },
   {
-   "n": 29,
+   "phase": "Build",
+   "title": "Connect all back ends: accounts, database, email and payments",
+   "status": "next",
+   "n": 29
+  },
+  {
+   "n": 30,
    "phase": "Test and launch",
    "title": "Testing on Android and iPhone, slow networks too",
    "status": "next"
   },
   {
-   "n": 30,
+   "n": 31,
    "phase": "Test and launch",
    "title": "Client and 2–3 chamas test it",
    "status": "next"
   },
   {
-   "n": 31,
+   "n": 32,
    "phase": "Test and launch",
    "title": "Security and privacy check",
    "status": "next"
   },
   {
-   "n": 32,
+   "phase": "Test and launch",
+   "title": "Domain purchase",
+   "status": "next",
+   "n": 33
+  },
+  {
+   "n": 34,
    "phase": "Test and launch",
    "title": "Domain and go live",
    "status": "next"
   },
   {
-   "n": 33,
+   "n": 35,
    "phase": "Test and launch",
    "title": "Handover, guide and training",
    "status": "next"
@@ -224,22 +236,37 @@
   {
    "at": "2026-11-27T23:45:00+02:00",
    "title": "Plans now have their own page",
-   "body": "Basic, Plus and Platinum are on a separate Plans page."
+   "body": "Basic, Plus and Platinum are on a separate Plans page.",
+   "by": "Gabby",
+   "id": "2026-11-27T23:45:00+02:00"
   },
   {
    "at": "2026-11-27T23:30:00+02:00",
    "title": "\"One idea, everywhere\"",
-   "body": "A rolling strip of savings-group names and \"Everyone gets a turn\" in 7 languages."
+   "body": "A rolling strip of savings-group names and \"Everyone gets a turn\" in 7 languages.",
+   "by": "Mona",
+   "id": "2026-11-27T23:30:00+02:00"
   },
   {
    "at": "2026-11-27T23:10:00+02:00",
    "title": "Pizza section added",
-   "body": "Shows how a chama works: one pot, everyone gets a turn."
+   "body": "Shows how a chama works: one pot, everyone gets a turn.",
+   "by": "Daniel",
+   "id": "2026-11-27T23:10:00+02:00"
   },
   {
    "at": "2026-11-27T21:00:00+02:00",
    "title": "Splash screen updated",
-   "body": "The intro now shows the new My Chaama name."
+   "body": "The intro now shows the new My Chaama name.",
+   "by": "Marfee",
+   "id": "2026-11-27T21:00:00+02:00"
   }
+ ],
+ "team": [
+  "John",
+  "Marfee",
+  "Mona",
+  "Daniel",
+  "Gabby"
  ]
 }
