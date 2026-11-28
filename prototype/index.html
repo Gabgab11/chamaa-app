@@ -965,7 +965,7 @@ function renderMethods(){const t=T[lang],ke=curOf(disp)==='KES'||geo==='KE';
   $('paygoal').textContent=goals[goalSel]?goals[goalSel].name:'—';}
 function renderInvites(){const t=T[lang];$('invcount').textContent=invites.filter(i=>i.st==='joined').length+' '+t.joined.toLowerCase()+' · '+invites.length;
   $('invlist').innerHTML=invites.map(i=>`<div class="irow"><div class="av" style="width:34px;height:34px;font-size:12px;background:var(--surface2);color:var(--text)">${esc((i.who.replace(/[^A-Za-z]/g,'')[0]||'#').toUpperCase())}</div><div style="flex:1;font-size:14px;font-weight:600;overflow-wrap:anywhere">${esc(i.who)}</div><span class="tag ${i.st==='joined'?'t-paid':'t-due'}">${i.st==='joined'?t.joined:t.pending}</span></div>`).join('');
-  const link='https://mychamaa.app/join/'+myCode();$('my-code').textContent=myCode();$('wa').href='https://wa.me/?text='+encodeURIComponent(t.waText.replace('{link}',link));}
+  const link='https://app.mychamaa.com/join/'+myCode();$('my-code').textContent=myCode();$('wa').href='https://wa.me/?text='+encodeURIComponent(t.waText.replace('{link}',link));}
 function chipRow(id,labels,sel,key){$(id).innerHTML=labels.map((l,i)=>`<button type="button" aria-pressed="${i===sel}" data-chip="${key}" data-i="${i}">${esc(l)}</button>`).join('')}
 function renderStForm(){const t=T[lang];if(st.ch>CHAMAS.length)st.ch=0;chipRow('st-chama',[t.allCh,...CHAMAS.map(c=>c.name)],st.ch,'ch');chipRow('st-period',t.per,st.per,'per');chipRow('st-format',['PDF','Excel (CSV)'],st.fmt,'fmt');$('st-custom').hidden=st.per!==3}
 function renderNotifs(){const t=T[lang],now=Date.now(),u=notes.filter(n=>!n.read).length;
@@ -1311,7 +1311,7 @@ function renderCreate(){const st=tx('crSteps'),n=st.length;$('cbar').style.width
     <div class="lbl2">${tx('crOrder')}</div>${chipsHTML('order',tx('orders'),cd.order)}
     <div class="lbl2">${tx('crMode')}</div>${chipsHTML('mode',tx('modes'),cd.mode)}<p class="muted" style="font-size:12.5px;margin:-8px 0 14px">${tx('modeS')[cd.mode]}</p>
     <div class="lbl2">${tx('crAppr')}</div>${chipsHTML('appr',tx('apprs'),cd.appr)}`}
-  if(cStep===2)h=`<h3 class="kh">${st[2]}</h3><div class="hero" style="margin-bottom:12px"><div style="font-size:12.5px;color:var(--hero-muted)">${tx('crCode')}</div><div class="disp" style="font-size:28px;margin:4px 0 10px">${cd.code}</div><button type="button" class="btn-sm" style="background:var(--lime);color:var(--ink)" data-copy="https://mychamaa.app/join/${cd.code}">${tx('copyLink')}</button></div>
+  if(cStep===2)h=`<h3 class="kh">${st[2]}</h3><div class="hero" style="margin-bottom:12px"><div style="font-size:12.5px;color:var(--hero-muted)">${tx('crCode')}</div><div class="disp" style="font-size:28px;margin:4px 0 10px">${cd.code}</div><button type="button" class="btn-sm" style="background:var(--lime);color:var(--ink)" data-copy="https://app.mychamaa.com/join/${cd.code}">${tx('copyLink')}</button></div>
     <div class="field"><label for="cr-inv">${tx('crAdd')}</label><div class="in" style="padding-right:6px"><input id="cr-inv" autocomplete="off" placeholder="friend@example.com"><button type="button" class="btn-sm" id="cr-add" style="background:var(--pri);color:var(--pri-text);min-height:40px">${tx('crAddBtn')}</button></div></div>
     <div class="card list">${cd.inv.length?cd.inv.map(x=>`<div class="irow"><div class="av" style="width:30px;height:30px;font-size:11px;background:var(--surface2);color:var(--text)">${esc(iniOf(x))}</div><div style="flex:1;font-size:14px;overflow-wrap:anywhere">${esc(x)}</div><span class="tag t-due">${tx('pending')}</span></div>`).join(''):`<p class="muted" style="margin:4px 0;font-size:14px">${tx('invSub')}</p>`}</div>`;
   $('cbody').innerHTML=h;const sb=$('cr-start');if(sb)setDt(sb,cd.start);$('v-create').scrollTop=0}
@@ -1474,7 +1474,7 @@ $('f-goal').addEventListener('submit',e=>{e.preventDefault();const t=T[lang],er=
 $('f-invite').addEventListener('submit',e=>{e.preventDefault();const t=T[lang],v=$('inv-to').value.trim(),dg=v.replace(/\D/g,'');
   if(!emailOk(v)&&!(dg.length>=7&&dg.length<=15&&/^[+\d\s()-]+$/.test(v))){$('e-inv').textContent=t.eInv;return}
   invites.unshift({who:v,st:'pending'});$('inv-to').value='';renderInvites();toast(t.invSent.replace('{who}',v))});
-$('copylink').addEventListener('click',async()=>{const l='https://mychamaa.app/join/'+myCode();try{await navigator.clipboard.writeText(l);toast(T[lang].copied)}catch(err){toast(l)}});
+$('copylink').addEventListener('click',async()=>{const l='https://app.mychamaa.com/join/'+myCode();try{await navigator.clipboard.writeText(l);toast(T[lang].copied)}catch(err){toast(l)}});
 
 $('st-gen').addEventListener('click',()=>genStatement(false));
 

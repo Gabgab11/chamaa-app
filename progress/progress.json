@@ -1,7 +1,7 @@
 {
  "project": "MyChamaa",
  "launch": "2027-01-08",
- "updated": "2026-11-28T07:05:00+02:00",
+ "updated": "2026-11-28T07:20:00+02:00",
  "steps": [
   {
    "n": 1,
@@ -216,14 +216,16 @@
   {
    "phase": "Test and launch",
    "title": "Domain purchase",
-   "status": "next",
-   "n": 33
+   "status": "done",
+   "n": 33,
+   "date": "2026-11-28"
   },
   {
    "n": 34,
    "phase": "Test and launch",
    "title": "Domain and go live",
-   "status": "next"
+   "status": "progress",
+   "note": "mychamaa.com is connected. Going live comes after testing."
   },
   {
    "n": 35,
@@ -233,6 +235,13 @@
   }
  ],
  "news": [
+  {
+   "id": "2026-11-28T07:20:00+02:00",
+   "at": "2026-11-28T07:20:00+02:00",
+   "by": "Daniel",
+   "title": "mychamaa.com is connected",
+   "body": "The website now lives at mychamaa.com and the app at app.mychamaa.com, with padlock security on both."
+  },
   {
    "id": "2026-11-28T07:05:00+02:00",
    "at": "2026-11-28T07:05:00+02:00",
