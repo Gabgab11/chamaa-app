@@ -18,7 +18,8 @@ export const onRequestPost = async ({ request, env }: Ctx): Promise<Response> =>
       try {
         const { status: st, reason } = await sendPushDetailed(endpoint, env);
         results.push({ host: new URL(endpoint).hostname, status: st, reason });
-        if (st === 404 || st === 410) { await env.PUSH_SUBS.delete(k.name); removed++; }
+        // Gone, or a push address the service says is not valid: forget it.
+        if (st === 404 || st === 410 || (st === 400 && /BadWebPushToken|BadDeviceToken/.test(reason))) { await env.PUSH_SUBS.delete(k.name); removed++; }
         else if (st >= 200 && st < 300) sent++;
         else failed++;
       } catch { failed++; }
