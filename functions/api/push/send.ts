@@ -1,5 +1,5 @@
 // Team-only: notifies every phone that turned on updates. Removes phones that unsubscribed.
-import { json, sendPush, verifyTeamToken, type Env } from '../../../functions-lib/push';
+import { json, sendPushDetailed, verifyTeamToken, type Env } from '../../../functions-lib/push';
 
 interface Ctx { request: Request; env: Env }
 
@@ -8,6 +8,7 @@ export const onRequestPost = async ({ request, env }: Ctx): Promise<Response> =>
   const token = (request.headers.get('authorization') || '').replace(/^Team\s+/i, '');
   if (!(await verifyTeamToken(token, env))) return json({ ok: false, error: 'forbidden' }, 403);
   let sent = 0, removed = 0, failed = 0, cursor: string | undefined;
+  const results: { host: string; status: number; reason: string }[] = [];
   do {
     const page = await env.PUSH_SUBS.list({ prefix: 'sub:', cursor });
     for (const k of page.keys) {
@@ -15,7 +16,8 @@ export const onRequestPost = async ({ request, env }: Ctx): Promise<Response> =>
       if (!raw) continue;
       const { endpoint } = JSON.parse(raw) as { endpoint: string };
       try {
-        const st = await sendPush(endpoint, env);
+        const { status: st, reason } = await sendPushDetailed(endpoint, env);
+        results.push({ host: new URL(endpoint).hostname, status: st, reason });
         if (st === 404 || st === 410) { await env.PUSH_SUBS.delete(k.name); removed++; }
         else if (st >= 200 && st < 300) sent++;
         else failed++;
@@ -23,5 +25,5 @@ export const onRequestPost = async ({ request, env }: Ctx): Promise<Response> =>
     }
     cursor = page.list_complete ? undefined : page.cursor;
   } while (cursor);
-  return json({ ok: true, sent, removed, failed });
+  return json({ ok: true, sent, removed, failed, results });
 };

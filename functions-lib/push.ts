@@ -54,11 +54,18 @@ export async function vapidHeader(endpoint: string, env: Env): Promise<string> {
 
 /** Payload-free push: the service worker fetches the latest update text itself. */
 export async function sendPush(endpoint: string, env: Env): Promise<number> {
+  return (await sendPushDetailed(endpoint, env)).status;
+}
+
+/** Same as sendPush, but keeps the push service's reason (e.g. Apple's "BadJwtToken") for checks. */
+export async function sendPushDetailed(endpoint: string, env: Env): Promise<{ status: number; reason: string }> {
   const res = await fetch(endpoint, {
     method: 'POST',
     headers: { Authorization: await vapidHeader(endpoint, env), TTL: '86400', Urgency: 'high', 'Content-Length': '0' },
   });
-  return res.status;
+  let reason = '';
+  try { reason = (await res.text()).slice(0, 200); } catch { /* none */ }
+  return { status: res.status, reason };
 }
 
 /**
