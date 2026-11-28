@@ -1,7 +1,7 @@
 {
  "project": "My Chaama",
  "launch": "2027-01-08",
- "updated": "2026-11-28T06:25:00+02:00",
+ "updated": "2026-11-28T06:35:00+02:00",
  "steps": [
   {
    "n": 1,
@@ -233,6 +233,13 @@
   }
  ],
  "news": [
+  {
+   "id": "2026-11-28T06:35:00+02:00",
+   "at": "2026-11-28T06:35:00+02:00",
+   "by": "John",
+   "title": "Live updates switched on",
+   "body": "Every finished step now arrives straight on your phone as a notification."
+  },
   {
    "at": "2026-11-27T23:45:00+02:00",
    "title": "Plans now have their own page",
