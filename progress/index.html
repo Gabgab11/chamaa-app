@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Chaama · Progress</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EEF4FB" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08132B" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/progress/manifest.webmanifest">
+<link rel="icon" href="/progress/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/progress/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="MC Progress">
+<style>
+:root{color-scheme:light dark;--bg:#EEF4FB;--card:#fff;--text:#0B1B3F;--muted:#50607D;--line:#DCE6F2;--blue:#2F6BFF;--lime:#C6F432;--navy:#0B1B3F}
+@media(prefers-color-scheme:dark){:root{--bg:#08132B;--card:#0F1E3D;--text:#EEF4FF;--muted:#A9B8D3;--line:#22365C;--blue:#5B8CFF}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:640px;margin:0 auto;padding:calc(env(safe-area-inset-top) + 20px) 16px calc(env(safe-area-inset-bottom) + 40px)}
+header{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.logo{width:44px;height:44px;border-radius:12px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center}
+h1{font-size:20px;font-weight:800;letter-spacing:-.02em;margin:0;line-height:1.2}
+.by{font-size:12.5px;color:var(--muted)}
+.hero{background:var(--navy);color:#fff;border-radius:16px;padding:18px;margin-bottom:12px}
+@media(prefers-color-scheme:dark){.hero{background:#13306B}}
+.hero .k{font-size:13px;color:#AFC0DC}.hero .big{font-size:34px;font-weight:800;letter-spacing:-.03em;line-height:1.1;margin:2px 0 10px}
+.bar{height:10px;border-radius:10px;background:rgba(255,255,255,.16);overflow:hidden}.bar i{display:block;height:100%;background:var(--lime);border-radius:10px;transition:width .8s cubic-bezier(.2,.7,.2,1)}
+.meta{display:flex;justify-content:space-between;font-size:12.5px;color:#AFC0DC;margin-top:8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+[hidden]{display:none!important}
+.notify>b{display:block;font-size:15px}.notify p{margin:4px 0 12px;font-size:13.5px;color:var(--muted)}
+.btn{display:block;width:100%;min-height:48px;border:0;border-radius:12px;background:var(--blue);color:#fff;font-weight:700;font-size:15px;font-family:inherit;cursor:pointer}
+.btn.sec{background:transparent;color:var(--text);border:1px solid var(--line);margin-top:8px}
+.btn:disabled{opacity:.55}
+.ios{font-size:13.5px;color:var(--muted);margin:0;padding-left:20px}.ios li{margin:4px 0}
+.msg{font-size:13px;margin-top:8px;color:var(--muted);min-height:18px}
+h2{font-size:15px;margin:20px 2px 8px}
+.steps{list-style:none;margin:0;padding:0}
+.step{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.step:last-child{border-bottom:0}
+.dot{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:12.5px;font-weight:800;border:2px solid var(--line);color:var(--muted)}
+.done .dot{background:var(--lime);border-color:var(--lime);color:var(--navy)}
+.progress .dot{border-color:var(--blue);color:var(--blue);box-shadow:0 0 0 4px color-mix(in srgb,var(--blue) 18%,transparent)}
+.st b{font-size:15px}.st small{display:block;font-size:13px;color:var(--muted)}
+.tag{display:inline-block;font-size:11px;font-weight:800;border-radius:6px;padding:2px 7px;margin-left:6px;vertical-align:2px}
+.done .tag{background:color-mix(in srgb,var(--lime) 35%,transparent)}.progress .tag{background:color-mix(in srgb,var(--blue) 18%,transparent);color:var(--blue)}.next .tag{background:var(--line);color:var(--muted)}
+.st a{font-size:13px;font-weight:700;color:var(--blue);text-decoration:none}
+.news{list-style:none;margin:0;padding:0}.news li{padding:10px 0;border-bottom:1px solid var(--line)}.news li:last-child{border-bottom:0}
+.news b{font-size:14.5px}.news p{margin:2px 0 0;font-size:13.5px;color:var(--muted)}.news time{font-size:12px;color:var(--muted)}
+.foot{text-align:center;font-size:12px;color:var(--muted);margin-top:18px}
+.live{display:inline-flex;align-items:center;gap:6px}.live:before{content:"";width:8px;height:8px;border-radius:50%;background:#3FBF5A;animation:p 2s infinite}
+@keyframes p{50%{opacity:.35}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo"><svg width="30" height="30" viewBox="0 0 256 256" aria-hidden="true"><g fill="currentColor"><ellipse cx="124" cy="136" rx="92" ry="74"/><path d="M164 74 L190 44 L196 92 Z"/><rect x="200" y="114" width="34" height="42" rx="12"/><rect x="66" y="186" width="28" height="44" rx="8"/><rect x="148" y="186" width="28" height="44" rx="8"/></g><rect fill="var(--card)" x="100" y="70" width="44" height="10" rx="5"/><path d="M124 140 A7 7 0 0 1 138 140 A14 14 0 0 1 110 140 A21 21 0 0 1 152 140 A28 28 0 0 1 96 140 A35 35 0 0 1 166 140" fill="none" stroke="#C6F432" stroke-width="9" stroke-linecap="round"/></svg></div>
+    <div><h1>My Chaama · Build progress</h1><div class="by">by Luminary Digital Group · <span class="live">Live</span></div></div>
+  </header>
+
+  <section class="hero" aria-live="polite">
+    <div class="k">Steps to launch</div>
+    <div class="big" id="pct">–</div>
+    <div class="bar"><i id="bar" style="width:0"></i></div>
+    <div class="meta"><span id="count"></span><span id="launch"></span></div>
+  </section>
+
+  <section class="card notify" id="notify">
+    <b>Get notified of every update</b>
+    <p id="nhint">Turn on alerts and your phone will tell you each time a step is finished.</p>
+    <ol class="ios" id="ios" hidden>
+      <li>Tap the <b>Share</b> button at the bottom of Safari.</li>
+      <li>Choose <b>Add to Home Screen</b>, then <b>Add</b>.</li>
+      <li>Open <b>MC Progress</b> from your home screen and come back here.</li>
+    </ol>
+    <button class="btn" id="on" type="button">Turn on updates</button>
+    <button class="btn sec" id="test" type="button" hidden>Send me a test notification</button>
+    <div class="msg" id="msg" role="status"></div>
+  </section>
+
+  <h2>The 12 steps</h2>
+  <div class="card"><ol class="steps" id="steps"></ol></div>
+
+  <h2>What's new</h2>
+  <div class="card"><ul class="news" id="news"></ul></div>
+
+  <p class="foot">Updates appear here as soon as they're built. Last update <span id="upd">–</span>.</p>
+</div>
+<script>
+const VAPID_PUBLIC = 'BKAgTwWuErYhKkYX6UM3-1oRkovkoT0zZTUAIepf0HmZVVfEgmXyk7dMq81rHZM98ETA42Ol9ZykYtAF2IEYCqY';
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const fmt = (d, t) => { const x = new Date(/^\d{4}-\d{2}-\d{2}$/.test(d) ? d + 'T12:00:00' : d); return isNaN(x) ? '' : x.toLocaleString(undefined, t ? { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' } : { day: 'numeric', month: 'short', year: 'numeric' }); };
+let lastStamp = '';
+
+async function load() {
+  try {
+    const r = await fetch('/progress/progress.json', { cache: 'no-store' });
+    const p = await r.json();
+    if (p.updated === lastStamp) return;
+    lastStamp = p.updated;
+    const done = p.steps.filter((s) => s.status === 'done').length, all = p.steps.length;
+    $('pct').textContent = Math.round((done / all) * 100) + '% complete';
+    $('bar').style.width = (done / all) * 100 + '%';
+    $('count').textContent = done + ' of ' + all + ' steps done';
+    $('launch').textContent = 'Launch ' + fmt(p.launch);
+    $('upd').textContent = fmt(p.updated, true);
+    const label = { done: 'Done', progress: 'In progress', next: 'Next' };
+    $('steps').innerHTML = p.steps.map((s) => '<li class="step ' + s.status + '"><span class="dot">' + (s.status === 'done' ? '✓' : s.n) + '</span><div class="st"><b>' + esc(s.title) + '</b><span class="tag">' + label[s.status] + '</span>' +
+      (s.note ? '<small>' + esc(s.note) + '</small>' : '') + (s.date ? '<small>' + fmt(s.date) + '</small>' : '') + (s.link ? '<a href="' + esc(s.link) + '" target="_blank" rel="noopener">Try it →</a>' : '') + '</div></li>').join('');
+    $('news').innerHTML = (p.news || []).map((n) => '<li><time>' + fmt(n.at, true) + '</time><br><b>' + esc(n.title) + '</b><p>' + esc(n.body) + '</p></li>').join('');
+  } catch (e) { /* offline: keep what is shown */ }
+}
+load();
+setInterval(load, 60000);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) load(); });
+
+/* ---------- notifications ---------- */
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+const pushOK = 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
+const keyBytes = (b) => Uint8Array.from(atob(b.replace(/-/g, '+').replace(/_/g, '/') + '==='.slice((b.length + 3) % 4)), (c) => c.charCodeAt(0));
+let reg = null;
+
+async function setup() {
+  if (!('serviceWorker' in navigator)) { $('on').hidden = true; $('nhint').textContent = 'This browser cannot show notifications. Try Safari on iPhone or Chrome on Android.'; return; }
+  reg = await navigator.serviceWorker.register('/progress/sw.js', { scope: '/progress/' });
+  if (isIOS && !standalone) { $('ios').hidden = false; $('on').hidden = true; $('nhint').textContent = 'On iPhone, add this page to your Home Screen first. Then open it from there to turn on alerts.'; return; }
+  if (!pushOK) { $('on').hidden = true; $('nhint').textContent = 'Notifications need iOS 16.4 or newer, or Chrome on Android.'; return; }
+  const sub = await reg.pushManager.getSubscription();
+  if (sub && Notification.permission === 'granted') onState();
+}
+function onState() { $('on').textContent = 'Updates are on ✓'; $('on').disabled = true; $('test').hidden = false; $('nhint').textContent = 'You will be told each time a step is finished.'; }
+
+$('on').addEventListener('click', async () => {
+  try {
+    const perm = await Notification.requestPermission();
+    if (perm !== 'granted') { $('msg').textContent = 'Alerts are off. You can allow them in Settings → Notifications → MC Progress.'; return; }
+    reg = reg || await navigator.serviceWorker.ready;
+    await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: keyBytes(VAPID_PUBLIC) });
+    onState();
+    $('msg').textContent = 'Done. Tap "Send me a test notification" to try it.';
+  } catch (e) { $('msg').textContent = 'Could not turn on alerts: ' + (e.message || e); }
+});
+
+$('test').addEventListener('click', async () => {
+  const b = $('test'); b.disabled = true;
+  try {
+    const sub = await (reg || await navigator.serviceWorker.ready).pushManager.getSubscription();
+    if (!sub) throw new Error('not subscribed');
+    const r = await fetch('/api/push/test', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ subscription: sub.toJSON(), delay: 6 }) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok || !j.ok) throw new Error(j.error || r.status);
+    $('msg').textContent = 'Sent. Lock your phone or close the app: it arrives in about 6 seconds.';
+  } catch (e) { $('msg').textContent = 'Test failed: ' + (e.message || e); }
+  setTimeout(() => (b.disabled = false), 8000);
+});
+setup();
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "project": "My Chaama",
+  "launch": "2027-01-08",
+  "updated": "2026-11-28T06:00:00+02:00",
+  "steps": [
+    { "n": 1,  "title": "Brand and logo", "status": "done", "date": "2026-11-27", "note": "New name My Chaama, the lime \"my\" logo, and navy and electric-blue colours." },
+    { "n": 2,  "title": "Website", "status": "done", "date": "2026-11-27", "note": "Landing page with the pizza section, the rolling \"One idea, everywhere\" strip and a separate Plans page.", "link": "https://chamaa.pages.dev/" },
+    { "n": 3,  "title": "Splash and welcome", "status": "done", "date": "2026-11-27", "note": "A coin circles the name, drops into the piggy bank and the piggy shakes.", "link": "https://chamaa-web.pages.dev/" },
+    { "n": 4,  "title": "Sign up and log in", "status": "done", "date": "2026-11-27", "note": "Create account, email check pop-up, log in and forgot password.", "link": "https://chamaa-web.pages.dev/" },
+    { "n": 5,  "title": "Home dashboard", "status": "done", "date": "2026-11-27", "note": "Balance with hide eye and local currency, Pay, Goals, Invite and Statement, notifications." },
+    { "n": 6,  "title": "Real accounts and secure database", "status": "progress", "note": "Accounts that work on any phone, private data and protected money records." },
+    { "n": 7,  "title": "Create and join a chama", "status": "next" },
+    { "n": 8,  "title": "Contributions and M-Pesa", "status": "next" },
+    { "n": 9,  "title": "Payouts and approvals", "status": "next" },
+    { "n": 10, "title": "Identity checks and bank accounts", "status": "next" },
+    { "n": 11, "title": "Goals, statements and notifications", "status": "next" },
+    { "n": 12, "title": "Final testing, domain and launch", "status": "next" }
+  ],
+  "news": [
+    { "at": "2026-11-27T23:45:00+02:00", "title": "Plans now have their own page", "body": "Basic, Plus and Platinum are on a separate Plans page." },
+    { "at": "2026-11-27T23:30:00+02:00", "title": "\"One idea, everywhere\"", "body": "A rolling strip of savings-group names and \"Everyone gets a turn\" in 7 languages." },
+    { "at": "2026-11-27T23:10:00+02:00", "title": "Pizza section added", "body": "Shows how a chama works: one pot, everyone gets a turn." },
+    { "at": "2026-11-27T21:00:00+02:00", "title": "Splash screen updated", "body": "The intro now shows the new My Chaama name." }
+  ]
+}
