@@ -5,7 +5,7 @@ self.addEventListener('activate', (e) => e.waitUntil(self.clients.claim()));
 
 self.addEventListener('push', (e) => {
   e.waitUntil((async () => {
-    let title = 'My Chaama', body = 'There is a new update on the build.';
+    let title = 'MyChamaa', body = 'There is a new update on the build.';
     try {
       const r = await fetch(SCOPE + 'progress.json', { cache: 'no-store' });
       const p = await r.json();

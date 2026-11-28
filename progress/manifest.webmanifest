@@ -1,7 +1,7 @@
 {
-  "name": "My Chaama · Progress",
+  "name": "MyChamaa · Progress",
   "short_name": "MC Progress",
-  "description": "Live progress of the My Chaama build.",
+  "description": "Live progress of the MyChamaa build.",
   "start_url": "/progress/",
   "scope": "/progress/",
   "display": "standalone",

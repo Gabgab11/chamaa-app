@@ -78,7 +78,7 @@ begin
           coalesce(md->>'city', ''), upper(coalesce(md->>'country', 'KE')));
   insert into public.kyc_records (user_id) values (new.id);
   insert into public.notices (user_id, kind, body)
-  values (new.id, 'join', 'Welcome to My Chaama, ' || coalesce(md->>'first_name', '') || '! Create or join a chama to get started.');
+  values (new.id, 'join', 'Welcome to MyChamaa, ' || coalesce(md->>'first_name', '') || '! Create or join a chama to get started.');
   return new;
 end $$;
 create trigger on_auth_user_created after insert on auth.users for each row execute function app.handle_new_user();

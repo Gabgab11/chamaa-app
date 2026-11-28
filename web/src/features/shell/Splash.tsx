@@ -97,7 +97,7 @@ export function Splash({ onDone }: { onDone: () => void }) {
   }, []);
 
   return (
-    <div className="splash" ref={root} role="img" aria-label="My Chaama">
+    <div className="splash" ref={root} role="img" aria-label="MyChamaa">
       <div className="sp-stack">
         <svg ref={pig} className="sp-pig" viewBox="0 0 256 256" aria-hidden="true">
           <ellipse fill="var(--pig)" cx="124" cy="136" rx="92" ry="74" />

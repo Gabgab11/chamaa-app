@@ -1,4 +1,4 @@
-# My Chaama database (Supabase)
+# MyChamaa database (Supabase)
 
 Migrations in `migrations/` run in order on the Supabase project.
 

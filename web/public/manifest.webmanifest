@@ -1,6 +1,6 @@
 {
-  "name": "My Chaama",
-  "short_name": "My Chaama",
+  "name": "MyChamaa",
+  "short_name": "MyChamaa",
   "description": "Run your savings group in one place.",
   "start_url": "/",
   "scope": "/",

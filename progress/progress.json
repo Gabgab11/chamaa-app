@@ -1,15 +1,15 @@
 {
- "project": "My Chaama",
+ "project": "MyChamaa",
  "launch": "2027-01-08",
- "updated": "2026-11-28T06:35:00+02:00",
+ "updated": "2026-11-28T07:05:00+02:00",
  "steps": [
   {
    "n": 1,
    "phase": "Design and planning",
    "title": "Logo, name and colours",
    "status": "done",
-   "date": "2026-11-27",
-   "note": "My Chaama name, the lime \"my\" logo, navy and electric-blue colours."
+   "date": "2026-11-28",
+   "note": "MyChamaa name, the lime \"my\" logo with the piggy on the \"m\", navy and electric-blue colours."
   },
   {
    "n": 2,
@@ -234,6 +234,13 @@
  ],
  "news": [
   {
+   "id": "2026-11-28T07:05:00+02:00",
+   "at": "2026-11-28T07:05:00+02:00",
+   "by": "Mona",
+   "title": "Name updated to MyChamaa",
+   "body": "The website, the app, the logo and the intro now all use the MyChamaa spelling."
+  },
+  {
    "id": "2026-11-28T06:35:00+02:00",
    "at": "2026-11-28T06:35:00+02:00",
    "by": "John",
@@ -264,7 +271,7 @@
   {
    "at": "2026-11-27T21:00:00+02:00",
    "title": "Splash screen updated",
-   "body": "The intro now shows the new My Chaama name.",
+   "body": "The intro now shows the new MyChamaa name.",
    "by": "Marfee",
    "id": "2026-11-27T21:00:00+02:00"
   }

@@ -176,6 +176,6 @@ h1, h2, p { margin: 0; }
 .sp-coin.back { z-index: 1; }
 @keyframes spOut { to { opacity: 0; transform: scale(1.06); } }
 
-/* wordmark: lime "my" tag tilted above "chaama" */
+/* wordmark: lime "my" tag tilted above "chamaa" */
 .wordmark { position: relative; display: inline-block; padding-top: .34em; white-space: nowrap; line-height: 1; }
 .wm-my { position: absolute; left: -.2em; top: -.06em; font-size: max(.31em, 8px); font-weight: 800; line-height: 1; letter-spacing: -.02em; background: var(--lime); color: var(--navy); padding: .26em .45em .3em; border-radius: .45em; transform: rotate(-8deg); transform-origin: left bottom; }

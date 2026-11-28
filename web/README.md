@@ -1,4 +1,4 @@
-# My Chaama web app
+# MyChamaa web app
 
 React + TypeScript + Vite, built as an installable PWA.
 

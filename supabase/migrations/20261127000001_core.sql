@@ -1,4 +1,4 @@
--- My Chaama core schema: members, chamas, cycles, contributions.
+-- MyChamaa core schema: members, chamas, cycles, contributions.
 -- Rules: money is bigint minor units; every table has RLS; clients never write money rows directly.
 
 create schema if not exists extensions;
